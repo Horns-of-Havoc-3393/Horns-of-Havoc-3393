@@ -1,3 +1,3 @@
-const myHeading = document.querySelector("h1");
+const myHeading = document.querySelector("h2");
 myHeading.textContent = "Hello world!";
 
