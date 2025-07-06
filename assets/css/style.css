@@ -11,7 +11,7 @@
 } */
 @font-face {
     font-family: 'CustomFont';
-    src: url('fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
+    src: url('assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
     /* Optional: font-weight or font-style here */
   }
   .headder {
