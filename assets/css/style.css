@@ -1,0 +1,45 @@
+/* body { 
+    background-color: black;
+}
+#title {
+    background-color: #663399;
+    color: #ffff33;
+    margin: auto;
+    width: 75%;
+    border: 3px solid #ffff33;
+    padding: 10px;
+} */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
+    /* Optional: font-weight or font-style here */
+  }
+  .headder {
+    display: flex;
+    align-items: center;   /* vertically center img + h2 */
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    gap: 1%;
+    
+  }
+  
+  #titial {
+    font-family: CustomFont, sans-serif;
+    font-size: 300%;
+  }
+  
+  .homeredir {
+    display: inline-flex;
+    text-decoration: none;
+    margin-right: -29.8%;
+    
+  }
+  
+  .homeredir img {
+    display: block;
+    width: 12%; 
+    height: 12%; 
+    margin-right: 0%;
+    padding-right: 0%;/* or use px if you want precise control */
+  }
