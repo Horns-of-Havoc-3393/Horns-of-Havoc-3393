@@ -16,4 +16,17 @@
   }
 #titial{
     font-family: CustomFont, sans-serif;
+    font-size: 500%;
+    display: flex;
+    margin-left: 2%;
 }
+#logo{
+    width: 5%;
+    display: flex;
+}
+.headder{
+    display: flex;
+    align-items: center;
+    margin-top: -2%;
+    width: 100%;
+   }
