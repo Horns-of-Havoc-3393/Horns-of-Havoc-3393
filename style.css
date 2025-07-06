@@ -9,6 +9,11 @@
     border: 3px solid #ffff33;
     padding: 10px;
 } */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
+    /* Optional: font-weight or font-style here */
+  }
 #titial{
-    font-family: ;
+    font-family: CustomFont, sans-serif;
 }
