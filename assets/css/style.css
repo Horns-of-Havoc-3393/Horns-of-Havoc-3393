@@ -21,19 +21,27 @@
     margin-left: -1%;
     width: 100.45vw;
     height: 70%;
-    background-color: #800080;
+    /* background-color: #800080; */
+    /* background: linear-gradient(90deg, #FFA500, #800080); */
+    background: linear-gradient(
+      to right,
+      #FFA500 0%,         /* Purple solid up to 20% */
+      #800080 100%
+      /* Gold starts fading from 20% and solid by 80% */
+    );
     
   }
+  
   
   #titial {
     font-family: CustomFont, sans-serif;
     font-size: 200%;
-    margin-left: 4%;
+    margin-left: 3.5%;
     
     max-width: 100%;
     max-height: 100%;
-
-    background: linear-gradient(90deg, #000000, #FFD700); /* purple to gold */
+    background-color: #800080; 
+    /* background: linear-gradient(5deg, #800080 0%,#800080 30%, #FFD700 80%, #FFD700 100%); purple to gold */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
