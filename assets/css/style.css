@@ -14,6 +14,12 @@
     src: url('../assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
     /* Optional: font-weight or font-style here */
   }
+  
+@font-face {
+  font-family: 'anotherFont';
+  src: url('../assets/fonts/AirAmericanaBoldItalic-3ln18.ttf') format('truetype');
+  /* Optional: font-weight or font-style here */
+}
   .headder {
     display: flex;
     align-items: center;   /* vertically center img + h2 */
@@ -42,6 +48,7 @@
     max-height: 100%;
     background-color: #800080; 
     /* background: linear-gradient(5deg, #800080 0%,#800080 30%, #FFD700 80%, #FFD700 100%); purple to gold */
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
@@ -67,12 +74,15 @@
   .navbar{
     display: flex;
     flex-direction: row;
-    gap: 1rem;   
+    gap: 1.2rem;   
     position: absolute;
-    margin-top: -3%;
+    margin-top: -3.5%;
     margin-left: 60%;
   }
 
   .navbar a{
+    font-family: anotherFont, sans-serif;
+    
     color: #FFA500;
+    font-size: 1.5rem;
   }
