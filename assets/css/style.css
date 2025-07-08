@@ -64,7 +64,15 @@
     padding-right: 0%;/* or use px if you want precise control */
   }
 
-  #navbar{
+  .navbar{
     display: flex;
     flex-direction: row;
+    gap: 1rem;   
+    position: absolute;
+    margin-top: -3%;
+    margin-left: 60%;
+  }
+
+  .navbar a{
+    color: #FFA500;
   }
