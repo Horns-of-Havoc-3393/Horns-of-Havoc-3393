@@ -1,14 +1,7 @@
-/* body { 
-    background-color: black;
+body { 
+  transition: background-color 0.3s ease; 
 }
-#title {
-    background-color: #663399;
-    color: #ffff33;
-    margin: auto;
-    width: 75%;
-    border: 3px solid #ffff33;
-    padding: 10px;
-} */
+
 @font-face {
     font-family: 'CustomFont';
     src: url('../assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
@@ -87,12 +80,48 @@
     font-size: 1.5rem;
   }
 .imSlide{
-  width: 30%;
+  width: 60%;
   height: auto;
- margin-left: 35%;
+ margin-left: 20%;
  margin-top: 3%;
 }
 .mySlides {
   width: 100%;
   height: auto;
+}
+.imgSelector {
+  
+  position: absolute; 
+  margin-top: -10%;
+  width: 6%;
+  height: 13%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+    border-radius: 50%;
+  /* padding: 10px; */
+  cursor: pointer;
+  font-size: 240%;
+}
+#advance {
+  margin-left: 1%;
+}
+
+#retreat {
+  margin-left: 52.4%;
+}
+.dMode{
+  position: absolute;
+  width: 3%;
+  height: auto;
+  margin-top: -41.2%;
+  margin-left: 95%;
+}
+.dMode img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.rotated {
+  transform: rotate(180deg);
 }

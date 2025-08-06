@@ -1,4 +1,5 @@
-	var slideIndex = 1;
+let flip = false;	
+    var slideIndex = 1;
 			showDivs(slideIndex);
 
 			function plusDivs(n) {
@@ -15,3 +16,22 @@
 			}
 			x[slideIndex-1].style.display = "block";
 			}
+
+function rotateImage() {
+  const img = document.getElementById("myImage");
+  img.classList.toggle("rotated");
+  darken();
+}
+function darken() {
+    flip = !flip;
+	var color = "#ffffff";
+	
+	if (flip) {
+		color = "#2a2828ff";
+	} 
+	else 
+	{
+		color = "#ffffff";
+	}
+	document.body.style.backgroundColor = color;
+}

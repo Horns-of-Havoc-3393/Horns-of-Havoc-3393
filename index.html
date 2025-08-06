@@ -19,7 +19,7 @@
 			  <!-- <ul> -->
 				  <a href="#">About</a>
 				  <a href="#">Contact Us</a>
-				  <a href="#"></a>
+				  <a href="#">Events</a>
 				  <a href="#"></a>
 				  <a href="#"></a>
 				<!-- </ul> -->
@@ -27,16 +27,20 @@
 	  </div>
 	  
 	  <div class="imSlide">
+		
+		
 		<img class="mySlides" src="/assets/images/DSC_2074.JPG">
 		<img class="mySlides" src="/assets/images/DSC_2095.JPG">
 		<img class="mySlides" src="/assets/images/20240207_153320 - frame at 0m4s.jpg">
 		<img class="mySlides" src="/assets/images/20240131_145435.jpg">
-		<button class="imgSelector" onclick="plusDivs(-1)">&#10094;</button>
-		<button class="imgSelector" onclick="plusDivs(+1)">&#10095;</button>
+		<button id="advance" class="imgSelector" onclick="plusDivs(-1)">&#10094;</button>
+		<button id="retreat" class="imgSelector" onclick="plusDivs(+1)">&#10095;</button>
 
 
 	  </div>
-	
+	<div class="dMode">
+		<a href="#x"><img id="myImage" src="/assets/images/noun-dark-mode-4256401.svg" alt="" onclick="rotateImage()"></a>
+	</div>
 	  
     <!-- <h3>Links</h3>
 	  <h4>Thanks <a href=http://amd.com>AMD</a></h4>
