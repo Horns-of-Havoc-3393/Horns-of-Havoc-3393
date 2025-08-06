@@ -42,7 +42,7 @@
   #titial {
     font-family: CustomFont, sans-serif;
     font-size: 200%;
-    margin-left: 3.5%;
+    margin-left: 8.5%;
     
     max-width: 100%;
     max-height: 100%;
@@ -86,3 +86,13 @@
     color: #FFA500;
     font-size: 1.5rem;
   }
+.imSlide{
+  width: 30%;
+  height: auto;
+ margin-left: 35%;
+ margin-top: 3%;
+}
+.mySlides {
+  width: 100%;
+  height: auto;
+}
