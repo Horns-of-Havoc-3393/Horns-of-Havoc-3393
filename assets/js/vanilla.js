@@ -33,6 +33,11 @@ function darken() {
 	let color = flip ? "#2a2828ff" : "#ffffff";
 	document.body.style.backgroundColor = color;
 	document.cookie = "myCookie=" + encodeURIComponent(color) + "; path=/; max-age=86400";
+    const colorBox = document.getElementById("mi");
+	if (colorBox) {
+		colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
+		colorBox.style.color = flip ? "#000000" : "#2a2828ff";
+	}
 }
 
 function getCookie(name) {

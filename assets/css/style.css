@@ -18,7 +18,7 @@ body {
     align-items: center;   /* vertically center img + h2 */
     margin-top: -1%;
     margin-left: -1%;
-    width: 100.45vw;
+    width: 99.45vw;
     height: 70%;
     /* background-color: #800080; */
     /* background: linear-gradient(90deg, #FFA500, #800080); */
@@ -125,4 +125,34 @@ body {
 }
 .rotated {
   transform: rotate(180deg);
+}
+.mission {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  /* background-color: #800080; */
+  top: 100%;
+  left: 2%;
+  padding: 0%;
+  text-align: center;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  font-size: 140%;
+    transition: background-color 0.3s ease;
+}
+
+.missionImg img{
+  width: 100%;
+  height: auto;
+}
+.missionImg{
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 100%;
+  left: 55%;
+  padding: 0%;
+  text-align: center;
 }
