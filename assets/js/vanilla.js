@@ -1,86 +1,103 @@
 let flip = false;
-var slideIndex = 1;
-var mslideIndex = 1;
-showDivs(slideIndex);
-showdaDivs(mslideIndex);
+let slideIndex = 1;
+let mslideIndex = 1;
 
+document.addEventListener("DOMContentLoaded", () => {
+  showDivs(slideIndex);
+  showAltDivs(mslideIndex);
+  setupGreetReveal();
+});
+
+// --- Slideshow Logic ---
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
 
-function plusnDivs(n) {
-  showdaDivs(mslideIndex += n);
+function plusAltDivs(n) {
+  showAltDivs(mslideIndex += n);
 }
 
 function showDivs(n) {
-  const x = document.getElementsByClassName("mySlides");
-  if (x.length === 0) return;
-  if (n > x.length) { slideIndex = 1; }
-  if (n < 1) { slideIndex = x.length; }
-  for (let i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[slideIndex - 1].style.display = "block";
+  const slides = document.getElementsByClassName("mySlides");
+  if (!slides.length) return;
+  slideIndex = wrapIndex(n, slides.length);
+  updateSlides(slides, slideIndex);
 }
 
-function showdaDivs(n) {
-  const x = document.getElementsByClassName("mSlides");
-  if (x.length === 0) return;
-  if (n > x.length) { mslideIndex = 1; }
-  if (n < 1) { mslideIndex = x.length; }
-  for (let i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[mslideIndex - 1].style.display = "block";
+function showAltDivs(n) {
+  const slides = document.getElementsByClassName("mSlides");
+  if (!slides.length) return;
+  mslideIndex = wrapIndex(n, slides.length);
+  updateSlides(slides, mslideIndex);
 }
 
+function updateSlides(slides, index) {
+  Array.from(slides).forEach(s => s.style.display = "none");
+  slides[index - 1].style.display = "block";
+}
+
+function wrapIndex(n, length) {
+  return n > length ? 1 : n < 1 ? length : n;
+}
+
+// --- Dark Mode Toggle ---
 function rotateImage() {
   const img = document.getElementById("myImage");
   img.classList.toggle("rotated");
-  const isRotated = img.classList.contains("rotated");
-  document.cookie = "imageRotated=" + isRotated + "; path=/; max-age=86400";
-  darken();
+  flip = img.classList.contains("rotated");
+
+  // Save to both localStorage and cookie
+  localStorage.setItem("imageRotated", flip);
+  setCookie("imageRotated", flip, 1);
+
+  applyDarkMode(flip);
 }
 
-function darken() {
-  flip = !flip;
+function applyDarkMode(isDark) {
+  const bgColor = isDark ? "#2a2828ff" : "#ffffff";
+  document.body.style.backgroundColor = bgColor;
 
-  const bodyColor = flip ? "#2a2828ff" : "#ffffff";
-  document.body.style.backgroundColor = bodyColor;
-  document.cookie = "myCookie=" + encodeURIComponent(bodyColor) + "; path=/; max-age=86400";
+  // Save to both localStorage and cookie
+  localStorage.setItem("myCookie", bgColor);
+  setCookie("myCookie", encodeURIComponent(bgColor), 1);
 
-  const colorBox = document.getElementById("mi");
-  const whatDo = document.getElementById("doW");
-  if (colorBox) {
-    colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    colorBox.style.color = flip ? "#000000" : "#2a2828ff";
+  const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
+  colorElems.forEach(el => {
+    if (el) {
+      el.style.backgroundColor = isDark ? "#FFA500" : "#800080";
+      el.style.color = isDark ? "#000000" : "#2a2828ff";
+    }
+  });
+
+  // Apply filter to both iframes: myIframe and cal
+  const iframeIds = ["myIframe", "cal"];
+  iframeIds.forEach(id => {
+    const iframe = document.getElementById(id);
+    if (iframe) {
+      iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
+    }
+  });
+
+  const textColor = isDark ? "#cfccc6ff" : "#000000";
+  localStorage.setItem("instructionColor", textColor);
+  setCookie("instructionColor", encodeURIComponent(textColor), 1);
+
+  updateTextColor(".instruction", textColor);
+  updateTextColor(".contact", textColor);
+}
+
+function updateTextColor(selector, color) {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.style.transition = "color 0.8s ease";
+    el.style.color = color;
   }
-  if (whatDo) {
-    whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-  }
+}
 
-  const iframeWrapper = document.getElementById("myIframe");
-  if (iframeWrapper) {
-    iframeWrapper.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
-  }
-
-  // Update both .instruction and .contact with smooth color transition
-  const instruction = document.querySelector(".instruction");
-  const contact = document.querySelector(".contact");
-  const newColor = flip ? "#cfccc6ff" : "#000000";
-
-  if (instruction) {
-    instruction.style.transition = "color 0.8s ease";
-    instruction.style.color = newColor;
-  }
-
-  if (contact) {
-    contact.style.transition = "color 0.8s ease";
-    contact.style.color = newColor;
-  }
-
-  document.cookie = "instructionColor=" + encodeURIComponent(newColor) + "; path=/; max-age=86400";
+// --- Cookie Utilities ---
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = name + '=' + value + '; expires=' + expires + '; path=/';
 }
 
 function getCookie(name) {
@@ -88,124 +105,147 @@ function getCookie(name) {
   return match ? decodeURIComponent(match[2]) : null;
 }
 
-window.onload = function () {
-  const savedColor = getCookie("myCookie");
-  if (savedColor) {
-    document.body.style.backgroundColor = savedColor;
-    flip = (savedColor !== "#ffffff");
+// --- Theme Restoration on Load ---
+window.onload = () => {
+  // Try localStorage first (fast)
+  let savedBg = localStorage.getItem("myCookie");
+  let imageRotated = localStorage.getItem("imageRotated");
+
+  // If no localStorage data, fallback to cookies
+  if (!savedBg) savedBg = getCookie("myCookie");
+  if (!imageRotated) imageRotated = getCookie("imageRotated");
+
+  if (savedBg) {
+    document.body.style.backgroundColor = savedBg;
+    flip = savedBg !== "#ffffff";
   }
 
-  const isRotated = getCookie("imageRotated");
-  if (isRotated === "true") {
-    const img = document.getElementById("myImage");
-    img.classList.add("rotated");
+  if (imageRotated === "true") {
+    document.getElementById("myImage")?.classList.add("rotated");
   }
 
-  const iframe = document.getElementById("myIframe");
-  if (iframe) {
-    iframe.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
-  }
-
-  const colorBox = document.getElementById("mi");
-  const whatDo = document.getElementById("doW");
-  if (colorBox) {
-    colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    colorBox.style.color = flip ? "#000000" : "#2a2828ff";
-  }
-  if (whatDo) {
-    whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-  }
-
-  const savedInstructionColor = getCookie("instructionColor");
-  const instruction = document.querySelector(".instruction");
-  const contact = document.querySelector(".contact");
-
-  if (instruction && savedInstructionColor) {
-    instruction.style.color = savedInstructionColor;
-    instruction.style.transition = "color 0.8s ease";
-  }
-
-  if (contact && savedInstructionColor) {
-    contact.style.color = savedInstructionColor;
-    contact.style.transition = "color 0.8s ease";
-  }
+  applyDarkMode(flip);
 };
 
-// JS to trigger wipe reveal on first load only
-if (!sessionStorage.getItem("animationPlayed")) {
-  sessionStorage.setItem("animationPlayed", "true");
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".greet");
-    if (el) {
-      el.classList.add("reveal");
-    }
-  });
-} else {
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".greet");
-    if (el) {
-      el.classList.add("revealed-static");
-    }
-  });
+// --- Greet Reveal (once per session) ---
+function setupGreetReveal() {
+  const greet = document.querySelector(".greet");
+  if (!greet) return;
+
+  if (!sessionStorage.getItem("animationPlayed")) {
+    greet.classList.add("reveal");
+    sessionStorage.setItem("animationPlayed", "true");
+  } else {
+    greet.classList.add("revealed-static");
+  }
 }
 
-
-
-
-
-
-
-function updateFooterPosition() {
-  const footer = document.getElementById("footer");
-  const main = document.querySelector('main');
-
-  if (!main || !footer) return;
-
-  // Get all visible elements inside main (exclude script/style)
-  const elements = [...main.querySelectorAll('*')].filter(el => {
-    const style = window.getComputedStyle(el);
-    return style.display !== 'none' && style.visibility !== 'hidden';
-  });
-
-  // Find the max bottom position of all content inside main
+// --- Footer Positioning & Loading Overlay ---
+function getContentBottom() {
   let maxBottom = 0;
-  elements.forEach(el => {
+  document.querySelectorAll('main > div, iframe').forEach(el => {
     const rect = el.getBoundingClientRect();
     const bottom = rect.top + rect.height + window.scrollY;
     if (bottom > maxBottom) maxBottom = bottom;
   });
-
-  // Get computed padding-bottom of main (if any)
-  const mainStyles = window.getComputedStyle(main);
-  const paddingBottom = parseFloat(mainStyles.paddingBottom) || 0;
-
-  const buffer = 10; // extra space in px so footer doesn’t overlap content
-  footer.style.position = 'absolute';
-  footer.style.top = (maxBottom + paddingBottom + buffer) + 'px';
+  return maxBottom;
 }
 
-function onAllIframesLoaded(callback) {
-  const iframes = document.querySelectorAll('iframe');
-  let loadedCount = 0;
+function updateFooterPositionWhenStable() {
+  const footer = document.getElementById('footer');
+  const overlay = document.getElementById('Overlay');
+  if (!footer) return;
 
-  if (iframes.length === 0) {
-    callback();
+  let lastBottom = 0;
+  let stableCount = 0;
+  const requiredStableFrames = 5;
+
+  function check() {
+    const currentBottom = getContentBottom();
+    if (Math.abs(currentBottom - lastBottom) < 1) {
+      stableCount++;
+      if (stableCount >= requiredStableFrames) {
+        footer.style.position = 'absolute';
+        footer.style.top = `${currentBottom}px`;
+        footer.classList.add('visible');
+        if (overlay) overlay.classList.add('hidden');
+        enableScrollInput();
+        return;
+      }
+    } else {
+      stableCount = 0;
+    }
+
+    lastBottom = currentBottom;
+    setTimeout(check, 100);
+  }
+
+  check();
+}
+
+function waitForIframesAndUpdateFooter() {
+  disableScrollInput();
+  const iframes = document.querySelectorAll('iframe');
+  if (!iframes.length) {
+    updateFooterPositionWhenStable();
     return;
   }
 
+  let loaded = 0;
   iframes.forEach(iframe => {
     iframe.addEventListener('load', () => {
-      loadedCount++;
-      if (loadedCount === iframes.length) {
-        callback();
+      loaded++;
+      if (loaded === iframes.length) {
+        updateFooterPositionWhenStable();
       }
     });
   });
+
+  // Fallback in case some iframes don't fire 'load'
+  setTimeout(() => {
+    if (loaded < iframes.length) {
+      updateFooterPositionWhenStable();
+    }
+  }, 3000);
 }
 
-window.addEventListener('load', () => {
-  onAllIframesLoaded(updateFooterPosition);
+window.addEventListener('load', waitForIframesAndUpdateFooter);
+window.addEventListener('resize', () => {
+  const footer = document.getElementById('footer');
+  if (footer) {
+    footer.style.position = 'absolute';
+    footer.style.top = `${getContentBottom()}px`;
+  }
 });
 
-window.addEventListener('resize', updateFooterPosition);
+// --- Scroll Lock Control ---
+function disableScrollInput() {
+  const scrollTop = window.scrollY;
+  const scrollLeft = window.scrollX;
+
+  function lockScroll() {
+    window.scrollTo(scrollLeft, scrollTop);
+  }
+
+  document.body.style.pointerEvents = 'none'; // Optional: disable interaction
+
+  window.addEventListener('scroll', lockScroll);
+  window.addEventListener('wheel', preventDefault, { passive: false });
+  window.addEventListener('touchmove', preventDefault, { passive: false });
+
+  // Store for cleanup
+  window._lockScrollHandler = lockScroll;
+}
+
+function enableScrollInput() {
+  document.body.style.pointerEvents = '';
+  window.removeEventListener('scroll', window._lockScrollHandler);
+  window.removeEventListener('wheel', preventDefault);
+  window.removeEventListener('touchmove', preventDefault);
+  delete window._lockScrollHandler;
+}
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+    

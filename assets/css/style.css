@@ -3,6 +3,14 @@ body {
   flex-direction: column;
   min-height: 100vh;
   transition: background-color 0.3s ease; 
+  overflow-y: scroll;
+}
+body.no-scroll {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+  overflow: hidden; /* Prevent scrolling */
 }
 #page-container {
   position: relative;
@@ -12,9 +20,7 @@ body {
 #content-wrap {
    padding-bottom: 40%;   /* Footer height */
 }
-html{
-  overflow-y: scroll;
-}
+
 main {
   flex-grow: 1;
 }
@@ -238,7 +244,7 @@ left: 5%;
   left:0%;
   top: 14%;
   width: 100%;
-  height: 60%;
+  height: 120%;
   transition: filter .3s ease;
   
 }
@@ -298,11 +304,13 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
 
 #cal{
   position: absolute;
-  left: 0%;
-  top: 14%;
-  width: 100%;
-  height: 80%;
+  left: 10%;
+  top: 10%;
+  width: 80%;
+  height: 70%;
   border: none;
+  transition: filter .3s ease;
+
 }
 .contact {
   position: absolute;
@@ -322,16 +330,25 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   position: absolute;
   bottom: -9%;
   width: 101.575336%;
-  height: 30%; 
+  margin-top: 10%;
+  height: 25%; 
   left: -1%;
+  visibility: hidden;
+  transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+  opacity: 0;
   background-color: #FFA500; /* Purple background */
+}
+#footer.visible {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
 }
 .fcontact{
   /* position: absolute; */
   position: relative;
   width: 30%;
   height: auto;
-  top: 0%;
+  top: -5%;
   left: -5%;
   padding: 0%;
   text-align: center;
@@ -352,4 +369,61 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   width: 40%;
   height: auto;
   top: 8%;
+}
+#Overlay {
+  position: fixed;
+  top: 0%; left: 0;
+  width: 100vw;
+  height: 92vh;
+  margin-top: 4%;
+  background-color: #800080;
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  font-size: 1.5rem;
+  color: #333;
+  z-index: 9999;
+  user-select: none;
+  pointer-events: all;
+  transition: opacity 0.3s ease;
+}
+#lg{
+  width: 10%;
+  height: auto;
+  margin-right: 0%;
+  transition: transform 0.3s ease;
+}
+#Overlay a{
+  position: absolute;
+  top: 150%;
+  left: -85%;
+  width: 284%;
+  font-size: 60%;
+  color: #FFD700; /* Gold text */
+  
+}
+#bc{
+  position: absolute;
+  width: 12%;
+  height: auto;
+  margin-left: -.75%;
+  transition: transform 0.3s ease;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#Overlay p {
+  position: absolute;
+  margin-left: 01%;
+  top: 60%;
+  font-family: CustomFont, sans-serif;
+  color: #FFD700; /* Gold text */
+  text-shadow: 2px 2px 0 #800080; /* Purple shadow */
+}
+#Overlay.hidden {
+  visibility: hidden;
+  opacity: 1;
+  transition-delay: .4s;
 }
