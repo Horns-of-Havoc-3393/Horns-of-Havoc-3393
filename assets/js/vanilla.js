@@ -1,9 +1,15 @@
 let flip = false;	
 var slideIndex = 1;
+var mslideIndex = 1;
 showDivs(slideIndex);
+showdaDivs(mslideIndex);
 
 function plusDivs(n) {
 	showDivs(slideIndex += n);
+}
+
+function plusnDivs(n) {
+	showdaDivs(mslideIndex += n);
 }
 
 function showDivs(n) {
@@ -15,6 +21,17 @@ function showDivs(n) {
 		x[i].style.display = "none";
 	}
 	x[slideIndex-1].style.display = "block";
+}
+
+function showdaDivs(n) {
+	var i;
+	var x = document.getElementsByClassName("mSlides");
+	if (n > x.length) {mslideIndex = 1}
+	if (n < 1) {mslideIndex = x.length}
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";
+	}
+	x[mslideIndex-1].style.display = "block";
 }
 
 function rotateImage() {
@@ -34,9 +51,14 @@ function darken() {
 	document.body.style.backgroundColor = color;
 	document.cookie = "myCookie=" + encodeURIComponent(color) + "; path=/; max-age=86400";
     const colorBox = document.getElementById("mi");
+    const  whatDo = document.getElementById("doW");
 	if (colorBox) {
 		colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
 		colorBox.style.color = flip ? "#000000" : "#2a2828ff";
+	}
+    if (whatDo) {
+		whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
+		whatDo.style.color = flip ? "#000000" : "#2a2828ff";
 	}
 }
 
@@ -48,14 +70,20 @@ function getCookie(name) {
 
 window.onload = function () {
 	const savedColor = getCookie("myCookie");
-	if (savedColor) {
-		document.body.style.backgroundColor = savedColor;
-		flip = (savedColor !== "#ffffff");
-	}
+    if (savedColor) {
+            document.body.style.backgroundColor = savedColor;
+            flip = (savedColor !== "#ffffff");
 
-	const isRotated = getCookie("imageRotated");
-	if (isRotated === "true") {
-		const img = document.getElementById("myImage");
-		img.classList.add("rotated");
-	}
+            const colorBox = document.getElementById("mi");
+            const whatDo = document.getElementById("doW");
+
+            if (colorBox) {
+                colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
+                colorBox.style.color = flip ? "#000000" : "#2a2828ff";
+            }
+            if (whatDo) {
+                whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
+                whatDo.style.color = flip ? "#000000" : "#2a2828ff";
+            }
+        }
 };

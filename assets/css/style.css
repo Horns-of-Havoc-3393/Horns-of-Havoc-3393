@@ -14,12 +14,13 @@ body {
   /* Optional: font-weight or font-style here */
 }
   .headder {
+    position: fixed;
     display: flex;
     align-items: center;   /* vertically center img + h2 */
     margin-top: -1%;
     margin-left: -1%;
     width: 99.45vw;
-    height: 70%;
+    height: 10%;
     /* background-color: #800080; */
     /* background: linear-gradient(90deg, #FFA500, #800080); */
     background: linear-gradient(
@@ -28,15 +29,14 @@ body {
       #800080 100%
       /* Gold starts fading from 20% and solid by 80% */
     );
-    
+    z-index: 10;
   }
-  
-  
+
   #titial {
     font-family: CustomFont, sans-serif;
     font-size: 200%;
     margin-left: 8.5%;
-    
+    /* position: fixed; */
     max-width: 100%;
     max-height: 100%;
     background-color: #800080; 
@@ -68,9 +68,10 @@ body {
     display: flex;
     flex-direction: row;
     gap: 1.2rem;   
-    position: absolute;
-    margin-top: -3.5%;
+    position: fixed;
+    margin-top: .5%;
     margin-left: 60%;
+    z-index: 11;
   }
 
   .navbar a{
@@ -80,12 +81,27 @@ body {
     font-size: 1.5rem;
   }
 .imSlide{
+  position: absolute;
   width: 60%;
   height: auto;
  margin-left: 20%;
- margin-top: 3%;
+ margin-top: 6%;
+}
+.doSlide{
+  left: 0%;
+  position: absolute;
+  top: 0%;
+  width: 40%;
+  height: auto;
+ margin-left: 3%;
+ margin-top: 82%;
 }
 .mySlides {
+  width: 100%;
+  height: auto;
+}
+
+.mSlides {
   width: 100%;
   height: auto;
 }
@@ -93,30 +109,57 @@ body {
   
   position: absolute; 
   margin-top: -10%;
-  width: 6%;
+  width: 7%;
   height: 13%;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-    border-radius: 50%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   /* padding: 10px; */
   cursor: pointer;
   font-size: 240%;
 }
+
+.imSelector {
+  
+  position: absolute; 
+  margin-top: -55.5%;
+  width: 7.5%;
+  height:100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+    /* border-radius: 50%; */
+  /* padding: 10px; */
+  cursor: pointer;
+  font-size: 150%;
+}
 #advance {
-  margin-left: 1%;
+left: 5%;
 }
 
 #retreat {
-  margin-left: 52.4%;
+  right: 5%;
+}
+
+#avance {
+  margin-left: 0%;
+}
+
+#rtreat {
+  margin-left: 92.5%;
 }
 .dMode{
-  position: absolute;
+  position: fixed;
   width: 3%;
   height: auto;
-  margin-top: -40%;
+  margin-top: 0%;
   margin-left: 95%;
-  z-index: 1;
+  z-index: 12;
+
 }
 .dMode img {
   width: 100%;
@@ -155,4 +198,20 @@ body {
   left: 55%;
   padding: 0%;
   text-align: center;
+}
+
+.whatDo {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 170%;
+  left: 55%;
+  padding: 0%;
+  text-align: center;
+  font-size: 140%;
+    transition: background-color 0.3s ease;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
