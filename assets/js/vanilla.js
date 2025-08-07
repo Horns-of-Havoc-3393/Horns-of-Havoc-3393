@@ -44,31 +44,31 @@ function wrapIndex(n, length) {
 function rotateImage() {
   const img = document.getElementById("myImage");
   img.classList.toggle("rotated");
-  const isRotated = img.classList.contains("rotated");
-  document.cookie = `imageRotated=${isRotated}; path=/; max-age=86400`;
-  toggleDarkMode();
+  // Set flip based on rotated presence (true = dark mode on)
+  flip = img.classList.contains("rotated");
+  document.cookie = `imageRotated=${flip}; path=/; max-age=86400`;
+  applyDarkMode(flip);
 }
 
-function toggleDarkMode() {
-  flip = !flip;
-  const bgColor = flip ? "#2a2828ff" : "#ffffff";
+function applyDarkMode(isDark) {
+  const bgColor = isDark ? "#2a2828ff" : "#ffffff";
   document.body.style.backgroundColor = bgColor;
   document.cookie = `myCookie=${encodeURIComponent(bgColor)}; path=/; max-age=86400`;
 
   const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
   colorElems.forEach(el => {
     if (el) {
-      el.style.backgroundColor = flip ? "#FFA500" : "#800080";
-      el.style.color = flip ? "#000000" : "#2a2828ff";
+      el.style.backgroundColor = isDark ? "#FFA500" : "#800080";
+      el.style.color = isDark ? "#000000" : "#2a2828ff";
     }
   });
 
   const iframe = document.getElementById("myIframe");
   if (iframe) {
-    iframe.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
+    iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
   }
 
-  const textColor = flip ? "#cfccc6ff" : "#000000";
+  const textColor = isDark ? "#cfccc6ff" : "#000000";
   document.cookie = `instructionColor=${encodeURIComponent(textColor)}; path=/; max-age=86400`;
 
   updateTextColor(".instruction", textColor);
@@ -101,24 +101,7 @@ window.onload = () => {
     document.getElementById("myImage")?.classList.add("rotated");
   }
 
-  const iframe = document.getElementById("myIframe");
-  if (iframe) {
-    iframe.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
-  }
-
-  const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
-  colorElems.forEach(el => {
-    if (el) {
-      el.style.backgroundColor = flip ? "#FFA500" : "#800080";
-      el.style.color = flip ? "#000000" : "#2a2828ff";
-    }
-  });
-
-  const savedTextColor = getCookie("instructionColor");
-  if (savedTextColor) {
-    updateTextColor(".instruction", savedTextColor);
-    updateTextColor(".contact", savedTextColor);
-  }
+  applyDarkMode(flip);
 };
 
 // --- Greet Reveal (once per session) ---
