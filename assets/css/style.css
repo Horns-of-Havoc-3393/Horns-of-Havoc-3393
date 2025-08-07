@@ -348,20 +348,57 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   position: relative;
   width: 30%;
   height: auto;
-  top: -5%;
+  top: 0%;
   left: -5%;
   padding: 0%;
   text-align: center;
   font-size: 85%;
 
 }
+.fsocials{
+  display: flex;
+  justify-content: center;
+  column-gap: 4%;    /* same gap as .socials */
+  font-size: 0;    
+}
 .fsocials img{
-  width: 6%;
+  display: block;
+  width: 2vw;   /* 8% of viewport width */
+  max-width: 100%;
   height: auto;
+  margin: 0;
+  padding: 0;
+}
+.fsocials a{
+  display: inline-block;
+  width: auto; /* no forced width */
+  padding: 0;
+  margin: 0;
+  border: none;
+  flex-shrink: 0; /* Purple text */;
 }
 .socials img{
-  width: 6%;
-  height: auto;   
+  display: block;         /* removes inline image spacing */
+  width: 7vh;            /* or use a responsive size like 10vw */
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.socials a{
+  display: inline-block;  /* shrink-wrap content */
+  padding: 0;
+  margin: 0;
+  border: none;          /* remove default link styles */
+  flex-shrink: 0;        /* prevent flex growing/shrinking */
+  font-size: initial;     /* reset font size */
+  width: auto;  /* Purple text */;
+}
+.socials{
+  display: flex;
+  justify-content: center;
+  column-gap: 4%;
+  font-size: 0;
 }
 #loo{
   position: absolute;
