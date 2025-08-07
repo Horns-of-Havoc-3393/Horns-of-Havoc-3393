@@ -331,7 +331,7 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   bottom: -9%;
   width: 101.575336%;
   margin-top: 10%;
-  height: 30%; 
+  height: 25%; 
   left: -1%;
   visibility: hidden;
   transition: visibility 0s linear 0.3s, opacity 0.3s ease;
@@ -348,7 +348,7 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   position: relative;
   width: 30%;
   height: auto;
-  top: 0%;
+  top: -5%;
   left: -5%;
   padding: 0%;
   text-align: center;
