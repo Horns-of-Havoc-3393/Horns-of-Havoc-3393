@@ -208,3 +208,25 @@ window.onload = function () {
     }
 };
 
+// JS to trigger wipe reveal
+// run this early in your <head> or before animation trigger
+if (!sessionStorage.getItem("animationPlayed")) {
+  sessionStorage.setItem("animationPlayed", "true");
+
+  // Add animation trigger
+  document.addEventListener("DOMContentLoaded", () => {
+    const el = document.querySelector(".greet");
+    if (el) {
+      el.classList.add("reveal");
+    }
+  });
+} else {
+  // Keep it revealed without animation
+  document.addEventListener("DOMContentLoaded", () => {
+    const el = document.querySelector(".greet");
+    if (el) {
+      el.classList.add("revealed-static"); // No animation, but visible
+    }
+  });
+}
+
