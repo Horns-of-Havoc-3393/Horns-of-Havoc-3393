@@ -387,6 +387,41 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   pointer-events: all;
   transition: opacity 0.3s ease;
 }
+#lg{
+  width: 10%;
+  height: auto;
+  margin-right: 0%;
+  transition: transform 0.3s ease;
+}
+#Overlay a{
+  position: absolute;
+  top: 150%;
+  left: -85%;
+  width: 284%;
+  font-size: 60%;
+  color: #FFD700; /* Gold text */
+  
+}
+#bc{
+  position: absolute;
+  width: 12%;
+  height: auto;
+  margin-left: -.75%;
+  transition: transform 0.3s ease;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#Overlay p {
+  position: absolute;
+  margin-left: 01%;
+  top: 60%;
+  font-family: CustomFont, sans-serif;
+  color: #FFD700; /* Gold text */
+  text-shadow: 2px 2px 0 #800080; /* Purple shadow */
+}
 #Overlay.hidden {
   visibility: hidden;
   opacity: 1;
