@@ -44,16 +44,22 @@ function wrapIndex(n, length) {
 function rotateImage() {
   const img = document.getElementById("myImage");
   img.classList.toggle("rotated");
-  // Set flip based on rotated presence (true = dark mode on)
   flip = img.classList.contains("rotated");
-  document.cookie = `imageRotated=${flip}; path=/; max-age=86400`;
+
+  // Save to both localStorage and cookie
+  localStorage.setItem("imageRotated", flip);
+  setCookie("imageRotated", flip, 1);
+
   applyDarkMode(flip);
 }
 
 function applyDarkMode(isDark) {
   const bgColor = isDark ? "#2a2828ff" : "#ffffff";
   document.body.style.backgroundColor = bgColor;
-  document.cookie = `myCookie=${encodeURIComponent(bgColor)}; path=/; max-age=86400`;
+
+  // Save to both localStorage and cookie
+  localStorage.setItem("myCookie", bgColor);
+  setCookie("myCookie", encodeURIComponent(bgColor), 1);
 
   const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
   colorElems.forEach(el => {
@@ -73,7 +79,8 @@ function applyDarkMode(isDark) {
   });
 
   const textColor = isDark ? "#cfccc6ff" : "#000000";
-  document.cookie = `instructionColor=${encodeURIComponent(textColor)}; path=/; max-age=86400`;
+  localStorage.setItem("instructionColor", textColor);
+  setCookie("instructionColor", encodeURIComponent(textColor), 1);
 
   updateTextColor(".instruction", textColor);
   updateTextColor(".contact", textColor);
@@ -88,20 +95,32 @@ function updateTextColor(selector, color) {
 }
 
 // --- Cookie Utilities ---
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = name + '=' + value + '; expires=' + expires + '; path=/';
+}
+
 function getCookie(name) {
-  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
   return match ? decodeURIComponent(match[2]) : null;
 }
 
 // --- Theme Restoration on Load ---
 window.onload = () => {
-  const savedBg = getCookie("myCookie");
+  // Try localStorage first (fast)
+  let savedBg = localStorage.getItem("myCookie");
+  let imageRotated = localStorage.getItem("imageRotated");
+
+  // If no localStorage data, fallback to cookies
+  if (!savedBg) savedBg = getCookie("myCookie");
+  if (!imageRotated) imageRotated = getCookie("imageRotated");
+
   if (savedBg) {
     document.body.style.backgroundColor = savedBg;
     flip = savedBg !== "#ffffff";
   }
 
-  if (getCookie("imageRotated") === "true") {
+  if (imageRotated === "true") {
     document.getElementById("myImage")?.classList.add("rotated");
   }
 
@@ -229,3 +248,4 @@ function enableScrollInput() {
 function preventDefault(e) {
   e.preventDefault();
 }
+    
