@@ -309,6 +309,8 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   width: 80%;
   height: 70%;
   border: none;
+  transition: filter .3s ease;
+
 }
 .contact {
   position: absolute;

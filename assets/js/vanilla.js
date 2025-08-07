@@ -63,10 +63,14 @@ function applyDarkMode(isDark) {
     }
   });
 
-  const iframe = document.getElementById("myIframe");
-  if (iframe) {
-    iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
-  }
+  // Apply filter to both iframes: myIframe and cal
+  const iframeIds = ["myIframe", "cal"];
+  iframeIds.forEach(id => {
+    const iframe = document.getElementById(id);
+    if (iframe) {
+      iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
+    }
+  });
 
   const textColor = isDark ? "#cfccc6ff" : "#000000";
   document.cookie = `instructionColor=${encodeURIComponent(textColor)}; path=/; max-age=86400`;
