@@ -1,104 +1,104 @@
 let flip = false;
-var slideIndex = 1;
-var mslideIndex = 1;
-showDivs(slideIndex);
-showdaDivs(mslideIndex);
+let slideIndex = 1;
+let mslideIndex = 1;
 
+document.addEventListener("DOMContentLoaded", () => {
+  showDivs(slideIndex);
+  showAltDivs(mslideIndex);
+  setupGreetReveal();
+});
+
+// --- Slideshow Logic ---
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
 
-function plusnDivs(n) {
-  showdaDivs(mslideIndex += n);
+function plusAltDivs(n) {
+  showAltDivs(mslideIndex += n);
 }
 
 function showDivs(n) {
-  const x = document.getElementsByClassName("mySlides");
-  if (x.length === 0) return;
-  if (n > x.length) { slideIndex = 1; }
-  if (n < 1) { slideIndex = x.length; }
-  for (let i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[slideIndex - 1].style.display = "block";
+  const slides = document.getElementsByClassName("mySlides");
+  if (!slides.length) return;
+  slideIndex = wrapIndex(n, slides.length);
+  updateSlides(slides, slideIndex);
 }
 
-function showdaDivs(n) {
-  const x = document.getElementsByClassName("mSlides");
-  if (x.length === 0) return;
-  if (n > x.length) { mslideIndex = 1; }
-  if (n < 1) { mslideIndex = x.length; }
-  for (let i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[mslideIndex - 1].style.display = "block";
+function showAltDivs(n) {
+  const slides = document.getElementsByClassName("mSlides");
+  if (!slides.length) return;
+  mslideIndex = wrapIndex(n, slides.length);
+  updateSlides(slides, mslideIndex);
 }
 
+function updateSlides(slides, index) {
+  Array.from(slides).forEach(s => s.style.display = "none");
+  slides[index - 1].style.display = "block";
+}
+
+function wrapIndex(n, length) {
+  return n > length ? 1 : n < 1 ? length : n;
+}
+
+// --- Dark Mode Toggle ---
 function rotateImage() {
   const img = document.getElementById("myImage");
   img.classList.toggle("rotated");
   const isRotated = img.classList.contains("rotated");
-  document.cookie = "imageRotated=" + isRotated + "; path=/; max-age=86400";
-  darken();
+  document.cookie = `imageRotated=${isRotated}; path=/; max-age=86400`;
+  toggleDarkMode();
 }
 
-function darken() {
+function toggleDarkMode() {
   flip = !flip;
+  const bgColor = flip ? "#2a2828ff" : "#ffffff";
+  document.body.style.backgroundColor = bgColor;
+  document.cookie = `myCookie=${encodeURIComponent(bgColor)}; path=/; max-age=86400`;
 
-  const bodyColor = flip ? "#2a2828ff" : "#ffffff";
-  document.body.style.backgroundColor = bodyColor;
-  document.cookie = "myCookie=" + encodeURIComponent(bodyColor) + "; path=/; max-age=86400";
+  const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
+  colorElems.forEach(el => {
+    if (el) {
+      el.style.backgroundColor = flip ? "#FFA500" : "#800080";
+      el.style.color = flip ? "#000000" : "#2a2828ff";
+    }
+  });
 
-  const colorBox = document.getElementById("mi");
-  const whatDo = document.getElementById("doW");
-  if (colorBox) {
-    colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    colorBox.style.color = flip ? "#000000" : "#2a2828ff";
-  }
-  if (whatDo) {
-    whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-  }
-
-  const iframeWrapper = document.getElementById("myIframe");
-  if (iframeWrapper) {
-    iframeWrapper.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
+  const iframe = document.getElementById("myIframe");
+  if (iframe) {
+    iframe.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
   }
 
-  // Update both .instruction and .contact with smooth color transition
-  const instruction = document.querySelector(".instruction");
-  const contact = document.querySelector(".contact");
-  const newColor = flip ? "#cfccc6ff" : "#000000";
+  const textColor = flip ? "#cfccc6ff" : "#000000";
+  document.cookie = `instructionColor=${encodeURIComponent(textColor)}; path=/; max-age=86400`;
 
-  if (instruction) {
-    instruction.style.transition = "color 0.8s ease";
-    instruction.style.color = newColor;
-  }
-
-  if (contact) {
-    contact.style.transition = "color 0.8s ease";
-    contact.style.color = newColor;
-  }
-
-  document.cookie = "instructionColor=" + encodeURIComponent(newColor) + "; path=/; max-age=86400";
+  updateTextColor(".instruction", textColor);
+  updateTextColor(".contact", textColor);
 }
 
+function updateTextColor(selector, color) {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.style.transition = "color 0.8s ease";
+    el.style.color = color;
+  }
+}
+
+// --- Cookie Utilities ---
 function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
   return match ? decodeURIComponent(match[2]) : null;
 }
 
-window.onload = function () {
-  const savedColor = getCookie("myCookie");
-  if (savedColor) {
-    document.body.style.backgroundColor = savedColor;
-    flip = (savedColor !== "#ffffff");
+// --- Theme Restoration on Load ---
+window.onload = () => {
+  const savedBg = getCookie("myCookie");
+  if (savedBg) {
+    document.body.style.backgroundColor = savedBg;
+    flip = savedBg !== "#ffffff";
   }
 
-  const isRotated = getCookie("imageRotated");
-  if (isRotated === "true") {
-    const img = document.getElementById("myImage");
-    img.classList.add("rotated");
+  if (getCookie("imageRotated") === "true") {
+    document.getElementById("myImage")?.classList.add("rotated");
   }
 
   const iframe = document.getElementById("myIframe");
@@ -106,53 +106,35 @@ window.onload = function () {
     iframe.style.filter = flip ? "invert(1) hue-rotate(180deg)" : "none";
   }
 
-  const colorBox = document.getElementById("mi");
-  const whatDo = document.getElementById("doW");
-  if (colorBox) {
-    colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    colorBox.style.color = flip ? "#000000" : "#2a2828ff";
-  }
-  if (whatDo) {
-    whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-    whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-  }
+  const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
+  colorElems.forEach(el => {
+    if (el) {
+      el.style.backgroundColor = flip ? "#FFA500" : "#800080";
+      el.style.color = flip ? "#000000" : "#2a2828ff";
+    }
+  });
 
-  const savedInstructionColor = getCookie("instructionColor");
-  const instruction = document.querySelector(".instruction");
-  const contact = document.querySelector(".contact");
-
-  if (instruction && savedInstructionColor) {
-    instruction.style.color = savedInstructionColor;
-    instruction.style.transition = "color 0.8s ease";
-  }
-
-  if (contact && savedInstructionColor) {
-    contact.style.color = savedInstructionColor;
-    contact.style.transition = "color 0.8s ease";
+  const savedTextColor = getCookie("instructionColor");
+  if (savedTextColor) {
+    updateTextColor(".instruction", savedTextColor);
+    updateTextColor(".contact", savedTextColor);
   }
 };
 
-// JS to trigger wipe reveal on first load only
-if (!sessionStorage.getItem("animationPlayed")) {
-  sessionStorage.setItem("animationPlayed", "true");
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".greet");
-    if (el) {
-      el.classList.add("reveal");
-    }
-  });
-} else {
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".greet");
-    if (el) {
-      el.classList.add("revealed-static");
-    }
-  });
+// --- Greet Reveal (once per session) ---
+function setupGreetReveal() {
+  const greet = document.querySelector(".greet");
+  if (!greet) return;
+
+  if (!sessionStorage.getItem("animationPlayed")) {
+    greet.classList.add("reveal");
+    sessionStorage.setItem("animationPlayed", "true");
+  } else {
+    greet.classList.add("revealed-static");
+  }
 }
 
-// FOOTER POSITIONING LOGIC STARTS HERE
-
-// Helper: get bottom position of content (main div children + iframes)
+// --- Footer Positioning & Loading Overlay ---
 function getContentBottom() {
   let maxBottom = 0;
   document.querySelectorAll('main > div, iframe').forEach(el => {
@@ -163,27 +145,25 @@ function getContentBottom() {
   return maxBottom;
 }
 
-// Wait until content bottom stabilizes before updating footer
 function updateFooterPositionWhenStable() {
   const footer = document.getElementById('footer');
-  const ovl = document.getElementById('Overlay');
+  const overlay = document.getElementById('Overlay');
   if (!footer) return;
 
   let lastBottom = 0;
   let stableCount = 0;
   const requiredStableFrames = 5;
-  const checkIntervalMs = 100;
 
   function check() {
     const currentBottom = getContentBottom();
-
     if (Math.abs(currentBottom - lastBottom) < 1) {
       stableCount++;
       if (stableCount >= requiredStableFrames) {
         footer.style.position = 'absolute';
-        footer.style.top = currentBottom + 'px';
+        footer.style.top = `${currentBottom}px`;
         footer.classList.add('visible');
-        ovl.classList.add('hidden');  // Show footer here
+        if (overlay) overlay.classList.add('hidden');
+        enableScrollInput();
         return;
       }
     } else {
@@ -191,45 +171,74 @@ function updateFooterPositionWhenStable() {
     }
 
     lastBottom = currentBottom;
-    setTimeout(check, checkIntervalMs);
+    setTimeout(check, 100);
   }
 
   check();
 }
 
-// Run after window load and iframe(s) load (or immediately if no iframes)
 function waitForIframesAndUpdateFooter() {
+  disableScrollInput();
   const iframes = document.querySelectorAll('iframe');
-  if (iframes.length === 0) {
+  if (!iframes.length) {
     updateFooterPositionWhenStable();
     return;
   }
 
-  let loadedCount = 0;
+  let loaded = 0;
   iframes.forEach(iframe => {
     iframe.addEventListener('load', () => {
-      loadedCount++;
-      if (loadedCount === iframes.length) {
-        // After all iframes loaded, run stable-position check
+      loaded++;
+      if (loaded === iframes.length) {
         updateFooterPositionWhenStable();
       }
     });
   });
 
-  // Fallback timeout in case iframe 'load' doesn't fire (e.g. cached)
+  // Fallback in case some iframes don't fire 'load'
   setTimeout(() => {
-    if (loadedCount < iframes.length) {
+    if (loaded < iframes.length) {
       updateFooterPositionWhenStable();
     }
   }, 3000);
 }
 
 window.addEventListener('load', waitForIframesAndUpdateFooter);
-
 window.addEventListener('resize', () => {
-  // on resize, just do one immediate reposition
   const footer = document.getElementById('footer');
-  if (!footer) return;
-  footer.style.position = 'absolute';
-  footer.style.top = getContentBottom() + 'px';
+  if (footer) {
+    footer.style.position = 'absolute';
+    footer.style.top = `${getContentBottom()}px`;
+  }
 });
+
+// --- Scroll Lock Control ---
+function disableScrollInput() {
+  const scrollTop = window.scrollY;
+  const scrollLeft = window.scrollX;
+
+  function lockScroll() {
+    window.scrollTo(scrollLeft, scrollTop);
+  }
+
+  document.body.style.pointerEvents = 'none'; // Optional: disable interaction
+
+  window.addEventListener('scroll', lockScroll);
+  window.addEventListener('wheel', preventDefault, { passive: false });
+  window.addEventListener('touchmove', preventDefault, { passive: false });
+
+  // Store for cleanup
+  window._lockScrollHandler = lockScroll;
+}
+
+function enableScrollInput() {
+  document.body.style.pointerEvents = '';
+  window.removeEventListener('scroll', window._lockScrollHandler);
+  window.removeEventListener('wheel', preventDefault);
+  window.removeEventListener('touchmove', preventDefault);
+  delete window._lockScrollHandler;
+}
+
+function preventDefault(e) {
+  e.preventDefault();
+}

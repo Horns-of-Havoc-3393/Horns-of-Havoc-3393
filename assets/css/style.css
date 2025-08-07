@@ -3,6 +3,14 @@ body {
   flex-direction: column;
   min-height: 100vh;
   transition: background-color 0.3s ease; 
+  overflow-y: scroll;
+}
+body.no-scroll {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+  overflow: hidden; /* Prevent scrolling */
 }
 #page-container {
   position: relative;
@@ -12,9 +20,7 @@ body {
 #content-wrap {
    padding-bottom: 40%;   /* Footer height */
 }
-html{
-  overflow-y: scroll;
-}
+
 main {
   flex-grow: 1;
 }
@@ -368,7 +374,7 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   width: 100vw;
   height: 92vh;
   margin-top: 4%;
-  background-color: rgb(0, 26, 255);
+  background-color: #800080;
   display: flex;
   justify-content: center;  
   align-items: center;
@@ -382,5 +388,5 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
 /* #Overlay.hidden {
   visibility: hidden;
   opacity: 1;
-  transition-delay: 0s;
+  transition-delay: .4s;
 } */
