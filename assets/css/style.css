@@ -385,8 +385,8 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   pointer-events: all;
   transition: opacity 0.3s ease;
 }
-/* #Overlay.hidden {
+#Overlay.hidden {
   visibility: hidden;
   opacity: 1;
   transition-delay: .4s;
-} */
+}
