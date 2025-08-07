@@ -12,17 +12,6 @@ function plusnDivs(n) {
 	showdaDivs(mslideIndex += n);
 }
 
-// function showDivs(n) {
-// 	var i;
-// 	var x = document.getElementsByClassName("mySlides");
-// 	if (n > x.length) {slideIndex = 1}
-// 	if (n < 1) {slideIndex = x.length}
-// 	for (i = 0; i < x.length; i++) {
-// 		x[i].style.display = "none";
-// 	}
-// 	x[slideIndex-1].style.display = "block";
-// }
-
 function showDivs(n) {
 	var i;
 	var x = document.getElementsByClassName("mySlides");
@@ -38,23 +27,10 @@ function showDivs(n) {
 	x[slideIndex - 1].style.display = "block";
 }
 
-
-// function showdaDivs(n) {
-// 	var i;
-// 	var x = document.getElementsByClassName("mSlides");
-// 	if (n > x.length) {mslideIndex = 1}
-// 	if (n < 1) {mslideIndex = x.length}
-// 	for (i = 0; i < x.length; i++) {
-// 		x[i].style.display = "none";
-// 	}
-// 	x[mslideIndex-1].style.display = "block";
-// }
-
 function showdaDivs(n) {
 	var i;
 	var x = document.getElementsByClassName("mSlides");
 
-	// Exit early if there are no elements with class "mSlides"
 	if (x.length === 0) return;
 
 	if (n > x.length) { mslideIndex = 1; }
@@ -67,7 +43,6 @@ function showdaDivs(n) {
 	x[mslideIndex - 1].style.display = "block";
 }
 
-
 function rotateImage() {
 	const img = document.getElementById("myImage");
 	img.classList.toggle("rotated");
@@ -78,44 +53,6 @@ function rotateImage() {
 
 	darken();
 }
-
-// function darken() {
-// 	flip = !flip;
-// 	let color = flip ? "#2a2828ff" : "#ffffff";
-// 	document.body.style.backgroundColor = color;
-// 	document.cookie = "myCookie=" + encodeURIComponent(color) + "; path=/; max-age=86400";
-//     const colorBox = document.getElementById("mi");
-//     const  whatDo = document.getElementById("doW");
-// 	if (colorBox) {
-// 		colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-// 		colorBox.style.color = flip ? "#000000" : "#2a2828ff";
-// 	}
-//     if (whatDo) {
-// 		whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-// 		whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-// 	}
-// }
-
-// function darken() {
-// 	flip = !flip;
-// 	let color = flip ? "#2a2828ff" : "#ffffff";
-// 	document.body.style.backgroundColor = color;
-// 	document.cookie = "myCookie=" + encodeURIComponent(color) + "; path=/; max-age=86400";
-
-// 	// Optional divs
-// 	const mi = document.getElementById("mi");
-// 	const doW = document.getElementById("doW");
-
-// 	if (mi) {
-// 		mi.style.backgroundColor = flip ? "#FFA500" : "#800080";
-// 		mi.style.color = flip ? "#000000" : "#2a2828ff";
-// 	}
-
-// 	if (doW) {
-// 		doW.style.backgroundColor = flip ? "#FFA500" : "#800080";
-// 		doW.style.color = flip ? "#000000" : "#2a2828ff";
-// 	}
-// }
 
 function darken() {
 	flip = !flip;
@@ -135,7 +72,7 @@ function darken() {
 		whatDo.style.color = flip ? "#000000" : "#2a2828ff";
 	}
 
-	// Toggle dark mode filter on iframe wrapper
+	// Handle iframe dark mode filter
 	const iframeWrapper = document.getElementById("myIframe");
 	if (iframeWrapper) {
 		if (flip) {
@@ -144,8 +81,15 @@ function darken() {
 			iframeWrapper.style.filter = "none";
 		}
 	}
-}
 
+	// NEW FEATURE: Update .instruction color and save it to cookie if exists
+	const instruction = document.querySelector(".instruction");
+	if (instruction) {
+		const newColor = flip ? "#cfccc6ff" : "#000000"; // orange in dark mode, black in light
+		instruction.style.color = newColor;
+		document.cookie = "instructionColor=" + encodeURIComponent(newColor) + "; path=/; max-age=86400";
+	}
+}
 
 function getCookie(name) {
 	const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -153,80 +97,64 @@ function getCookie(name) {
 	return null;
 }
 
-// window.onload = function () {
-// 	const savedColor = getCookie("myCookie");
-// if (savedColor) {
-// 		document.body.style.backgroundColor = savedColor;
-// 		flip = (savedColor !== "#ffffff");
-
-// 		const colorBox = document.getElementById("mi");
-// 		const whatDo = document.getElementById("doW");
-
-// 		if (colorBox) {
-// 			colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-// 			colorBox.style.color = flip ? "#000000" : "#2a2828ff";
-// 		}
-// 		if (whatDo) {
-// 			whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-// 			whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-// 		}
-// 	}
-// };
 window.onload = function () {
-    const savedColor = getCookie("myCookie");
-    if (savedColor) {
-        document.body.style.backgroundColor = savedColor;
-        flip = (savedColor !== "#ffffff");
-    }
+	const savedColor = getCookie("myCookie");
+	if (savedColor) {
+		document.body.style.backgroundColor = savedColor;
+		flip = (savedColor !== "#ffffff");
+	}
 
-    const isRotated = getCookie("imageRotated");
-    if (isRotated === "true") {
-        const img = document.getElementById("myImage");
-        img.classList.add("rotated");
-    }
+	const isRotated = getCookie("imageRotated");
+	if (isRotated === "true") {
+		const img = document.getElementById("myImage");
+		img.classList.add("rotated");
+	}
 
-    // Restore iframe dark mode filter
-    const iframe = document.getElementById("myIframe");
-    if (iframe) {
-        if (flip) {
-            iframe.style.filter = "invert(1) hue-rotate(180deg)";
-        } else {
-            iframe.style.filter = "none";
-        }
-    }
+	const iframe = document.getElementById("myIframe");
+	if (iframe) {
+		if (flip) {
+			iframe.style.filter = "invert(1) hue-rotate(180deg)";
+		} else {
+			iframe.style.filter = "none";
+		}
+	}
 
-    // Restore colors for #mi and #doW divs (optional)
-    const colorBox = document.getElementById("mi");
-    const whatDo = document.getElementById("doW");
-    if (colorBox) {
-        colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
-        colorBox.style.color = flip ? "#000000" : "#2a2828ff";
-    }
-    if (whatDo) {
-        whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
-        whatDo.style.color = flip ? "#000000" : "#2a2828ff";
-    }
+	const colorBox = document.getElementById("mi");
+	const whatDo = document.getElementById("doW");
+	if (colorBox) {
+		colorBox.style.backgroundColor = flip ? "#FFA500" : "#800080";
+		colorBox.style.color = flip ? "#000000" : "#2a2828ff";
+	}
+	if (whatDo) {
+		whatDo.style.backgroundColor = flip ? "#FFA500" : "#800080";
+		whatDo.style.color = flip ? "#000000" : "#2a2828ff";
+	}
+
+	// NEW FEATURE: Restore .instruction color from cookie if it exists
+	const instruction = document.querySelector(".instruction");
+	const savedInstructionColor = getCookie("instructionColor");
+	if (instruction && savedInstructionColor) {
+		instruction.style.color = savedInstructionColor;
+	}
 };
+
 
 // JS to trigger wipe reveal
 // run this early in your <head> or before animation trigger
 if (!sessionStorage.getItem("animationPlayed")) {
-  sessionStorage.setItem("animationPlayed", "true");
+	sessionStorage.setItem("animationPlayed", "true");
 
-  // Add animation trigger
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".greet");
-    if (el) {
-      el.classList.add("reveal");
-    }
-  });
+	document.addEventListener("DOMContentLoaded", () => {
+		const el = document.querySelector(".greet");
+		if (el) {
+			el.classList.add("reveal");
+		}
+	});
 } else {
-  // Keep it revealed without animation
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".greet");
-    if (el) {
-      el.classList.add("revealed-static"); // No animation, but visible
-    }
-  });
+	document.addEventListener("DOMContentLoaded", () => {
+		const el = document.querySelector(".greet");
+		if (el) {
+			el.classList.add("revealed-static"); // no animation but visible
+		}
+	});
 }
-
