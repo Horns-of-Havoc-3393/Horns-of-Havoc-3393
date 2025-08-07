@@ -114,8 +114,9 @@ body {
   position: absolute;
   width: 3%;
   height: auto;
-  margin-top: -41.2%;
+  margin-top: -40%;
   margin-left: 95%;
+  z-index: 1;
 }
 .dMode img {
   width: 100%;
