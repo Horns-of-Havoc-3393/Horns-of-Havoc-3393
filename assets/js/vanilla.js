@@ -150,62 +150,86 @@ if (!sessionStorage.getItem("animationPlayed")) {
   });
 }
 
+// FOOTER POSITIONING LOGIC STARTS HERE
 
-
-
-
-
-
-function updateFooterPosition() {
-  const footer = document.getElementById("footer");
-  const main = document.querySelector('main');
-
-  if (!main || !footer) return;
-
-  // Get all visible elements inside main (exclude script/style)
-  const elements = [...main.querySelectorAll('*')].filter(el => {
-    const style = window.getComputedStyle(el);
-    return style.display !== 'none' && style.visibility !== 'hidden';
-  });
-
-  // Find the max bottom position of all content inside main
+// Helper: get bottom position of content (main div children + iframes)
+function getContentBottom() {
   let maxBottom = 0;
-  elements.forEach(el => {
+  document.querySelectorAll('main > div, iframe').forEach(el => {
     const rect = el.getBoundingClientRect();
     const bottom = rect.top + rect.height + window.scrollY;
     if (bottom > maxBottom) maxBottom = bottom;
   });
-
-  // Get computed padding-bottom of main (if any)
-  const mainStyles = window.getComputedStyle(main);
-  const paddingBottom = parseFloat(mainStyles.paddingBottom) || 0;
-
-  const buffer = 10; // extra space in px so footer doesn’t overlap content
-  footer.style.position = 'absolute';
-  footer.style.top = (maxBottom + paddingBottom + buffer) + 'px';
+  return maxBottom;
 }
 
-function onAllIframesLoaded(callback) {
-  const iframes = document.querySelectorAll('iframe');
-  let loadedCount = 0;
+// Wait until content bottom stabilizes before updating footer
+function updateFooterPositionWhenStable() {
+  const footer = document.getElementById('footer');
+  const ovl = document.getElementById('Overlay');
+  if (!footer) return;
 
+  let lastBottom = 0;
+  let stableCount = 0;
+  const requiredStableFrames = 5;
+  const checkIntervalMs = 100;
+
+  function check() {
+    const currentBottom = getContentBottom();
+
+    if (Math.abs(currentBottom - lastBottom) < 1) {
+      stableCount++;
+      if (stableCount >= requiredStableFrames) {
+        footer.style.position = 'absolute';
+        footer.style.top = currentBottom + 'px';
+        footer.classList.add('visible');
+        ovl.classList.add('hidden');  // Show footer here
+        return;
+      }
+    } else {
+      stableCount = 0;
+    }
+
+    lastBottom = currentBottom;
+    setTimeout(check, checkIntervalMs);
+  }
+
+  check();
+}
+
+// Run after window load and iframe(s) load (or immediately if no iframes)
+function waitForIframesAndUpdateFooter() {
+  const iframes = document.querySelectorAll('iframe');
   if (iframes.length === 0) {
-    callback();
+    updateFooterPositionWhenStable();
     return;
   }
 
+  let loadedCount = 0;
   iframes.forEach(iframe => {
     iframe.addEventListener('load', () => {
       loadedCount++;
       if (loadedCount === iframes.length) {
-        callback();
+        // After all iframes loaded, run stable-position check
+        updateFooterPositionWhenStable();
       }
     });
   });
+
+  // Fallback timeout in case iframe 'load' doesn't fire (e.g. cached)
+  setTimeout(() => {
+    if (loadedCount < iframes.length) {
+      updateFooterPositionWhenStable();
+    }
+  }, 3000);
 }
 
-window.addEventListener('load', () => {
-  onAllIframesLoaded(updateFooterPosition);
-});
+window.addEventListener('load', waitForIframesAndUpdateFooter);
 
-window.addEventListener('resize', updateFooterPosition);
+window.addEventListener('resize', () => {
+  // on resize, just do one immediate reposition
+  const footer = document.getElementById('footer');
+  if (!footer) return;
+  footer.style.position = 'absolute';
+  footer.style.top = getContentBottom() + 'px';
+});
