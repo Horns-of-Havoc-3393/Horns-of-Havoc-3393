@@ -69,12 +69,22 @@ function applyDarkMode(isDark) {
     }
   });
 
-  // Apply filter to both iframes: myIframe and cal
+  // Apply filter to iframes
   const iframeIds = ["myIframe", "cal"];
   iframeIds.forEach(id => {
     const iframe = document.getElementById(id);
     if (iframe) {
       iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
+    }
+  });
+
+  // Invert only .socials images on dark mode
+  const socialImgs = document.querySelectorAll('.socials img');
+  socialImgs.forEach(img => {
+    if (isDark) {
+      img.classList.add('darkmode-invert');
+    } else {
+      img.classList.remove('darkmode-invert');
     }
   });
 
@@ -248,4 +258,3 @@ function enableScrollInput() {
 function preventDefault(e) {
   e.preventDefault();
 }
-    

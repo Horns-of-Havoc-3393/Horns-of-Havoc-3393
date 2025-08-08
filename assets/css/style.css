@@ -325,6 +325,7 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
+  transition: background-color 0.3s ease;
 }
 #footer {
   position: absolute;
@@ -463,4 +464,13 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
   visibility: hidden;
   opacity: 1;
   transition-delay: .4s;
+}
+.darkmode-invert {
+  filter: invert(0.6) brightness(1.2) saturate(0.7);
+  transition: filter 0.3s ease;
+}
+.darkmode-soft {
+  filter: brightness(70%);
+  opacity: 0.8;
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
