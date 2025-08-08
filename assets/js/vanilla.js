@@ -258,3 +258,11 @@ function enableScrollInput() {
 function preventDefault(e) {
   e.preventDefault();
 }
+function isMobile() {
+  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobile()) {
+  // Redirect to mobile site
+  window.location.href = "https://m.website.com";
+}
