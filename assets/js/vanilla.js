@@ -264,5 +264,5 @@ function isMobile() {
 
 if (isMobile()) {
   // Redirect to mobile site
-  window.location.href = "https://m.website.com";
+  window.location.href = "/mobile/index.html";
 }
