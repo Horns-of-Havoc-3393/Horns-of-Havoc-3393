@@ -15,10 +15,32 @@ if (isDesktop()) {
 
 /* Set the width of the side navigation to 250px */
 function openNav() {
-  document.getElementById("menuContent").style.width = "250px";
+  document.getElementById("mySidenav").style.width = "250px";
 }
 
-/* Set the width of the side navigation to 0 */
 function closeNav() {
-  document.getElementById("menuContent").style.width = "0";
+  document.getElementById("mySidenav").style.width = "0";
 }
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("darkToggle");
+
+    // Optional: remember user's choice
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+    }
+
+    toggle.addEventListener("change", () => {
+        if (toggle.checked) {
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            document.body.classList.remove("dark-mode");
+            localStorage.setItem("darkMode", "disabled");
+        }
+    });
+});

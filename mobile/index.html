@@ -18,19 +18,27 @@
                     <a href="index.html" class="homeredir"><img src="../assets/images/HOH_Logo_2025_Official-removebg-preview.png" alt="" id="logo"></a>
                     <h1 id="titial">FRC Team: 3393</h1>
                 </div>
-                <div class="menu">
-                    <img src="assets/images/Menu Many Squares Icon_0000ff.png" alt="">
-                        <div id="menuContent">
-                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                            <a href="#">About</a>
-                            <a href="#">Services</a>
-                            <a href="#">Clients</a>
-                            <a href="#">Contact</a>
-                        </div>
+
+                <div id="mySidenav" class="sidenav">
+                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+				  <a href="index.html">Home</a>
+				  <a href="join.html">Join</a>
+				  <a href="contact.html">Contact Us</a>
+				  <a href="events.html">Events</a>
+				  <a href="donate.html">Donate</a>
+                  <!-- <img src="../assets/images/noun-dark-mode-4256401.svg" id="dMode" alt=""> -->
+                    <label class="switch">
+                        <input type="checkbox" id="darkToggle" onclick="applyDarkMode(this.checked)">
+                        <span class="slider round"></span>
+                    </label>
+                    <img src="assets/images/Contrast Off With Rays_ffffff.png" id="sun" alt="">
+                    <img src="assets/images/Old Moon Icon_ffffff.png" id="moon" alt="">
                 </div>
-                <span onclick="openNav()">open</span>
+
+                <span id="menuBtn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
             </main>
         </div>
+        <footer id="footer"></footer>
     </div>
 
 
