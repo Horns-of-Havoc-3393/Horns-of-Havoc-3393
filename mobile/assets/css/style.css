@@ -45,7 +45,7 @@ main {
     align-items: center;   /* vertically center img + h2 */
     margin-top: -2.5%;
     margin-left: -2.5%;
-    width: 100.45vw;
+    width: 101vw;
     height: 10%;
     /* background-color: #800080; */
     /* background: linear-gradient(90deg, #FFA500, #800080); */
@@ -97,7 +97,15 @@ main {
   }
   .menu{
     position: fixed;
+    top: 3%;
+    right: 3%;
+    width: 10%;
     background-color: #FFA500;
+    z-index: 10;
+  }
+  .menu img{
+    width: 100%;
+    height: auto;
   }
   .navbar{
     display: flex;
