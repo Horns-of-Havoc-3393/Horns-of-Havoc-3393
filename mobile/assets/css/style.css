@@ -36,18 +36,22 @@ main {
   /* Optional: font-weight or font-style here */
 }
   .headder {
+      display: flex;
+      justify-content: center;
+      column-gap: 0%;
+
     position: fixed;
     display: flex;
     align-items: center;   /* vertically center img + h2 */
-    margin-top: -2%;
-    margin-left: -2%;
+    margin-top: -2.5%;
+    margin-left: -2.5%;
     width: 100.45vw;
-    height: 15%;
+    height: 10%;
     /* background-color: #800080; */
     /* background: linear-gradient(90deg, #FFA500, #800080); */
     background: linear-gradient(
       to right,
-      #FFA500 0%,         /* Purple solid up to 20% */
+      #FFA500 50%,         /* Purple solid up to 20% */
       #800080 100%
       /* Gold starts fading from 20% and solid by 80% */
     );
@@ -62,6 +66,7 @@ main {
     max-width: 100%;
     max-height: 100%;
     background-color: #800080; 
+    left: 21%;
     /* background: linear-gradient(5deg, #800080 0%,#800080 30%, #FFD700 80%, #FFD700 100%); purple to gold */
     background-clip: text;
     -webkit-background-clip: text;
@@ -72,22 +77,28 @@ main {
   }
   
   .homeredir {
-    display: inline-flex;
-    text-decoration: none;
-    margin-right: -29.8%;
-    z-index: 14;
-    
+    position: absolute;
+   display: inline-block;  /* shrink-wrap content */
+  padding: 0;
+  margin: 0;
+  left: 3%;
+  border: none;          /* remove default link styles */
+  flex-shrink: 0;  
+  align-items: center;       /* reset font size */
+  width: 15%;
+  height: auto; 
   }
   
   .homeredir img {
     display: block;
-    max-width: 12%; 
-    max-height: 12%; 
-    margin-right: 0%;
-    margin-left:4% ;
-    padding-right: 0%;/* or use px if you want precise control */
-  }
+    width: 100%;   /* 8% of viewport width */
+    height: auto;
 
+  }
+  .menu{
+    position: fixed;
+    background-color: #FFA500;
+  }
   .navbar{
     display: flex;
     flex-direction: row;
