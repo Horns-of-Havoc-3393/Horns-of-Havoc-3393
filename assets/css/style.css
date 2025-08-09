@@ -55,9 +55,11 @@ main {
   }
 
   #titial {
+    position: absolute;
     font-family: CustomFont, sans-serif;
     font-size: 200%;
-    margin-left: 8.5%;
+    /* margin-left: 8.5%; */
+    left: 5%;
     /* position: fixed; */
     max-width: 100%;
     max-height: 100%;
