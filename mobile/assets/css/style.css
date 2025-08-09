@@ -375,18 +375,26 @@ body.dark-mode #whatDo{
 }
 .instruction p{
   width: 95vw;
+  font-family: anotherFont, sans-serif;
+  color: #800080;
+  font-weight: bold;
 }
 .instruction h1 {
   top: -25%;
   left: -5vw;
   width: 100vw;
+  font-family: customFont, sans-serif;
   position: absolute;
-  font-size: 200%;
+  font-size: 2.25rem;
   text-align: center;
+  color: #800080;
+  text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
 }
 .lower{
   position: relative;
   top:30vh;
+  font-weight: bold;
+  font-family: anotherFont, sans-serif; 
 }
 .instruction img {
   position: absolute  ;
@@ -555,6 +563,9 @@ body.dark-mode .contact{
   animation: spin 1s linear infinite;
 }
 body.dark-mode .instruction{
+  color:#cfccc6ff;
+}
+body.dark-mode .instruction p{
   color:#cfccc6ff;
 }
 @keyframes spin {
