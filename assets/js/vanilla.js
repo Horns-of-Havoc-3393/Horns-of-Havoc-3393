@@ -94,6 +94,22 @@ function applyDarkMode(isDark) {
 
   updateTextColor(".instruction", textColor);
   updateTextColor(".contact", textColor);
+
+  // --- Appended: Toggle .instruction p and h1 colors and shadows ---
+  document.querySelectorAll(".instruction p").forEach(p => {
+    p.style.color = isDark ? "#FFD700" : "#800080"; // gold on dark, purple on light
+    p.style.textShadow = isDark ? "1px 1px 0 #800080" : "1px 1px 0 #FFD700";
+  });
+
+  document.querySelectorAll(".instruction h1").forEach(h1 => {
+    if (isDark) {
+      h1.style.color = "#FFD700";             // gold text on dark
+      h1.style.textShadow = "2px 2px 0 #800080"; // purple shadow on dark
+    } else {
+      h1.style.color = "#800080";             // purple text on light
+      h1.style.textShadow = "2px 2px 0 #FFD700"; // gold shadow on light
+    }
+  });
 }
 
 function updateTextColor(selector, color) {
@@ -258,6 +274,7 @@ function enableScrollInput() {
 function preventDefault(e) {
   e.preventDefault();
 }
+
 function isMobile() {
   return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -266,6 +283,6 @@ if (isMobile()) {
   // Redirect to mobile site
   console.log("mobile");
   window.location.href = "/mobile/index.html";
-}else{
+} else {
   console.log("desktop");
 }

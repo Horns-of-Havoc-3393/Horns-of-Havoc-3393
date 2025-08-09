@@ -57,7 +57,6 @@ main {
   #titial {
     position: absolute;
     font-family: CustomFont, sans-serif;
-    font-size: 200%;
     /* margin-left: 8.5%; */
     left: 5%;
     /* position: fixed; */
@@ -263,16 +262,23 @@ left: 5%;
   font-family: CustomFont, sans-serif;
   z-index: 14;
   width: 25%;
-  top:  -1.7%;
-  left: 32%;
+  height: 5.5%;
+      max-width: 100%;
+    max-height: 100%;
+  top:  1.35%;
+      background-clip: text;
+    -webkit-background-clip: text;
+  left: 28%;
+  background-color: #80008099;
   display: inline-block;
   clip-path: inset(0 100% 0 0); /* hide from right */
   transition: clip-path 4s ease-out;
 }
 .greet h1 {
-font-size: 200%;
-color: #800080; /* Purple text */
-text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
+margin: 0%;
+font-size: 2rem;
+font-weight: bold;
+color: #800080; /* Purple text */ text-shadow: 2px 2px 0 #FFD700; /*Gold shadow */
 
 
 }
@@ -303,13 +309,31 @@ text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
 .instruction h1 {
   font-size: 200%;
   text-align: center;
+  color: hsl(300, 100%, 25%);
+  font-family: CustomFont, sans-serif;
+  text-shadow: 2px 2px 0 #FFD700; /* Gold shadow */
 }
+.instruction p{
+  
+    font-family: anotherfont, sans-serif;
+    font-size: 1.4rem;
+    margin-left: 0%;
+    color: #800080; /* Purple text */
+    /*text-shadow: 1px 1px 0 #FFD700; /* Gold shadow */
+}
+
+
 .instruction img {
   position: absolute  ;
   width: 120%;
   height: auto;
   top: 10%;
   left: 110%;
+  border: solid 1px #800080; /* Purple border */
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 
 #cal{
