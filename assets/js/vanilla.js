@@ -65,7 +65,7 @@ function applyDarkMode(isDark) {
   colorElems.forEach(el => {
     if (el) {
       el.style.backgroundColor = isDark ? "#FFA500" : "#800080";
-      el.style.color = isDark ? "#000000" : "#2a2828ff";
+      el.style.color = isDark ? "#000000" : "#FFFACD";
     }
   });
 
