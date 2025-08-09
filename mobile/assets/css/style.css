@@ -157,7 +157,7 @@ main {
   position: absolute;
   display: inline-block;
   left: 25vw;
-  top: 45vh;
+  top: 53vh;
   z-index: 20;
   width: 17vw;
   height: 4.15vh;
@@ -167,7 +167,7 @@ main {
   width: 8vw;
   height: auto;
   position: absolute;
-  top: 45.5vh;
+  top: 53vh;
   left: 13vw;
   padding: 0;
 }
@@ -175,7 +175,7 @@ main {
   width: 8vw;
   height: auto;
   position: absolute;
-  top: 45.5vh;
+  top: 53vh;
   left: 45vw;
   padding: 0;
 }
