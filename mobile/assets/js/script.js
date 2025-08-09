@@ -6,11 +6,10 @@ function isDesktop() {
 }
 
 if (isDesktop()) {
-  // Redirect to mobile site or another URL
-    console.log("desktop");
-  window.location.href = "index.html"; 
-}else {
-    console.log("mobile");
+  console.log("desktop");
+  window.location.href = "index.html";
+} else {
+  console.log("mobile");
 }
 
 /* Set the width of the side navigation to 250px */
@@ -22,39 +21,41 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById("darkToggle");
+  const toggle = document.getElementById("darkToggle");
 
-    // Optional: remember user's choice
-    if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark-mode");
-        toggle.checked = true;
+  // Restore dark mode from localStorage
+  const savedDarkMode = localStorage.getItem("darkMode");
+  if (savedDarkMode === "enabled") {
+    document.body.classList.add("dark-mode");
+    toggle.checked = true;
+    applyDarkMode(true);
+  } else {
+    applyDarkMode(false);
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("darkMode", "enabled");
+      applyDarkMode(true);
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("darkMode", "disabled");
+      applyDarkMode(false);
     }
-
-    toggle.addEventListener("change", () => {
-        if (toggle.checked) {
-            document.body.classList.add("dark-mode");
-            localStorage.setItem("darkMode", "enabled");
-        } else {
-            document.body.classList.remove("dark-mode");
-            localStorage.setItem("darkMode", "disabled");
-        }
-    });
+  });
 });
-
 
 let flip = false;
 let slideIndex = 1;
 let mslideIndex = 1;
 
-
 document.addEventListener("DOMContentLoaded", () => {
   showDivs(slideIndex);
   showAltDivs(mslideIndex);
 });
+
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
@@ -86,12 +87,21 @@ function wrapIndex(n, length) {
   return n > length ? 1 : n < 1 ? length : n;
 }
 
+// Updated applyDarkMode to affect both iframes
+function applyDarkMode(isDark) {
+  const bgColor = isDark ? "#2a2828ff" : "#ffffff";
+  document.body.style.backgroundColor = bgColor;
 
+  // Invert both iframes when dark mode is on
+  ["myIframe", "cal"].forEach(id => {
+    const iframe = document.getElementById(id);
+    if (iframe) {
+      iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
+    }
+  });
+}
 
-
-
-
-
+// ... rest of your footer + overlay + scroll lock code unchanged:
 
 function getContentBottom() {
   let maxBottom = 0;

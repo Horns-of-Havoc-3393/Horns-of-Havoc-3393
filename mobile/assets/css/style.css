@@ -386,10 +386,10 @@ body.dark-mode #whatDo{
 
 #cal{
   position: absolute;
-  left: 10%;
-  top: 10%;
-  width: 80%;
-  height: 70%;
+  left: -2.5vw;
+  top: 25vh;
+  width: 100vw;
+  height: 50vh;
   border: none;
   transition: filter .3s ease;
 
