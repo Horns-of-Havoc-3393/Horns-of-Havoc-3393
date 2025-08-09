@@ -299,10 +299,27 @@ body.dark-mode #whoUs{
   background-color: #FFA500;
   color: white;
 }
+#pic{
+  width: 60vw;
+  height: auto;
+  position: absolute;
+  left: 18%;
+  top: 85vh;
+}
 
 
+#whatDo{
+  width: 60vw;
+  height: auto;
+  position: absolute;
+  left: 18%;
+  top: 110vh;
 
-
+}
+body.dark-mode #whatDo{
+  font-size: 90%;
+  color: #cfccc6ff;
+}
 
 
 
@@ -484,10 +501,10 @@ body.dark-mode #whoUs{
 }
 #Overlay {
   position: fixed;
-  top: 0%; left: 0;
+  top: 0%; left: 0%;
   width: 100vw;
-  height: 92vh;
-  margin-top: 4%;
+  height: 100vh;
+  margin-top: 0%;
   background-color: #800080;
   display: flex;
   justify-content: center;  
@@ -508,9 +525,9 @@ body.dark-mode #whoUs{
 #Overlay a{
   position: absolute;
   top: 150%;
-  left: -85%;
+  left: -70%;
   width: 284%;
-  font-size: 60%;
+  font-size: 50%;
   color: #FFD700; /* Gold text */
   
 }
