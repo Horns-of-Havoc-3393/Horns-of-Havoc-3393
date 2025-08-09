@@ -101,7 +101,7 @@ function applyDarkMode(isDark) {
   });
 }
 
-// ... rest of your footer + overlay + scroll lock code unchanged:
+// --- Footer + overlay + scroll lock code with caching footer position ---
 
 function getContentBottom() {
   let maxBottom = 0;
@@ -113,10 +113,17 @@ function getContentBottom() {
   return maxBottom;
 }
 
-function updateFooterPositionWhenStable() {
+function updateFooterPosition(pos) {
   const footer = document.getElementById('footer');
-  const overlay = document.getElementById('Overlay');
   if (!footer) return;
+  footer.style.position = 'absolute';
+  footer.style.top = `${pos}px`;
+  footer.classList.add('visible');
+}
+
+function updateFooterPositionWhenStable() {
+  const overlay = document.getElementById('Overlay');
+  if (!document.getElementById('footer')) return;
 
   let lastBottom = 0;
   let stableCount = 0;
@@ -127,9 +134,8 @@ function updateFooterPositionWhenStable() {
     if (Math.abs(currentBottom - lastBottom) < 1) {
       stableCount++;
       if (stableCount >= requiredStableFrames) {
-        footer.style.position = 'absolute';
-        footer.style.top = `${currentBottom}px`;
-        footer.classList.add('visible');
+        updateFooterPosition(currentBottom);
+        sessionStorage.setItem('footerPos', currentBottom); // Cache footer pos
         if (overlay) overlay.classList.add('hidden');
         enableScrollInput();
         return;
@@ -137,7 +143,6 @@ function updateFooterPositionWhenStable() {
     } else {
       stableCount = 0;
     }
-
     lastBottom = currentBottom;
     setTimeout(check, 100);
   }
@@ -147,6 +152,17 @@ function updateFooterPositionWhenStable() {
 
 function waitForIframesAndUpdateFooter() {
   disableScrollInput();
+
+  // Use cached footer position if available
+  const cachedFooterPos = sessionStorage.getItem('footerPos');
+  if (cachedFooterPos) {
+    updateFooterPosition(cachedFooterPos);
+    enableScrollInput();
+    const overlay = document.getElementById('Overlay');
+    if (overlay) overlay.classList.add('hidden');
+    return; // Skip recalculation if cached
+  }
+
   const iframes = document.querySelectorAll('iframe');
   if (!iframes.length) {
     updateFooterPositionWhenStable();
@@ -172,15 +188,18 @@ function waitForIframesAndUpdateFooter() {
 }
 
 window.addEventListener('load', waitForIframesAndUpdateFooter);
+
 window.addEventListener('resize', () => {
   const footer = document.getElementById('footer');
   if (footer) {
-    footer.style.position = 'absolute';
-    footer.style.top = `${getContentBottom()}px`;
+    const pos = getContentBottom();
+    updateFooterPosition(pos);
+    sessionStorage.setItem('footerPos', pos); // Update cached position on resize
   }
 });
 
 // --- Scroll Lock Control ---
+
 function disableScrollInput() {
   const scrollTop = window.scrollY;
   const scrollLeft = window.scrollX;

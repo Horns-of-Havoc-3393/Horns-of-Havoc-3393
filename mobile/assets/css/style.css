@@ -361,7 +361,7 @@ body.dark-mode #whatDo{
   position: absolute;
   width: 40%;
   height: auto;
-  top: 20%;
+  top: 25%;
   left: 2%;
   padding: 0%;
   text-align: left  ;
@@ -372,16 +372,27 @@ body.dark-mode #whatDo{
   border-bottom-right-radius: 30px;
 
 }
+.instruction p{
+  width: 95vw;
+}
 .instruction h1 {
+  top: -25%;
+  left: -5vw;
+  width: 100vw;
+  position: absolute;
   font-size: 200%;
   text-align: center;
 }
+.lower{
+  position: relative;
+  top:30vh;
+}
 .instruction img {
   position: absolute  ;
-  width: 120%;
+  width: 250%;
   height: auto;
-  top: 10%;
-  left: 110%;
+  top: 26vh;
+  left: -2vw;
 }
 
 #cal{
@@ -413,7 +424,7 @@ body.dark-mode .contact{
   color: #cfccc6ff;
 }
 #footer {
-  position: absolute;
+  position: fixed;
   bottom: -9%;
   width: 100.2vw;
   height: 15%; 
@@ -541,6 +552,9 @@ body.dark-mode .contact{
   margin-left: -.75%;
   transition: transform 0.3s ease;
   animation: spin 1s linear infinite;
+}
+body.dark-mode .instruction{
+  color:#cfccc6ff;
 }
 @keyframes spin {
   0%   { transform: rotate(0deg); }
