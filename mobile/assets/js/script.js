@@ -85,3 +85,118 @@ function updateSlides(slides, index) {
 function wrapIndex(n, length) {
   return n > length ? 1 : n < 1 ? length : n;
 }
+
+
+
+
+
+
+
+
+function getContentBottom() {
+  let maxBottom = 0;
+  document.querySelectorAll('main > div, iframe').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const bottom = rect.top + rect.height + window.scrollY;
+    if (bottom > maxBottom) maxBottom = bottom;
+  });
+  return maxBottom;
+}
+
+function updateFooterPositionWhenStable() {
+  const footer = document.getElementById('footer');
+  const overlay = document.getElementById('Overlay');
+  if (!footer) return;
+
+  let lastBottom = 0;
+  let stableCount = 0;
+  const requiredStableFrames = 5;
+
+  function check() {
+    const currentBottom = getContentBottom();
+    if (Math.abs(currentBottom - lastBottom) < 1) {
+      stableCount++;
+      if (stableCount >= requiredStableFrames) {
+        footer.style.position = 'absolute';
+        footer.style.top = `${currentBottom}px`;
+        footer.classList.add('visible');
+        if (overlay) overlay.classList.add('hidden');
+        enableScrollInput();
+        return;
+      }
+    } else {
+      stableCount = 0;
+    }
+
+    lastBottom = currentBottom;
+    setTimeout(check, 100);
+  }
+
+  check();
+}
+
+function waitForIframesAndUpdateFooter() {
+  disableScrollInput();
+  const iframes = document.querySelectorAll('iframe');
+  if (!iframes.length) {
+    updateFooterPositionWhenStable();
+    return;
+  }
+
+  let loaded = 0;
+  iframes.forEach(iframe => {
+    iframe.addEventListener('load', () => {
+      loaded++;
+      if (loaded === iframes.length) {
+        updateFooterPositionWhenStable();
+      }
+    });
+  });
+
+  // Fallback in case some iframes don't fire 'load'
+  setTimeout(() => {
+    if (loaded < iframes.length) {
+      updateFooterPositionWhenStable();
+    }
+  }, 3000);
+}
+
+window.addEventListener('load', waitForIframesAndUpdateFooter);
+window.addEventListener('resize', () => {
+  const footer = document.getElementById('footer');
+  if (footer) {
+    footer.style.position = 'absolute';
+    footer.style.top = `${getContentBottom()}px`;
+  }
+});
+
+// --- Scroll Lock Control ---
+function disableScrollInput() {
+  const scrollTop = window.scrollY;
+  const scrollLeft = window.scrollX;
+
+  function lockScroll() {
+    window.scrollTo(scrollLeft, scrollTop);
+  }
+
+  document.body.style.pointerEvents = 'none'; // Optional: disable interaction
+
+  window.addEventListener('scroll', lockScroll);
+  window.addEventListener('wheel', preventDefault, { passive: false });
+  window.addEventListener('touchmove', preventDefault, { passive: false });
+
+  // Store for cleanup
+  window._lockScrollHandler = lockScroll;
+}
+
+function enableScrollInput() {
+  document.body.style.pointerEvents = '';
+  window.removeEventListener('scroll', window._lockScrollHandler);
+  window.removeEventListener('wheel', preventDefault);
+  window.removeEventListener('touchmove', preventDefault);
+  delete window._lockScrollHandler;
+}
+
+function preventDefault(e) {
+  e.preventDefault();
+}

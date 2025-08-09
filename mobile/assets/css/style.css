@@ -280,7 +280,25 @@ input:checked + .slider:before {
   right: 5vw;
 }
 
+#whoUs{
+  position: absolute;
+  top: 50vh;
+  left: 5vw;
+  background-color: #800080;
+  font-size: 90%;
+  width: 80vw;
+  padding: .5rem;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  transition: background-color 0.3s ease;
+}
 
+body.dark-mode #whoUs{
+  background-color: #FFA500;
+  color: white;
+}
 
 
 
@@ -377,10 +395,9 @@ input:checked + .slider:before {
 #footer {
   position: absolute;
   bottom: -9%;
-  width: 101.575336%;
-  margin-top: 10%;
-  height: 25%; 
-  left: -1%;
+  width: 100.2vw;
+  height: 15%; 
+  left: -2.5%;
   visibility: hidden;
   transition: visibility 0s linear 0.3s, opacity 0.3s ease;
   opacity: 0;
@@ -394,24 +411,27 @@ input:checked + .slider:before {
 .fcontact{
   /* position: absolute; */
   position: relative;
-  width: 30%;
-  height: auto;
-  top: 0%;
-  left: -5%;
+  width: 29%;
+  top: 12%;
+  left: 2%;
   padding: 0%;
   text-align: center;
-  font-size: 85%;
+  font-size: 50%;
 
 }
 .fsocials{
+  position: absolute;
   display: flex;
   justify-content: center;
-  column-gap: 4%;    /* same gap as .socials */
+  column-gap:10%;    /* same gap as .socials */
   font-size: 0;    
+  left: 45vw;
+  width: 20vw;
+  top: 5vh;
 }
 .fsocials img{
   display: block;
-  width: 2vw;   /* 8% of viewport width */
+  width: 4vw;   /* 8% of viewport width */
   max-width: 100%;
   height: auto;
   margin: 0;
@@ -447,6 +467,13 @@ input:checked + .slider:before {
   justify-content: center;
   column-gap: 4%;
   font-size: 0;
+}
+#soc{
+  position: absolute;
+  top: 10%;
+  font-size: 120%;
+  left: 35vw;
+  width: 40vw;
 }
 #loo{
   position: absolute;
