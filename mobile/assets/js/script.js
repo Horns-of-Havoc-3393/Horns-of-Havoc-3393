@@ -7,7 +7,7 @@ function isDesktop() {
 
 if (isDesktop()) {
   console.log("desktop");
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 } else {
   console.log("mobile");
 }
