@@ -1,4 +1,11 @@
+/* Global box-sizing reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body { 
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -18,7 +25,6 @@ body.dark-mode {
     background-color: #2a2828ff;
     color: black;
 }
-
 
 #page-container {
   position: relative;
@@ -43,17 +49,18 @@ main {
   src: url('/assets/fonts/AirAmericanaBoldItalic-3ln18.ttf') format('truetype');
   /* Optional: font-weight or font-style here */
 }
-  .headder {
-      display: flex;
-      justify-content: center;
-      column-gap: 0%;
 
+/* Header fix: remove negative margins and keep width 100vw */
+.headder {
+    display: flex;
+    justify-content: center;
+    column-gap: 0%;
     position: fixed;
     display: flex;
     align-items: center;   /* vertically center img + h2 */
-    margin-top: -2.5%;
-    margin-left: -2.5%;
-    width: 101vw;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 10%;
     /* background-color: #800080; */
     /* background: linear-gradient(90deg, #FFA500, #800080); */
@@ -66,27 +73,27 @@ main {
     z-index: 1;
   }
 
-  #titial {
-    font-family: CustomFont, sans-serif;
-    font-size: 200%;
-    position: absolute;
-    /* position: fixed; */
-    max-width: 100%;
-    max-height: 100%;
-    background-color: #800080; 
-    left: 21%;
-    /* background: linear-gradient(5deg, #800080 0%,#800080 30%, #FFD700 80%, #FFD700 100%); purple to gold */
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    font-size: 1.5rem;
-    z-index: 10;
-  }
-  
-  .homeredir {
-    position: absolute;
-   display: inline-block;  /* shrink-wrap content */
+#titial {
+  font-family: CustomFont, sans-serif;
+  font-size: 200%;
+  position: absolute;
+  /* position: fixed; */
+  max-width: 100%;
+  max-height: 100%;
+  background-color: #800080; 
+  left: 21%;
+  /* background: linear-gradient(5deg, #800080 0%,#800080 30%, #FFD700 80%, #FFD700 100%); purple to gold */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1.5rem;
+  z-index: 10;
+}
+
+.homeredir {
+  position: absolute;
+  display: inline-block;  /* shrink-wrap content */
   padding: 0;
   margin: 0;
   left: 3%;
@@ -95,16 +102,15 @@ main {
   align-items: center;       /* reset font size */
   width: 15%;
   height: auto; 
-  }
-  
-  .homeredir img {
-    display: block;
-    width: 100%;   /* 8% of viewport width */
-    height: auto;
+}
 
-  }
+.homeredir img {
+  display: block;
+  width: 100%;   /* 8% of viewport width */
+  height: auto;
+}
 
-  .sidenav {
+.sidenav {
   height: 100%;
   width: 0;
   position: fixed;
@@ -143,15 +149,12 @@ main {
   .sidenav a {font-size: 18px;}
 }
 
-
 #menuBtn{
   position: fixed;
   z-index: 14;
   left: 85vw;
   top: 2.25vh;
 }
-
-
 
 .switch {
   position: absolute;
@@ -232,7 +235,6 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-
 #openingSlide{
   background-color: #800080;
   width: 95vw;
@@ -308,45 +310,17 @@ body.dark-mode #whoUs{
   top: 85vh;
 }
 
-
 #whatDo{
   width: 60vw;
   height: auto;
   position: absolute;
   left: 18%;
   top: 110vh;
-
 }
 body.dark-mode #whatDo{
   font-size: 90%;
   color: #cfccc6ff;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
 #myIframe{
   position: absolute;
@@ -413,8 +387,8 @@ body.dark-mode #whatDo{
   height: 50vh;
   border: none;
   transition: filter .3s ease;
-
 }
+
 .contact {
   position: absolute;
   width: 90vw;
@@ -433,22 +407,27 @@ body.dark-mode #whatDo{
 body.dark-mode .contact{
   color: #cfccc6ff;
 }
+
+/* Footer fixed: position absolute, flush left, width 100vw, no negative margins */
 #footer {
-  position: fixed;
-  bottom: -9%;
-  width: 100.2vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  margin-top: 15%;
   height: 15%; 
-  left: -2.5%;
   visibility: hidden;
   transition: visibility 0s linear 0.3s, opacity 0.3s ease;
   opacity: 0;
   background-color: #FFA500; /* Purple background */
+  box-sizing: border-box;
 }
 #footer.visible {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
 }
+
 .fcontact{
   /* position: absolute; */
   position: relative;
