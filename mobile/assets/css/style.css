@@ -375,12 +375,13 @@ body.dark-mode #whatDo{
 }
 .instruction p{
   width: 95vw;
+  margin-bottom: 3rem;
   font-family: anotherFont, sans-serif;
   color: #800080;
   font-weight: bold;
 }
 .instruction h1 {
-  top: -25%;
+  top: -18%;
   left: -5vw;
   width: 100vw;
   font-family: customFont, sans-serif;
@@ -392,7 +393,7 @@ body.dark-mode #whatDo{
 }
 .lower{
   position: relative;
-  top:30vh;
+  top:40vh;
   font-weight: bold;
   font-family: anotherFont, sans-serif; 
 }
@@ -400,7 +401,7 @@ body.dark-mode #whatDo{
   position: absolute  ;
   width: 250%;
   height: auto;
-  top: 26vh;
+  top: 34.5vh;
   left: -2vw;
 }
 
