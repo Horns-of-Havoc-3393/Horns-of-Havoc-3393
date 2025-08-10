@@ -481,6 +481,7 @@ color: #800080; /* Purple text */ text-shadow: 2px 2px 0 #FFD700; /*Gold shadow 
   margin-left: -.75%;
   transition: transform 0.3s ease;
   animation: spin 1s linear infinite;
+  filter: hue-rotate(-26deg);
 }
 @keyframes spin {
   0%   { transform: rotate(0deg); }
@@ -489,7 +490,7 @@ color: #800080; /* Purple text */ text-shadow: 2px 2px 0 #FFD700; /*Gold shadow 
 #Overlay p {
   position: absolute;
   margin-left: 01%;
-  top: 60%;
+  top: 65%;
   font-family: CustomFont, sans-serif;
   color: #FFD700; /* Gold text */
   text-shadow: 2px 2px 0 #800080; /* Purple shadow */

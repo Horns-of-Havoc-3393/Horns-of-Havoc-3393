@@ -574,11 +574,11 @@ body.dark-mode .instruction p{
   color: #FFD700; /* Gold text */
   text-shadow: 2px 2px 0 #800080; /* Purple shadow */
 }
-#Overlay.hidden {
-  visibility: hidden;
-  opacity: 1;
-  transition-delay: .4s;
-}
+  #Overlay.hidden {
+    visibility: hidden;
+    opacity: 1;
+    transition-delay: .4s;
+  }
 .darkmode-invert {
   filter: invert(0.6) brightness(1.2) saturate(0.7);
   transition: filter 0.3s ease;
