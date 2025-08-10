@@ -541,27 +541,20 @@ body.dark-mode .contact{
   transition: opacity 0.3s ease;
 }
 #lg{
-  width: 10%;
+  width: 25%;
   height: auto;
   margin-right: 0%;
   transition: transform 0.3s ease;
 }
-#Overlay a{
-  position: absolute;
-  top: 150%;
-  left: -70%;
-  width: 284%;
-  font-size: 50%;
-  color: #FFD700; /* Gold text */
-  
-}
+
 #bc{
   position: absolute;
-  width: 12%;
+  width: 30%;
   height: auto;
-  margin-left: -.75%;
+  margin-left: -1.5%;
   transition: transform 0.3s ease;
   animation: spin 1s linear infinite;
+  filter: hue-rotate(-26deg);
 }
 body.dark-mode .instruction{
   color:#cfccc6ff;
