@@ -360,3 +360,94 @@ main {
   color: #800080;
   text-shadow: .5px .5px #FFA500;
 }
+#history{
+  position: relative;
+  background-color: #800080;
+  width: 60vw;
+  height: 60vh;
+  left: 19vw;
+  overflow: auto;
+  border-bottom-left-radius: 1.5em;
+  border-bottom-right-radius: 1.5em;
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+  padding: 1rem;
+}
+#conta{
+  width: auto;
+  height: auto;
+  padding-bottom: 3rem;
+}
+#history p{
+  color: #FFFACD;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin: 1rem 0;
+}
+#history h1{
+  font-family: customFont, sans-serif;
+  color: #FFFACD;
+}
+
+
+
+
+
+
+
+
+
+
+.socials img{
+  display: block;         /* removes inline image spacing */
+  width: 7vh;            /* or use a responsive size like 10vw */
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+body.dark-mode .socials img{
+  filter: invert(1) brightness(0.8) contrast(1);
+}
+.socials a{
+  display: inline-block;  /* shrink-wrap content */
+  padding: 0;
+  margin: 0;
+  border: none;          /* remove default link styles */
+  flex-shrink: 0;        /* prevent flex growing/shrinking */
+  font-size: initial;     /* reset font size */
+  width: auto;  /* Purple text */;
+}
+.socials{
+  display: flex;
+  justify-content: center;
+  column-gap: 4%;
+  font-size: 0;
+}
+.contact {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 25%;
+  left: 29.5%;
+  padding: 0%;
+  text-align: center;
+  font-size: 1.2rem;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+body.dark-mode .contact{
+  color: #cfccc6ff;
+}
+#cal{
+  position: relative;
+  top: 5vh;
+  background-color: #800080;
+  width: 90vw;
+  left: 5vw;
+  height: 100vh;
+  margin-bottom: 15vh;
+}
