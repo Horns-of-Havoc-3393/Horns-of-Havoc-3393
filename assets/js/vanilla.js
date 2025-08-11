@@ -1,3 +1,44 @@
+function isDesktop() {
+  const ua = navigator.userAgent;
+  const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
+  const isWideScreen = window.innerWidth >= 1024;
+  return !isMobileUA && isWideScreen;
+}
+
+if (!isDesktop()) {
+  console.log("mobile");
+  window.location.href = "../index.html";
+} else {
+  console.log("desktop");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("darkToggle");
+  if (!toggle) return;
+
+  // Restore dark mode from localStorage
+  const savedDarkMode = localStorage.getItem("darkMode");
+  if (savedDarkMode === "enabled") {
+    document.body.classList.add("dark-mode");
+    toggle.checked = true;
+    applyDarkMode(true);
+  } else {
+    applyDarkMode(false);
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("darkMode", "enabled");
+      applyDarkMode(true);
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("darkMode", "disabled");
+      applyDarkMode(false);
+    }
+  });
+});
+
 let flip = false;
 let slideIndex = 1;
 let mslideIndex = 1;
@@ -5,10 +46,8 @@ let mslideIndex = 1;
 document.addEventListener("DOMContentLoaded", () => {
   showDivs(slideIndex);
   showAltDivs(mslideIndex);
-  setupGreetReveal();
 });
 
-// --- Slideshow Logic ---
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
@@ -32,7 +71,7 @@ function showAltDivs(n) {
 }
 
 function updateSlides(slides, index) {
-  Array.from(slides).forEach(s => s.style.display = "none");
+  Array.from(slides).forEach(s => (s.style.display = "none"));
   slides[index - 1].style.display = "block";
 }
 
@@ -40,211 +79,65 @@ function wrapIndex(n, length) {
   return n > length ? 1 : n < 1 ? length : n;
 }
 
-// --- Dark Mode Toggle ---
-function rotateImage() {
-  const img = document.getElementById("myImage");
-  img.classList.toggle("rotated");
-  flip = img.classList.contains("rotated");
-
-  // Save to both localStorage and cookie
-  localStorage.setItem("imageRotated", flip);
-  setCookie("imageRotated", flip, 1);
-
-  applyDarkMode(flip);
-}
-
 function applyDarkMode(isDark) {
   const bgColor = isDark ? "#2a2828ff" : "#ffffff";
   document.body.style.backgroundColor = bgColor;
 
-  // Save to both localStorage and cookie
-  localStorage.setItem("myCookie", bgColor);
-  setCookie("myCookie", encodeURIComponent(bgColor), 1);
-
-  const colorElems = [document.getElementById("mi"), document.getElementById("doW")];
-  colorElems.forEach(el => {
-    if (el) {
-      el.style.backgroundColor = isDark ? "#FFA500" : "#800080";
-      el.style.color = isDark ? "#000000" : "#FFFACD";
-    }
-  });
-
-  // Apply filter to iframes
-  const iframeIds = ["myIframe", "cal"];
-  iframeIds.forEach(id => {
+  ["myIframe", "cal"].forEach(id => {
     const iframe = document.getElementById(id);
     if (iframe) {
       iframe.style.filter = isDark ? "invert(1) hue-rotate(180deg)" : "none";
     }
   });
-
-  // Invert only .socials images on dark mode
-  const socialImgs = document.querySelectorAll('.socials img');
-  socialImgs.forEach(img => {
-    if (isDark) {
-      img.classList.add('darkmode-invert');
-    } else {
-      img.classList.remove('darkmode-invert');
-    }
-  });
-
-  const textColor = isDark ? "#cfccc6ff" : "#000000";
-  localStorage.setItem("instructionColor", textColor);
-  setCookie("instructionColor", encodeURIComponent(textColor), 1);
-
-  updateTextColor(".instruction", textColor);
-  updateTextColor(".contact", textColor);
-
-  // --- Appended: Toggle .instruction p and h1 colors and shadows ---
-  document.querySelectorAll(".instruction p").forEach(p => {
-    p.style.color = isDark ? "#FFD700" : "#800080"; // gold on dark, purple on light
-    p.style.textShadow = isDark ? "1px 1px 0 #800080" : "1px 1px 0 #FFD700";
-  });
-
-  document.querySelectorAll(".instruction h1").forEach(h1 => {
-    if (isDark) {
-      h1.style.color = "#FFD700";             // gold text on dark
-      h1.style.textShadow = "2px 2px 0 #800080"; // purple shadow on dark
-    } else {
-      h1.style.color = "#800080";             // purple text on light
-      h1.style.textShadow = "2px 2px 0 #FFD700"; // gold shadow on light
-    }
-  });
 }
 
-function updateTextColor(selector, color) {
-  const el = document.querySelector(selector);
-  if (el) {
-    el.style.transition = "color 0.8s ease";
-    el.style.color = color;
-  }
-}
+// --- Footer positioning after main/content-wrap content ---
 
-// --- Cookie Utilities ---
-function setCookie(name, value, days) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString();
-  document.cookie = name + '=' + value + '; expires=' + expires + '; path=/';
-}
-
-function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? decodeURIComponent(match[2]) : null;
-}
-
-// --- Theme Restoration on Load ---
-window.onload = () => {
-  // Try localStorage first (fast)
-  let savedBg = localStorage.getItem("myCookie");
-  let imageRotated = localStorage.getItem("imageRotated");
-
-  // If no localStorage data, fallback to cookies
-  if (!savedBg) savedBg = getCookie("myCookie");
-  if (!imageRotated) imageRotated = getCookie("imageRotated");
-
-  if (savedBg) {
-    document.body.style.backgroundColor = savedBg;
-    flip = savedBg !== "#ffffff";
-  }
-
-  if (imageRotated === "true") {
-    document.getElementById("myImage")?.classList.add("rotated");
-  }
-
-  applyDarkMode(flip);
-};
-
-// --- Greet Reveal (once per session) ---
-function setupGreetReveal() {
-  const greet = document.querySelector(".greet");
-  if (!greet) return;
-
-  if (!sessionStorage.getItem("animationPlayed")) {
-    greet.classList.add("reveal");
-    sessionStorage.setItem("animationPlayed", "true");
-  } else {
-    greet.classList.add("revealed-static");
-  }
-}
-
-// --- Footer Positioning & Loading Overlay ---
-function getContentBottom() {
-  let maxBottom = 0;
-  document.querySelectorAll('main > div, iframe').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    const bottom = rect.top + rect.height + window.scrollY;
-    if (bottom > maxBottom) maxBottom = bottom;
-  });
-  return maxBottom;
-}
-
-function updateFooterPositionWhenStable() {
+function placeFooterDirectlyAfterContent() {
   const footer = document.getElementById('footer');
-  const overlay = document.getElementById('Overlay');
   if (!footer) return;
 
-  let lastBottom = 0;
-  let stableCount = 0;
-  const requiredStableFrames = 5;
+  // Use <main> content height if present, else fallback to #content-wrap
+  let contentElement = document.querySelector('main') || document.getElementById('content-wrap');
+  if (!contentElement) return;
 
-  function check() {
-    const currentBottom = getContentBottom();
-    if (Math.abs(currentBottom - lastBottom) < 1) {
-      stableCount++;
-      if (stableCount >= requiredStableFrames) {
-        footer.style.position = 'absolute';
-        footer.style.top = `${currentBottom}px`;
-        footer.classList.add('visible');
-        if (overlay) overlay.classList.add('hidden');
-        enableScrollInput();
-        return;
-      }
-    } else {
-      stableCount = 0;
-    }
+  const footerHeight = footer.offsetHeight;
+  const contentRect = contentElement.getBoundingClientRect();
 
-    lastBottom = currentBottom;
-    setTimeout(check, 100);
-  }
+  // Calculate content bottom relative to document top
+  const contentBottom = window.scrollY + contentRect.top + contentElement.offsetHeight;
 
-  check();
+  // Optional offset for iframe scenario
+  const iframeOffset = isInIframe() ? 10 : 0;
+
+  // Place footer absolutely at content bottom plus offset
+  footer.style.position = 'absolute';
+  footer.style.top = (contentBottom + iframeOffset) + 'px';
+  footer.style.width = '100%';
+  footer.classList.add('visible');
 }
 
-function waitForIframesAndUpdateFooter() {
-  disableScrollInput();
-  const iframes = document.querySelectorAll('iframe');
-  if (!iframes.length) {
-    updateFooterPositionWhenStable();
-    return;
+function isInIframe() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
   }
-
-  let loaded = 0;
-  iframes.forEach(iframe => {
-    iframe.addEventListener('load', () => {
-      loaded++;
-      if (loaded === iframes.length) {
-        updateFooterPositionWhenStable();
-      }
-    });
-  });
-
-  // Fallback in case some iframes don't fire 'load'
-  setTimeout(() => {
-    if (loaded < iframes.length) {
-      updateFooterPositionWhenStable();
-    }
-  }, 3000);
 }
 
-window.addEventListener('load', waitForIframesAndUpdateFooter);
-window.addEventListener('resize', () => {
-  const footer = document.getElementById('footer');
-  if (footer) {
-    footer.style.position = 'absolute';
-    footer.style.top = `${getContentBottom()}px`;
+// Run once on load and resize
+window.addEventListener('load', () => {
+  const overlay = document.getElementById('Overlay');
+  if (overlay) {
+    overlay.classList.add('hidden');
   }
+  enableScrollInput();
+  placeFooterDirectlyAfterContent();
 });
+window.addEventListener('resize', placeFooterDirectlyAfterContent);
 
 // --- Scroll Lock Control ---
+
 function disableScrollInput() {
   const scrollTop = window.scrollY;
   const scrollLeft = window.scrollX;
@@ -253,13 +146,12 @@ function disableScrollInput() {
     window.scrollTo(scrollLeft, scrollTop);
   }
 
-  document.body.style.pointerEvents = 'none'; // Optional: disable interaction
+  document.body.style.pointerEvents = 'none';
 
   window.addEventListener('scroll', lockScroll);
   window.addEventListener('wheel', preventDefault, { passive: false });
   window.addEventListener('touchmove', preventDefault, { passive: false });
 
-  // Store for cleanup
   window._lockScrollHandler = lockScroll;
 }
 
@@ -273,16 +165,4 @@ function enableScrollInput() {
 
 function preventDefault(e) {
   e.preventDefault();
-}
-
-function isMobile() {
-  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-if (isMobile()) {
-  // Redirect to mobile site
-  console.log("mobile");
-  window.location.href = "/mobile/index.html";
-} else {
-  console.log("desktop");
 }

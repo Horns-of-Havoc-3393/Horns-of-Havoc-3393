@@ -103,88 +103,100 @@ function applyDarkMode(isDark) {
 
 // --- Footer + overlay + scroll lock code with caching footer position ---
 
-function getMaxContentBottom() {
-  const main = document.querySelector('main');
-  if (!main) return window.innerHeight;
-
-  // Select all descendants inside main, including main itself
-  const elements = main.querySelectorAll('*');
+function getContentBottom() {
   let maxBottom = 0;
-
-  elements.forEach(el => {
-    // Get rect relative to viewport + scroll to get absolute position
+  document.querySelectorAll('main > div, iframe').forEach(el => {
     const rect = el.getBoundingClientRect();
-    const bottom = rect.top + window.scrollY + rect.height;
-
+    const bottom = rect.top + rect.height + window.scrollY;
     if (bottom > maxBottom) maxBottom = bottom;
   });
-
   return maxBottom;
 }
 
-function positionFooterBelowContent() {
+function updateFooterPosition(pos) {
   const footer = document.getElementById('footer');
   if (!footer) return;
-
-  // Calculate max bottom of all content inside main
-  const contentBottom = getMaxContentBottom();
-
-  // Set footer styles
   footer.style.position = 'absolute';
-  footer.style.top = `${contentBottom}px`;
-  footer.style.left = '0';
-  footer.style.width = '100%';
+  footer.style.top = `${pos}px`;
   footer.classList.add('visible');
 }
 
-function waitForAllContentThenPositionFooter() {
+function updateFooterPositionWhenStable() {
   const overlay = document.getElementById('Overlay');
-  const footer = document.getElementById('footer');
+  if (!document.getElementById('footer')) return;
 
-  if (!footer) return;
+  let lastBottom = 0;
+  let stableCount = 0;
+  const requiredStableFrames = 5;
 
-  // Disable scroll and show overlay while loading
-  document.body.style.overflow = 'hidden';
-  if (overlay) overlay.classList.remove('hidden');
+  function check() {
+    const currentBottom = getContentBottom();
+    if (Math.abs(currentBottom - lastBottom) < 1) {
+      stableCount++;
+      if (stableCount >= requiredStableFrames) {
+        updateFooterPosition(currentBottom);
+        sessionStorage.setItem('footerPos', currentBottom); // Cache footer pos
+        if (overlay) overlay.classList.add('hidden');
+        enableScrollInput();
+        return;
+      }
+    } else {
+      stableCount = 0;
+    }
+    lastBottom = currentBottom;
+    setTimeout(check, 100);
+  }
 
-  // Wait for all iframes inside main (if any)
-  const iframes = document.querySelectorAll('main iframe');
-  let loadedCount = 0;
+  check();
+}
 
-  if (iframes.length === 0) {
-    // No iframes, just position footer after slight delay
-    setTimeout(() => {
-      positionFooterBelowContent();
-      if (overlay) overlay.classList.add('hidden');
-      document.body.style.overflow = '';
-    }, 200);
+function waitForIframesAndUpdateFooter() {
+  disableScrollInput();
+
+  // Use cached footer position if available
+  const cachedFooterPos = sessionStorage.getItem('footerPos');
+  if (cachedFooterPos) {
+    updateFooterPosition(cachedFooterPos);
+    enableScrollInput();
+    const overlay = document.getElementById('Overlay');
+    if (overlay) overlay.classList.add('hidden');
+    return; // Skip recalculation if cached
+  }
+
+  const iframes = document.querySelectorAll('iframe');
+  if (!iframes.length) {
+    updateFooterPositionWhenStable();
     return;
   }
 
+  let loaded = 0;
   iframes.forEach(iframe => {
     iframe.addEventListener('load', () => {
-      loadedCount++;
-      if (loadedCount === iframes.length) {
-        positionFooterBelowContent();
-        if (overlay) overlay.classList.add('hidden');
-        document.body.style.overflow = '';
+      loaded++;
+      if (loaded === iframes.length) {
+        updateFooterPositionWhenStable();
       }
     });
   });
 
-  // Fallback timeout in case iframe load events don’t fire
+  // Fallback in case some iframes don't fire 'load'
   setTimeout(() => {
-    if (loadedCount < iframes.length) {
-      positionFooterBelowContent();
-      if (overlay) overlay.classList.add('hidden');
-      document.body.style.overflow = '';
+    if (loaded < iframes.length) {
+      updateFooterPositionWhenStable();
     }
-  }, 5000);
+  }, 3000);
 }
 
-window.addEventListener('load', waitForAllContentThenPositionFooter);
+window.addEventListener('load', waitForIframesAndUpdateFooter);
 
-window.addEventListener('resize', positionFooterBelowContent);
+window.addEventListener('resize', () => {
+  const footer = document.getElementById('footer');
+  if (footer) {
+    const pos = getContentBottom();
+    updateFooterPosition(pos);
+    sessionStorage.setItem('footerPos', pos); // Update cached position on resize
+  }
+});
 
 // --- Scroll Lock Control ---
 
