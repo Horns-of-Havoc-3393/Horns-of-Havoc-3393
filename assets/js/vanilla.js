@@ -13,33 +13,20 @@ if (!isDesktop()) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("darkToggle");
-  if (!toggle) return;
-
-  // Restore dark mode from localStorage
+  // On page load, restore dark mode from localStorage
   const savedDarkMode = localStorage.getItem("darkMode");
-  if (savedDarkMode === "enabled") {
+  const isDark = savedDarkMode === "enabled";
+
+  if (isDark) {
     document.body.classList.add("dark-mode");
-    toggle.checked = true;
-    applyDarkMode(true);
   } else {
-    applyDarkMode(false);
+    document.body.classList.remove("dark-mode");
   }
 
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      document.body.classList.add("dark-mode");
-      localStorage.setItem("darkMode", "enabled");
-      applyDarkMode(true);
-    } else {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("darkMode", "disabled");
-      applyDarkMode(false);
-    }
-  });
+  applyDarkMode(isDark);
+  updateImageRotation(isDark);
 });
 
-let flip = false;
 let slideIndex = 1;
 let mslideIndex = 1;
 
@@ -91,26 +78,39 @@ function applyDarkMode(isDark) {
   });
 }
 
+function updateImageRotation(isDark) {
+  const img = document.getElementById("myImage");
+  if (!img) return;
+  if (isDark) {
+    img.classList.add("rotated");
+  } else {
+    img.classList.remove("rotated");
+  }
+}
+
+// Your dark mode toggle triggered by clicking the image:
+function toggleDarkMode() {
+  const isDark = document.body.classList.toggle("dark-mode");
+  localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+  applyDarkMode(isDark);
+  updateImageRotation(isDark);
+}
+
 // --- Footer positioning after main/content-wrap content ---
 
 function placeFooterDirectlyAfterContent() {
   const footer = document.getElementById('footer');
   if (!footer) return;
 
-  // Use <main> content height if present, else fallback to #content-wrap
   let contentElement = document.querySelector('main') || document.getElementById('content-wrap');
   if (!contentElement) return;
 
-  const footerHeight = footer.offsetHeight;
   const contentRect = contentElement.getBoundingClientRect();
 
-  // Calculate content bottom relative to document top
   const contentBottom = window.scrollY + contentRect.top + contentElement.offsetHeight;
 
-  // Optional offset for iframe scenario
   const iframeOffset = isInIframe() ? 10 : 0;
 
-  // Place footer absolutely at content bottom plus offset
   footer.style.position = 'absolute';
   footer.style.top = (contentBottom + iframeOffset) + 'px';
   footer.style.width = '100%';
@@ -125,7 +125,6 @@ function isInIframe() {
   }
 }
 
-// Run once on load and resize
 window.addEventListener('load', () => {
   const overlay = document.getElementById('Overlay');
   if (overlay) {

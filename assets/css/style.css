@@ -126,6 +126,13 @@ main {
     width: 3.5vw;
     height: auto;
   }
+  #myImage.rotated{
+    transform: rotate(180deg);
+  }
+  #myImage {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
   .dMode img{
     width: 100%;
     cursor: pointer;
