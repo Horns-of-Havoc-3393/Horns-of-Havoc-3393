@@ -40,9 +40,34 @@ main {
   left: 0vw;
   top: 10vh;
 }
-#Overlay.hidden {
-  display: none;
+#lg{
+  position: relative;
+  width: 14vw;
+  left: 42vw;
+  top: 20vh;
 }
+#bc {
+  position: relative;
+  width: 18vw;
+  left: 25.3vw;
+  top: 24.5vh;
+  transition: transform 0.3s ease;
+  animation: spin 1s linear infinite;
+}
+#Overlay p{
+  font-family: customFont, sans-serif;
+  top: 23vh;
+  font-size: 2.5vw;
+  left: 43vw;
+  position: relative;
+}
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* #Overlay.hidden {
+  display: none;
+} */
 @font-face {
     font-family: 'CustomFont';
     src: url('/assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
@@ -104,8 +129,19 @@ main {
     font-family: CustomFont, sans-serif;
     font-size: 1vw;
     left: 8vw;
+    color: #800080; /* Purple text */
+    text-shadow: 2px 2px 0 #FFD700; 
+  clip-path: inset(0 100% 0 0); /* hide from right */
+  transition: clip-path 4s ease-out;/* Gold shadow */
+  }
+  .greet.reveal {
+    clip-path: inset(0 0 0 0); /* reveal fully */
   }
 
+  .greet.revealed-static {
+    clip-path: inset(0 0 0 0);
+    transition: none;
+  }
   
   .navbar{
     display: flex;
@@ -332,7 +368,7 @@ main {
 
 .instruction img{
   left: 55vw;
-  top: 70vh;
+  top: 75vh;
   position: relative;
   width: 40vw;
   height: auto;
@@ -340,15 +376,16 @@ main {
 .instruction p{
   font-family: anotherFont, sans-serif;
   font-size: 1.75vw;
+  line-height: 1.5;
 }
 .instruction h1{
   font-family: customFont, sans-serif;
-  font-size: 3.5rem;
+  font-size: 4vw;
   text-align: center;
 }
 .instruction{
   position:relative;
-  top: -30vh;
+  top: -40vh;
   
 }
 .ist{
@@ -372,6 +409,7 @@ main {
   border-top-left-radius: 1.5em;
   border-top-right-radius: 1.5em;
   padding: 1rem;
+  color: #FFFACD;
 }
 #conta{
   width: auto;
@@ -379,14 +417,12 @@ main {
   padding-bottom: 3rem;
 }
 #history p{
-  color: #FFFACD;
   font-size: 1.5rem;
   line-height: 1.5;
   margin: 1rem 0;
 }
 #history h1{
   font-family: customFont, sans-serif;
-  color: #FFFACD;
 }
 
 
@@ -450,4 +486,15 @@ body.dark-mode .contact{
   left: 5vw;
   height: 100vh;
   margin-bottom: 15vh;
+}
+body.dark-mode #mi,body.dark-mode #doW,body.dark-mode #history {
+  background-color: #FFA500;
+  color: black;
+}
+body.dark-mode .instruction h1{
+  color: #FFA500;
+}
+body.dark-mode .instruction p{
+  color: #FFA500;
+  text-shadow: 1px 1px #800080;
 }

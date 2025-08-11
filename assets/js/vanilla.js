@@ -13,7 +13,7 @@ if (!isDesktop()) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // On page load, restore dark mode from localStorage
+  // Restore dark mode from localStorage
   const savedDarkMode = localStorage.getItem("darkMode");
   const isDark = savedDarkMode === "enabled";
 
@@ -25,15 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   applyDarkMode(isDark);
   updateImageRotation(isDark);
+
+  // Show initial greet reveal animation if first session load
+  setupGreetReveal();
+
+  // Initialize slideshows
+  showDivs(slideIndex);
+  showAltDivs(mslideIndex);
 });
 
 let slideIndex = 1;
 let mslideIndex = 1;
-
-document.addEventListener("DOMContentLoaded", () => {
-  showDivs(slideIndex);
-  showAltDivs(mslideIndex);
-});
 
 function plusDivs(n) {
   showDivs(slideIndex += n);
@@ -88,7 +90,6 @@ function updateImageRotation(isDark) {
   }
 }
 
-// Your dark mode toggle triggered by clicking the image:
 function toggleDarkMode() {
   const isDark = document.body.classList.toggle("dark-mode");
   localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
@@ -96,8 +97,20 @@ function toggleDarkMode() {
   updateImageRotation(isDark);
 }
 
-// --- Footer positioning after main/content-wrap content ---
+// --- Greet Reveal (once per session) ---
+function setupGreetReveal() {
+  const greet = document.querySelector(".greet");
+  if (!greet) return;
 
+  if (!sessionStorage.getItem("animationPlayed")) {
+    greet.classList.add("reveal");
+    sessionStorage.setItem("animationPlayed", "true");
+  } else {
+    greet.classList.add("revealed-static");
+  }
+}
+
+// --- Footer positioning after main/content-wrap content ---
 function placeFooterDirectlyAfterContent() {
   const footer = document.getElementById('footer');
   if (!footer) return;
@@ -133,10 +146,10 @@ window.addEventListener('load', () => {
   enableScrollInput();
   placeFooterDirectlyAfterContent();
 });
+
 window.addEventListener('resize', placeFooterDirectlyAfterContent);
 
 // --- Scroll Lock Control ---
-
 function disableScrollInput() {
   const scrollTop = window.scrollY;
   const scrollLeft = window.scrollX;
