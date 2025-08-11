@@ -5,11 +5,12 @@ function isDesktop() {
   return !isMobileUA && isWideScreen;
 }
 
-if (isDesktop()) {
-  console.log("desktop");
-  window.location.href = "../index.html";
-} else {
+if (!isDesktop()) {
   console.log("mobile");
+} else {
+  const currentPage = window.location.pathname.split("/").pop(); // e.g., "about.html"
+  window.location.href = `/${currentPage}`;
+  console.log("desktop");
 }
 
 /* Set the width of the side navigation to 250px */
@@ -101,26 +102,69 @@ function applyDarkMode(isDark) {
   });
 }
 
-// --- Footer + overlay + scroll lock code with caching footer position ---
+// --- Footer + overlay + scroll lock code ---
 
-function getContentBottom() {
-  let maxBottom = 0;
-  document.querySelectorAll('main > div, iframe').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    const bottom = rect.top + rect.height + window.scrollY;
-    if (bottom > maxBottom) maxBottom = bottom;
-  });
-  return maxBottom;
+// New helper: get iframe content height (if same-origin)
+function getIframeContentHeight(iframe) {
+  try {
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    if (!doc) return 0;
+    const body = doc.body;
+    const html = doc.documentElement;
+    return Math.max(
+      body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
+  } catch (e) {
+    // Access denied due to cross-origin
+    return 0;
+  }
 }
 
+// Get the maximum bottom among content containers plus iframes to position footer below all content
+function getMaxContentBottom() {
+  const idsToCheck = ['content-wrap', 'conta', 'history'];
+
+  let maxBottom = 0;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  idsToCheck.forEach(id => {
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    const rect = elem.getBoundingClientRect();
+    const bottom = rect.top + scrollTop + rect.height;
+    if (bottom > maxBottom) maxBottom = bottom;
+  });
+
+  // Add iframe content heights from iframes inside #content-wrap
+  const contentWrap = document.getElementById('content-wrap');
+  if (contentWrap) {
+    const iframes = contentWrap.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+      const rect = iframe.getBoundingClientRect();
+      const iframeContentHeight = getIframeContentHeight(iframe);
+      const fullHeight = Math.max(rect.height, iframeContentHeight);
+      const iframeBottomDoc = scrollTop + rect.top + fullHeight;
+      if (iframeBottomDoc > maxBottom) maxBottom = iframeBottomDoc;
+    });
+  }
+
+  return maxBottom + 20; // 20px padding below content
+}
+
+// Update footer position absolutely at calculated bottom
 function updateFooterPosition(pos) {
   const footer = document.getElementById('footer');
   if (!footer) return;
+
   footer.style.position = 'absolute';
   footer.style.top = `${pos}px`;
+  footer.style.left = '0';
+  footer.style.width = '100vw';
   footer.classList.add('visible');
 }
 
+// Detect stable position over frames before updating footer & hiding overlay
 function updateFooterPositionWhenStable() {
   const overlay = document.getElementById('Overlay');
   if (!document.getElementById('footer')) return;
@@ -130,12 +174,11 @@ function updateFooterPositionWhenStable() {
   const requiredStableFrames = 5;
 
   function check() {
-    const currentBottom = getContentBottom();
+    const currentBottom = getMaxContentBottom();
     if (Math.abs(currentBottom - lastBottom) < 1) {
       stableCount++;
       if (stableCount >= requiredStableFrames) {
         updateFooterPosition(currentBottom);
-        sessionStorage.setItem('footerPos', currentBottom); // Cache footer pos
         if (overlay) overlay.classList.add('hidden');
         enableScrollInput();
         return;
@@ -150,41 +193,47 @@ function updateFooterPositionWhenStable() {
   check();
 }
 
+// Wait for iframes inside #content-wrap to load before positioning footer
 function waitForIframesAndUpdateFooter() {
   disableScrollInput();
 
-  // Use cached footer position if available
-  const cachedFooterPos = sessionStorage.getItem('footerPos');
-  if (cachedFooterPos) {
-    updateFooterPosition(cachedFooterPos);
-    enableScrollInput();
-    const overlay = document.getElementById('Overlay');
-    if (overlay) overlay.classList.add('hidden');
-    return; // Skip recalculation if cached
+  const contentWrap = document.getElementById('content-wrap');
+  if (!contentWrap) {
+    updateFooterPositionWhenStable();
+    return;
   }
 
-  const iframes = document.querySelectorAll('iframe');
-  if (!iframes.length) {
+  const iframes = contentWrap.querySelectorAll('iframe');
+  if (iframes.length === 0) {
     updateFooterPositionWhenStable();
     return;
   }
 
   let loaded = 0;
-  iframes.forEach(iframe => {
-    iframe.addEventListener('load', () => {
-      loaded++;
-      if (loaded === iframes.length) {
-        updateFooterPositionWhenStable();
-      }
-    });
-  });
+  const totalIframes = iframes.length;
 
-  // Fallback in case some iframes don't fire 'load'
-  setTimeout(() => {
-    if (loaded < iframes.length) {
+  function onIframeLoad() {
+    loaded++;
+    if (loaded === totalIframes) {
       updateFooterPositionWhenStable();
     }
-  }, 3000);
+  }
+
+  iframes.forEach(iframe => {
+    if (iframe.complete || iframe.readyState === 'complete') {
+      onIframeLoad();
+    } else {
+      iframe.addEventListener('load', onIframeLoad);
+      iframe.addEventListener('error', onIframeLoad);
+    }
+  });
+
+  // Fallback timeout
+  setTimeout(() => {
+    if (loaded < totalIframes) {
+      updateFooterPositionWhenStable();
+    }
+  }, 5000);
 }
 
 window.addEventListener('load', waitForIframesAndUpdateFooter);
@@ -192,9 +241,8 @@ window.addEventListener('load', waitForIframesAndUpdateFooter);
 window.addEventListener('resize', () => {
   const footer = document.getElementById('footer');
   if (footer) {
-    const pos = getContentBottom();
+    const pos = getMaxContentBottom();
     updateFooterPosition(pos);
-    sessionStorage.setItem('footerPos', pos); // Update cached position on resize
   }
 });
 
@@ -208,13 +256,12 @@ function disableScrollInput() {
     window.scrollTo(scrollLeft, scrollTop);
   }
 
-  document.body.style.pointerEvents = 'none'; // Optional: disable interaction
+  document.body.style.pointerEvents = 'none';
 
   window.addEventListener('scroll', lockScroll);
   window.addEventListener('wheel', preventDefault, { passive: false });
   window.addEventListener('touchmove', preventDefault, { passive: false });
 
-  // Store for cleanup
   window._lockScrollHandler = lockScroll;
 }
 

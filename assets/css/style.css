@@ -52,8 +52,10 @@ main {
   left: 25.3vw;
   top: 24.5vh;
   transition: transform 0.3s ease;
-  animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite, goldPurpleStrobe 1s steps(1, end) infinite;
+
 }
+
 #Overlay p{
   font-family: customFont, sans-serif;
   top: 23vh;
@@ -65,9 +67,44 @@ main {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-/* #Overlay.hidden {
+@keyframes flickerGoldPurple {
+  0%   { filter: hue-rotate(40deg); }
+  100% { filter: hue-rotate(270deg); }
+}
+@keyframes goldPurpleFade {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
+  }
+  50% {
+    filter: brightness(0.6) drop-shadow(0 0 4px #800080) drop-shadow(0 0 10px #800080);
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
+  }
+}
+@keyframes goldPurpleFade {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
+  }
+  50% {
+    filter: brightness(0.6) drop-shadow(0 0 4px #800080) drop-shadow(0 0 10px #800080);
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
+  }
+}
+@keyframes goldPurpleStrobe {
+  0%, 49% {
+    filter: brightness(2) drop-shadow(0 0 8px #FFA500) drop-shadow(0 0 20px #FFA500);
+  }
+  50%, 100% {
+    filter: brightness(10) drop-shadow(0 0 10px #800080) drop-shadow(0 0 20px #800080);
+  }
+}
+
+#Overlay.hidden {
   display: none;
-} */
+}
 @font-face {
     font-family: 'CustomFont';
     src: url('/assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
@@ -103,6 +140,7 @@ main {
     font-family: 'CustomFont', sans-serif;
     font-size: 2vw;
     color: #800080;
+    cursor: pointer;
   }
   #logo{
   position: relative;
@@ -399,10 +437,10 @@ main {
 }
 #history{
   position: relative;
-  background-color: #800080;
   width: 60vw;
-  height: 60vh;
+  height: 45vh;
   left: 19vw;
+  background-color: #800080;
   overflow: auto;
   border-bottom-left-radius: 1.5em;
   border-bottom-right-radius: 1.5em;

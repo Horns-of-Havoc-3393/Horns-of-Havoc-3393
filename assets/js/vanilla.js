@@ -7,7 +7,10 @@ function isDesktop() {
 
 if (!isDesktop()) {
   console.log("mobile");
-  window.location.href = "../index.html";
+    
+  const currentPage = window.location.pathname.split("/").pop(); // e.g., "about.html"
+  window.location.href = `/mobile/${currentPage}`;
+  //window.location.href = "../index.html";
 } else {
   console.log("desktop");
 }
@@ -178,3 +181,6 @@ function enableScrollInput() {
 function preventDefault(e) {
   e.preventDefault();
 }
+document.getElementById("titial").addEventListener("click", function() {
+    window.location.href = "index.html"; // replace with your redirect URL
+});
