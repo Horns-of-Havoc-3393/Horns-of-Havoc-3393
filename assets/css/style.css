@@ -560,7 +560,7 @@ body.dark-mode #mi,body.dark-mode #doW,body.dark-mode #history {
 body.dark-mode .instruction h1{
   color: #FFA500;
 }
-body.dark-mode .instruction p{
+body.dark-mode .ist{
   color: #FFA500;
   text-shadow: 1px 1px #800080;
 }
