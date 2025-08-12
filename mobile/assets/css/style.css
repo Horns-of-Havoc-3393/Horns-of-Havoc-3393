@@ -51,6 +51,12 @@ main {
     /* Optional: font-weight or font-style here */
   }
   
+  @font-face {
+    font-family: 'medieval';
+    src: url('/assets/fonts/MountainKingRegular-woBYn.ttf') format('truetype');
+    /* Optional: font-weight or font-style here */
+  }
+  
 @font-face {
   font-family: 'anotherFont';
   src: url('/assets/fonts/AirAmericanaBoldItalic-3ln18.ttf') format('truetype');
