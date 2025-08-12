@@ -450,18 +450,21 @@ main {
   background-position: center;
   text-shadow: 2px 2px #FFA500;
   padding: 2rem;
+  height: 106.6vh;
+  overflow: auto;
   border-bottom-left-radius: 1.5em;
   border-bottom-right-radius: 1.5em;
   border-top-left-radius: 1.5em;
   border-top-right-radius: 1.5em;
 }
 .tiers-container{
-  left: 2.75vw;
+  left: 2.30vw;
   top: 0;
-  width: 90vw;
-  height: 70vh;
+  width: 94.3vw;
+  height: 115.5vh;
   position: relative;
   margin-top:10vh;
+  /* padding-bottom: 1rem; */
 }
 #history{
   position: relative;

@@ -184,3 +184,19 @@ function preventDefault(e) {
 document.getElementById("titial").addEventListener("click", function() {
     window.location.href = "index.html"; // replace with your redirect URL
 });
+
+
+
+   const today = new Date();
+
+    // Format as YYYY-MM-DD
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0
+    // const dd = String(today.getDate()).padStart(2, '0');
+    if(mm>4&&mm<12){
+      yyyy = 1 + today.getFullYear();
+    }else{
+      yyyy = today.getFullYear();
+    }
+    document.getElementById("dat").textContent = `January - 31 - ${yyyy}`;
+
