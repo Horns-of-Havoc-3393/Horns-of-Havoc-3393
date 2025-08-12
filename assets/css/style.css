@@ -113,7 +113,7 @@ main {
 
 @font-face {
     font-family: 'medieval';
-    src: url('/assets/fonts/AliceInWonderland-1GzL0.ttf') format('truetype');
+    src: url('/assets/fonts/MountainKingRegular-woBYn.ttf') format('truetype');
     /* Optional: font-weight or font-style here */
   }
   
@@ -441,13 +441,27 @@ main {
   text-shadow: .5px .5px #FFA500;
 }
 .tiers{
-  left: 5vw;
   width: 90vw;
-  position: relative;
   font-size: 2.75rem;
   font-family: medieval, sans-serif;
-  color: #FFA500;
-  text-shadow: 1px 1px #800080;
+  color: black;
+  background-image: url("/assets/images/bac.png");
+  background-size: cover;
+  background-position: center;
+  text-shadow: 2px 2px #FFA500;
+  padding: 2rem;
+  border-bottom-left-radius: 1.5em;
+  border-bottom-right-radius: 1.5em;
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+}
+.tiers-container{
+  left: 2.75vw;
+  top: 0;
+  width: 90vw;
+  height: 70vh;
+  position: relative;
+  margin-top:10vh;
 }
 #history{
   position: relative;
