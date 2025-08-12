@@ -47,13 +47,13 @@ main {
 }
 @font-face {
     font-family: 'CustomFont';
-    src: url('/assets/fonts/Norse.otf') format('truetype');
+    src: url('/assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
     /* Optional: font-weight or font-style here */
   }
   
-  @font-face {
+@font-face {
     font-family: 'medieval';
-    src: url('/assets/fonts/MountainKingRegular-woBYn.ttf') format('truetype');
+    src: url('/assets/fonts/Norse.otf') format('truetype');
     /* Optional: font-weight or font-style here */
   }
   
