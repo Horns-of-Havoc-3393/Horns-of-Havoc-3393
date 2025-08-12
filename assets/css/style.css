@@ -110,6 +110,12 @@ main {
     src: url('/assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
     /* Optional: font-weight or font-style here */
   }
+
+@font-face {
+    font-family: 'medieval';
+    src: url('/assets/fonts/AliceInWonderland-1GzL0.ttf') format('truetype');
+    /* Optional: font-weight or font-style here */
+  }
   
 @font-face {
   font-family: 'anotherFont';
@@ -411,11 +417,7 @@ main {
   width: 40vw;
   height: auto;
 }
-.instruction p{
-  font-family: anotherFont, sans-serif;
-  font-size: 1.75vw;
-  line-height: 1.5;
-}
+
 .instruction h1{
   font-family: customFont, sans-serif;
   font-size: 4vw;
@@ -427,6 +429,9 @@ main {
   
 }
 .ist{
+  font-size: 1.75vw;
+  line-height: 1.5;
+  font-family: anotherFont, sans-serif;
   position:relative;
   top: 6vh;
   left: 2vw;
@@ -434,6 +439,15 @@ main {
   overflow: auto;
   color: #800080;
   text-shadow: .5px .5px #FFA500;
+}
+.tiers{
+  left: 5vw;
+  width: 90vw;
+  position: relative;
+  font-size: 2.75rem;
+  font-family: medieval, sans-serif;
+  color: #FFA500;
+  text-shadow: 1px 1px #800080;
 }
 #history{
   position: relative;
