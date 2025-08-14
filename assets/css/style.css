@@ -247,13 +247,58 @@ main {
     cursor: pointer;
     top: 5em;
   }
+
+  #advance{position: absolute;left: 43vw;}
+  #retreat{position: absolute;left: 1.6vw;}
   
-  .doSlide{
-    top: 16.5vh;
-    left: 6vw;
-    position: relative;
-    width: 35vw;
+  .missionImg img{
+    top: 0vh;
+    left: 13vw;
+    position:relative;
+    width: 40vw;
+    height: auto;
   }
+  #mi{
+    position: relative;
+    width: 37vw;
+    padding: 1rem;
+    font-size: 1.5rem;
+    height: auto;
+    background-color: #800080;
+    color:#FFFACD;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+      border-bottom-left-radius: 1em;
+      border-bottom-right-radius: 1em;
+      overflow: auto;
+      left: 5vw;
+  }
+  .mussion-container{
+    position: relative;
+    width: 100vw;
+    height: auto;
+    margin-top: 76vh;
+    display: flex;
+  }
+  #mi h1{
+    font-size: 1.5vw;
+  }
+#doW{
+  position: relative;
+  color: #FFFACD;
+    padding: 1rem;
+    background-color: #800080;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+      border-bottom-left-radius: 1em;
+      border-bottom-right-radius: 1em;
+          width:45vw;
+    height: auto;
+    left: 48.5vw;
+    font-size: 1.25rem;
+    
+}
+
   .imSelector{
     position: relative;
     z-index: 1;
@@ -265,82 +310,33 @@ main {
     cursor: pointer;
     width: 3vw;
   }
-  #avance{
-    position: relative;
-    
-    left: 28.73vw;
-    /* transform: translateY(-50%); */
-  }
-  #rtreat{
-    position: relative;
-    
-    left: vw;
-    /* transform: translateY(-50%); */
+  #avance{position: absolute;right: 0vw;}
+  #rtreat{position: absolute;left: 0vw;}
+
+.doSlide{
+    left: 7vw;
+    /* top: 1.5vh; */
+    position:absolute;
+    width: 35vw;
   }
   .doSlide img{
     position: relative;
     width: 100%;
     height: auto;
-    top: -41.25vh;
+    top: 0vh;
   }
-  #advance{
-    position: absolute;
-    
-    left: 43vw;
-    /* transform: translateY(-50%); */
-  }
-  #retreat{
-    position: absolute;
-    
-    left: 1.6vw;
-    /* transform: translateY(-50%); */
-  }
-  .missionImg img{
-    left: 50vw;
-    top: 30vh;
-    position:relative;
-    width: 40vw;
-    height: auto;
-  }
-  #mi{
-    position: relative;
-    width: 37vw;
-    padding: 1rem;
-    top: 76.5vh;
-    font-size: 1.5rem;
-    height: 40vh;
-    background-color: #800080;
-    color:#FFFACD;
-      border-top-left-radius: 1em;
-      border-top-right-radius: 1em;
-      border-bottom-left-radius: 1em;
-      border-bottom-right-radius: 1em;
-      overflow: auto;
-      left: 5vw;
-  }
-  #mi h1{
-    font-size: 1.5vw;
-  }
-#doW{
+.do-container{
+  display: flex;
   position: relative;
-  color: #FFFACD;
-    padding: 1rem;
-  background-color: #800080;
-      border-top-left-radius: 1em;
-      border-top-right-radius: 1em;
-      border-bottom-left-radius: 1em;
-      border-bottom-right-radius: 1em;
-          width:45vw;
-    height: 40vh;
-    left: 47vw;
-    top: 60vh;
-    font-size: 1.25rem;
-    overflow: auto;
+  min-height: 41.25vh;
+  width: 100vw;
+  height: auto;
+  margin-top: 25vh;
 }
 #footer {
   position: relative;
   width: 100vw;
-  height: 30vh; 
+  height: 32vh; 
   padding: 0%;  
   left: 0;                /* changed from -.6vw to 0 */
   visibility: visible;
@@ -362,15 +358,17 @@ main {
   height: 25vh;
   top: 0%;
   left: 5%;
+  margin-top: 3vh;
   padding: 0%;
   text-align: center;
   font-size: 1vw;
 
 }
 .fsocials{  
+  margin-top: 1vh;
   display: flex;
   justify-content: center;
-  column-gap: 4%;    /* same gap as .socials */
+  column-gap: 2vw;    /* same gap as .socials */
   font-size: 0;    
 }
 .fsocials img{
@@ -425,7 +423,7 @@ main {
 }
 .instruction{
   position:relative;
-  top: -40vh;
+  margin-top: -40vh;
   
 }
 .ist{
@@ -442,34 +440,40 @@ main {
 }
 .tiers{
   width: 90vw;
-  font-size: 2.75rem;
-  font-family: medieval, sans-serif;
+  font-size: 2rem;
   color: black;
   background-image: url("/assets/images/bac.png");
   background-size: cover;
   background-position: center;
   text-shadow: 2px 2px #FFA500;
   padding: 2rem;
-  height: 106.6vh;
+  /* height: 106.6vh; */
+  height: auto;
   overflow: auto;
   border-bottom-left-radius: 1.5em;
   border-bottom-right-radius: 1.5em;
   border-top-left-radius: 1.5em;
   border-top-right-radius: 1.5em;
 }
+.tiers h2{
+  font-family: medieval, sans-serif;
+}
+.tiers p{
+  font-family: customFont, sans-serif;
+}
 .tiers-container{
   left: 2.30vw;
   top: 0;
   width: 94.3vw;
-  height: 115.5vh;
+  height:auto ;
   position: relative;
   margin-top:10vh;
-  /* padding-bottom: 1rem; */
+  padding-bottom: 10rem;
 }
 #history{
   position: relative;
   width: 70vw;
-  height: 45vh;
+  height: auto;
   left: 14vw;
   background-color: #800080;
   overflow: auto;
@@ -481,9 +485,11 @@ main {
   color: #FFFACD;
 }
 #conta{
+  margin-top: 20vh;
+  position: relative;
   width: auto;
   height: auto;
-  padding-bottom: 3rem;
+  padding-bottom: 6rem;
 }
 #history p{
   font-size: 1.5rem;
