@@ -250,72 +250,71 @@ input:checked + .slider:before {
 }
 
 #openingSlide{
-  background-color: #800080;
-  width: 95vw;
-  height: 24vh;
+  width: 100vw;
+  height: auto;
   position: relative;
-  top: 22vh;
-  left: 2.5vw;
+  margin-top: 22vh;
   z-index: 0;
   display: flex;
-  
+  /* background-color: #FFA500; */
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
 }
 
 #openingSlide img{
-  position: relative;
+ position: relative;
  width: 95vw;
+ margin-left: 0vw;
  height: auto;
- left: 21vw;
+ /* visibility: hidden; */
 }
 /* .imgSelector {
 
 } */
-
+.imgSelectorContainer {
+  position: absolute;
+  margin-left: 0vw;
+  /* background-color: #800080; */
+  display: flex;
+  z-index:20;
+  margin-top: 10vh;
+  width: 100vw;
+  height: auto;
+}
 .imgSelector {
-  top: 10vh;
-  display: block;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;  /* horizontal text center */
+  align-items: center;      /* vertical text center */
+  position: absolute;       /* overlay on images */
+  /* top: 50%;                 vertical center relative to container */
+  /*transform: translateY(-50%); */
+  width: 50px;              /* adjust size as needed */
+  height: 50px;
+  font-size: 2rem;          /* arrow size */
+  border: none;
+  border-radius: 50%;       /* circle button */
+  background-color: rgba(0,0,0,0.5);
   color: white;
   cursor: pointer;
-  font-size: 120%;
-    border-top-left-radius: 1em;
-  border-top-right-radius: 1em;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
-
-  font-size: 15vw;
-
-  position:relative;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
-  cursor: pointer;
-  z-index: 10;
+  z-index: 10;     
 }
 #advance{
-  width: 50vw;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  height: 9.5vh;
-  right: 25vw;
+  position: absolute;
+  right: 5%;
 }
 #retreat{
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  width: 50vw;
-  height: 9.5vh;
-  left: -70vw;
+position: relative;
+left: 5%;
 }
 
 #whoUs{
   position:relative;
-  top: 40vh;
+  margin-top: 30vh;
   left: 10vw;
   background-color: #800080;
   font-size: 90%;
+  height: auto;
   width: 80vw;
   color: #FFFACD;
   padding: .5rem;
@@ -335,7 +334,7 @@ body.dark-mode #whoUs{
   height: auto;
   position:relative;
   left: 18%;
-  top: 50vh;
+  margin-top: 20vh;
 }
 
 #whatDo{
@@ -343,7 +342,7 @@ body.dark-mode #whoUs{
   height: auto;
   position: relative;
   left: 18%;
-  margin-top: 60vh;
+  margin-top: 10vh;
 }
 body.dark-mode #whatDo{
   font-size: 90%;
@@ -361,11 +360,10 @@ body.dark-mode #whatDo{
 }
 
 .instruction {
-
   position: relative;
-  top: 10.5vh;
+  margin-top: 10.5vh;
   width: 100vw;
-  height: 240vh;
+  height: auto;
   left: 0vw;
   padding: 0%;
   text-align: left  ;
@@ -417,10 +415,14 @@ body.dark-mode #whatDo{
   height: 20vh;
   margin-top: 35vh;
  }
+ .tiers h2{
+  font-family: medieval, sans-serif;
+  font-size: 2rem;
+ }
  .tiers{
   width: 90vw;
-  font-size: 1.25rem;
-  font-family: medieval, sans-serif;
+  font-size: 1rem;
+  font-family: customFont, sans-serif;
   color: #000000;
   background-image: url("/assets/images/bac.png");
   background-size: cover;
@@ -436,7 +438,7 @@ body.dark-mode #whatDo{
   left: 4vw;
   top: 0;
   width: 90vw;
-  height: 70vh;
+  height: auto;
   position: relative;
   margin-top:15vh;
 }
@@ -485,13 +487,14 @@ body.dark-mode .contact{
   left: 0;
   width: 100vw;
   margin-top: 15%;
-  height: 13vh; 
+  min-height: 13vh;
+  height: auto; 
   /* overflow: hidden; */
   /* visibility: hidden; */
   transition: visibility 0s linear 0.3s, opacity 0.3s ease;
   opacity: 0;
   background-color: #FFA500; /* Purple background */
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 #footer.visible {
   visibility: visible;
@@ -518,7 +521,7 @@ body.dark-mode .contact{
   font-size: 0;    
   left: 45vw;
   width: 20vw;
-  top: 5vh;
+  top: 6vh;
 }
 .fsocials img{
   display: block;
@@ -691,7 +694,7 @@ body.dark-mode .upperr, body.dark-mode .lower{
   padding: 1rem;
   width: 85vw;
   position: relative;
-  height: 75vh;
+  height: auto;
   overflow: auto;
   left: 7vw;
   border-top-left-radius: 30px;
@@ -707,5 +710,5 @@ body.dark-mode .upperr, body.dark-mode .lower{
   position: relative;
   align-items: center;
   width: 100vw;
-  height: 75vh;
+  height: auto  ;
 }
