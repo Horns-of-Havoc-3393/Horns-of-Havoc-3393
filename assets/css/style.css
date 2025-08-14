@@ -18,17 +18,17 @@ body.no-scroll {
   display: flex;
   position: relative;
   flex-direction: column;
+  margin-bottom: 0%;
   flex-grow: 1;        
-  min-height: 0;       
+  min-height: 100vh;       
 }
 #content-wrap {
-   flex-grow: 1;
-   min-height: 0;      
+   flex: 1;
 }
 main {
   flex-grow: 1;
-  margin-top: 11vh;    
-  min-height: 0;       
+  /* margin-top: 11vh;    */
+  margin-bottom: 0%;  
 }
 #Overlay{
   position: fixed;
@@ -206,7 +206,6 @@ transition: clip-path 4s ease-out;/* Gold shadow */
     height: auto;
     margin-top: 76vh;
     display: flex;
-    background-color: #FFA500;
   }
   #mi h1{
     font-size: 1.5vw;
@@ -255,7 +254,6 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   }
 .do-container{
   display: flex;
-  background-color: #FFA500;
   position: relative;
   min-height: 41.25vh;
   width: 99vw;
@@ -263,9 +261,10 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   margin-top: 25vh;
 }
 #footer {
-  position: absolute;
-  width: 100vw;
-
+  flex-shrink: 0;
+  position: relative;
+  width: 99vw;
+  overflow: auto;
   aspect-ratio: 1849 / 281;
   left: 0vw;                /* changed from -.6vw to 0 */
   visibility: visible;
@@ -273,6 +272,9 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   opacity: 1;
   background-color: #FFA500; /* Purple background */
 } 
+/* #footer * {
+  outline: 1px solid red;
+} */
 
 #footer.visible { 
   opacity: 1;
@@ -282,61 +284,51 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   /* position: absolute; */
   position: relative;
   width: 16%;
-  height: auto;
+  aspect-ratio: 295/ 233;
   top: 0%;
-  left: 5%;
-  padding: 0%;
+  margin-bottom: 0%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-left: 5vw;
   text-align: center;
   font-size: 1vw;
-  background-color: #800080;
 
 }
 .fcontactText{
   position: relative;
   width: 100%;
   height: auto;
-  background-color: #FFD700;
-  
+  padding: 0%;
+  margin: 0%;  
 }
 .fsocials{  
   position: relative;
-  margin-top: -25vh;
+  margin-top: 0%; 
   display: flex;
   height: auto;
-  background-color: #FFFACD;
   justify-content: center;
   column-gap: 2vw;    /* same gap as .socials */
   font-size: 0;    
 }
 .fsocials img{
   position: relative;
-  display: block;
   width: 2vw;   /* 8% of viewport width */
   max-width: 100%;
   height: auto;
   cursor: pointer;
   padding: 0;
 }
-/*.fsocials a{
-  display: inline-block;
-  width: auto;
-  padding: 0;
-  margin: 0;
-  border: none;
-  flex-shrink: 0;   
-}*/
-
 #loo{
   position: relative;
   left: 70vw;
-  background-color: aqua;
-  width: 12em;
+  width: 10em;
   height: auto;
-  top: -9.7vw;
+  margin-top: -11vw;
 }
 
 #myIframe{
-  top: 8vh;
+  margin-top: 20vh;
   left: 24vw;
   position: relative;
   width: 50vw;
@@ -360,7 +352,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
 }
 .instruction{
   position:relative;
-  margin-top: -40vh;
+  margin-top: -30vh;
   
 }
 .ist{
@@ -402,7 +394,6 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   left: 2.30vw;
   top: 0;
   width: 94.3vw;
-  background-color: #FFA500;
   height:auto ;
   position: relative;
   margin-top:10vh;
@@ -493,10 +484,9 @@ body.dark-mode .contact{
 }
 #cal{
   position: relative;
-  top: 5vh;
-  background-color: #800080;
+  margin-top: 25vh;
   width: 90vw;
-  left: 5vw;
+  left: 4.5vw;
   height: 100vh;
   margin-bottom: 15vh;
 }
