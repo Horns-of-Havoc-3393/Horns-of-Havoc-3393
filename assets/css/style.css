@@ -3,33 +3,32 @@ body {
   flex-direction: column;
   transition: background-color 0.3s ease; 
   overflow-y: scroll;
-  margin: 0;               /* added */
-  min-height: 100vh;       /* added */
+  margin: 0;           
+  min-height: 100vh;   
 }
 body.no-scroll {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   transition: background-color 0.3s ease;
-  overflow: hidden; /* Prevent scrolling */
-  margin: 0;              /* added */
+  overflow: hidden; 
+  margin: 0;        
 }
 #page-container {
   display: flex;
   position: relative;
   flex-direction: column;
-  flex-grow: 1;           /* added */
-  min-height: 0;          /* added */
+  flex-grow: 1;        
+  min-height: 0;       
 }
 #content-wrap {
    flex-grow: 1;
-   /* padding-bottom: 70vh; */
-   min-height: 0;          /* added */
+   min-height: 0;      
 }
 main {
   flex-grow: 1;
-  margin-top: 11vh;       /* added: push content below fixed header */
-  min-height: 0;          /* added */
+  margin-top: 11vh;    
+  min-height: 0;       
 }
 #Overlay{
   position: fixed;
@@ -63,160 +62,88 @@ main {
   left: 43vw;
   position: relative;
 }
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-@keyframes flickerGoldPurple {
-  0%   { filter: hue-rotate(40deg); }
-  100% { filter: hue-rotate(270deg); }
-}
-@keyframes goldPurpleFade {
-  0% {
-    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
-  }
-  50% {
-    filter: brightness(0.6) drop-shadow(0 0 4px #800080) drop-shadow(0 0 10px #800080);
-  }
-  100% {
-    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
-  }
-}
-@keyframes goldPurpleFade {
-  0% {
-    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
-  }
-  50% {
-    filter: brightness(0.6) drop-shadow(0 0 4px #800080) drop-shadow(0 0 10px #800080);
-  }
-  100% {
-    filter: brightness(1) drop-shadow(0 0 4px #FFA500) drop-shadow(0 0 10px #FFA500);
-  }
-}
-@keyframes goldPurpleStrobe {
-  0%, 49% {
-    filter: brightness(2) drop-shadow(0 0 8px #FFA500) drop-shadow(0 0 20px #FFA500);
-  }
-  50%, 100% {
-    filter: brightness(10) drop-shadow(0 0 10px #800080) drop-shadow(0 0 20px #800080);
-  }
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes flickerGoldPurple{0%{filter:hue-rotate(40deg);}100%{filter:hue-rotate(270deg);}}
+@keyframes goldPurpleFade{0%{filter:brightness(1)drop-shadow(0 0 4px #FFA500)drop-shadow(0 0 10px #FFA500);}50%{filter:brightness(0.6)drop-shadow(0 0 4px #800080)drop-shadow(0 0 10px #800080);}100%{filter:brightness(1)drop-shadow(0 0 4px #FFA500)drop-shadow(0 0 10px #FFA500);}}
+@keyframes goldPurpleFade{0%{filter:brightness(1)drop-shadow(0 0 4px #FFA500)drop-shadow(0 0 10px #FFA500);}50%{filter:brightness(0.6)drop-shadow(0 0 4px #800080)drop-shadow(0 0 10px #800080);}100%{filter:brightness(1)drop-shadow(0 0 4px #FFA500)drop-shadow(0 0 10px #FFA500);}}
+@keyframes goldPurpleStrobe{0%,49%{filter:brightness(2)drop-shadow(0 0 8px #FFA500)drop-shadow(0 0 20px #FFA500);}50%,100%{filter:brightness(10)drop-shadow(0 0 10px #800080)drop-shadow(0 0 20px #800080);}}
+#Overlay.hidden{display: none;}
+
+@font-face {font-family:'CustomFont';src:url('/assets/fonts/LiberStructRegular-ARdoA.ttf')format('truetype');}
+@font-face {font-family:'medieval';src:url('/assets/fonts/Norse.otf')format('truetype');} 
+@font-face {font-family:'anotherFont';src:url('/assets/fonts/AirAmericanaBoldItalic-3ln18.ttf')format('truetype');}
+
+.headder{
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: -.2vh;
+  left: 000vw;
+  width: 100.45vw;
+  /* height: 11vh; */
+  aspect-ratio: 1845 / 95;
+  background: linear-gradient(to right,#FFA500 0%,#800080 100%);
+  z-index: 10;
 }
 
-#Overlay.hidden {
-  display: none;
-}
-@font-face {
-    font-family: 'CustomFont';
-    src: url('/assets/fonts/LiberStructRegular-ARdoA.ttf') format('truetype');
-    /* Optional: font-weight or font-style here */
-  }
-
-@font-face {
-    font-family: 'medieval';
-    src: url('/assets/fonts/Norse.otf') format('truetype');
-    /* Optional: font-weight or font-style here */
-  }
-  
-@font-face {
-  font-family: 'anotherFont';
-  src: url('/assets/fonts/AirAmericanaBoldItalic-3ln18.ttf') format('truetype');
-  /* Optional: font-weight or font-style here */
-}
-  .headder {
-    position: fixed;
-    display: flex;
-    align-items: center;   /* vertically center img + h2 */
-    top: -.2vh;
-    left: 000vw;
-    width: 100.45vw;
-    height: 11vh;
-    /* background-color: #800080; */
-    /* background: linear-gradient(90deg, #FFA500, #800080); */
-    background: linear-gradient(
-      to right,
-      #FFA500 0%,         /* Purple solid up to 20% */
-      #800080 100%
-      /* Gold starts fading from 20% and solid by 80% */
-    );
-    z-index: 10;
-  }
-  #titial{
-    position: relative;
-    left: 1vw;
-    font-family: 'CustomFont', sans-serif;
-    font-size: 2vw;
-    color: #800080;
-    cursor: pointer;
-  }
-  #logo{
+#titial{
   position: relative;
-  display: block;         /* removes inline image spacing */
-  width: 7vh;            /* or use a responsive size like 10vw */
+  margin-left: .5vw;
+  font-family: 'CustomFont', sans-serif;
+  font-size: 2vw;
+  color: #800080;
+  cursor: pointer;
+}
+#logo{
+  position: relative;
+  display: block;
+  width: 3.25vw;
+  aspect-ratio: 1 / 1;
   max-width: 100%;
   height: auto;
-  left: .5vw;
-  margin: 0;
+  margin-left: .5vw;
+  cursor: pointer;
   padding: 0;
-  }
-
-  #logo a{
-  display: inline-block;  /* shrink-wrap content */
-  padding: 0;
-  margin: 0;
-  border: none;          /* remove default link styles */
-  flex-shrink: 0;        /* prevent flex growing/shrinking */
-  font-size: initial;     /* reset font size */
-  width: auto;
-  }
-  .greet{
-    position: relative;
-    font-family: CustomFont, sans-serif;
-    font-size: 1vw;
-    left: 8vw;
-    color: #800080; /* Purple text */
-    text-shadow: 2px 2px 0 #FFD700; 
+}
+.greet{
+  position: relative;
+  font-family: CustomFont, sans-serif;
+  font-size: 1vw;
+  margin-left: 7vw;
+  color: #800080; /* Purple text */
+  text-shadow: 2px 2px 0 #FFD700; 
   clip-path: inset(0 100% 0 0); /* hide from right */
-  transition: clip-path 4s ease-out;/* Gold shadow */
-  }
-  .greet.reveal {
-    clip-path: inset(0 0 0 0); /* reveal fully */
-  }
-
-  .greet.revealed-static {
-    clip-path: inset(0 0 0 0);
-    transition: none;
-  }
+transition: clip-path 4s ease-out;/* Gold shadow */
+}
+.greet.reveal{clip-path: inset(0 0 0 0);}
+.greet.revealed-static{clip-path: inset(0 0 0 0); transition: none;}
   
-  .navbar{
-    display: flex;
-    flex-direction: row;
-    gap: 1.2vw;   
-    position: fixed;
-    left: 64vw;
-    z-index: 11;
-  }
-    .navbar a{
-    font-family: anotherFont, sans-serif;
-    color: #FFA500;
-    font-size: 1.7vw;
-  }
-  .dMode{
-    position: relative;
-    left: 52vw;
-    width: 3.5vw;
-    height: auto;
-  }
-  #myImage.rotated{
-    transform: rotate(180deg);
-  }
-  #myImage {
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-  }
+.navbar{
+  display: flex;
+  flex-direction: row;
+  gap: 1.2vw;   
+  position: relative;
+  margin-left: 15.5vw;
+  z-index: 11;
+}
+.navbar a{
+  font-family: anotherFont, sans-serif;
+  color: #FFA500;
+  font-size: 1.7vw;
+}
+.dMode{
+  position: relative;
+  margin-left: 2vw;
+  width: auto;
+}
+#myImage.rotated{transform:rotate(180deg);}
+#myImage {transform: rotate(0deg);transition: transform 0.3s ease;}
   .dMode img{
-    width: 100%;
+    position: relative;
+    width: 3.5vw;
+    aspect-ratio: 1 / 1;
     cursor: pointer;
-    height: 100%;
     transition: transform 0.3s ease;
   }
   .imSlide{
@@ -230,23 +157,23 @@ main {
     width: 100%;
     height: auto;
   }
-  .imgSelector{
-    z-index: 1;
-    font-size:4vw;
-    position: relative;
-    left: 1vw;
-      border-top-left-radius: 3vw;
+.imgSelector{
+  z-index: 1;
+  font-size:4vw;
+  position: relative;
+  left: 1vw;
+  border-top-left-radius: 3vw;
   border-top-right-radius: 3vw;
   border-bottom-left-radius: 3vw;
   border-bottom-right-radius: 3vw;
-    width: 5.5vw;
-      background-color: rgba(0, 0, 0, 0.5);
+  width: 5.5vw;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
-    height: auto;
-    border: none;
-    cursor: pointer;
-    top: 5em;
-  }
+  height: auto;
+  border: none;
+  cursor: pointer;
+  top: 5em;
+}
 
   #advance{position: absolute;left: 43vw;}
   #retreat{position: absolute;left: 1.6vw;}
@@ -275,10 +202,11 @@ main {
   }
   .mussion-container{
     position: relative;
-    width: 100vw;
+    width: 99vw;
     height: auto;
     margin-top: 76vh;
     display: flex;
+    background-color: #FFA500;
   }
   #mi h1{
     font-size: 1.5vw;
@@ -327,24 +255,23 @@ main {
   }
 .do-container{
   display: flex;
+  background-color: #FFA500;
   position: relative;
   min-height: 41.25vh;
-  width: 100vw;
+  width: 99vw;
   height: auto;
   margin-top: 25vh;
 }
 #footer {
-  position: relative;
+  position: absolute;
   width: 100vw;
-  height: 32vh; 
-  padding: 0%;  
-  left: 0;                /* changed from -.6vw to 0 */
+
+  aspect-ratio: 1849 / 281;
+  left: 0vw;                /* changed from -.6vw to 0 */
   visibility: visible;
   transition: visibility 0s linear 0.0s, opacity 0.0s ease;
   opacity: 1;
-  overflow: hidden;
   background-color: #FFA500; /* Purple background */
-  flex-shrink: 0;          /* added */
 } 
 
 #footer.visible { 
@@ -355,18 +282,28 @@ main {
   /* position: absolute; */
   position: relative;
   width: 16%;
-  height: 25vh;
+  height: auto;
   top: 0%;
   left: 5%;
-  margin-top: 3vh;
   padding: 0%;
   text-align: center;
   font-size: 1vw;
+  background-color: #800080;
 
 }
+.fcontactText{
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #FFD700;
+  
+}
 .fsocials{  
-  margin-top: 1vh;
+  position: relative;
+  margin-top: -25vh;
   display: flex;
+  height: auto;
+  background-color: #FFFACD;
   justify-content: center;
   column-gap: 2vw;    /* same gap as .socials */
   font-size: 0;    
@@ -377,22 +314,22 @@ main {
   width: 2vw;   /* 8% of viewport width */
   max-width: 100%;
   height: auto;
-  margin: 0;
+  cursor: pointer;
   padding: 0;
-  top: -27vh;
 }
-.fsocials a{
+/*.fsocials a{
   display: inline-block;
-  width: auto; /* no forced width */
+  width: auto;
   padding: 0;
   margin: 0;
   border: none;
-  flex-shrink: 0; /* Purple text */  
-}
+  flex-shrink: 0;   
+}*/
 
 #loo{
   position: relative;
   left: 70vw;
+  background-color: aqua;
   width: 12em;
   height: auto;
   top: -9.7vw;
@@ -465,6 +402,7 @@ main {
   left: 2.30vw;
   top: 0;
   width: 94.3vw;
+  background-color: #FFA500;
   height:auto ;
   position: relative;
   margin-top:10vh;

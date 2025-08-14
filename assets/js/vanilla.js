@@ -182,9 +182,20 @@ function preventDefault(e) {
   e.preventDefault();
 }
 document.getElementById("titial").addEventListener("click", function() {
-    window.location.href = "index.html"; // replace with your redirect URL
+    window.location.href = "index.html";
 });
-
+document.getElementById("logo").addEventListener("click", function() {
+    window.location.href = "index.html";
+});
+document.getElementById("insta").addEventListener("click", function() {
+    window.location.href = "https://www.instagram.com/phshornsofhavoc3393?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==";
+});
+document.getElementById("twit").addEventListener("click", function() {
+    window.location.href = "https://x.com/hornsofhavoc";
+});
+document.getElementById("face").addEventListener("click", function() {
+    window.location.href = "https://www.facebook.com/PuyallupHSRobotics3393";
+});
 
 
    const today = new Date();
