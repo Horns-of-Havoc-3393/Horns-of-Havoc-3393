@@ -57,7 +57,7 @@ main {
 
 #Overlay p{
   font-family: customFont, sans-serif;
-  top: 23vh;
+  top: 25vh;
   font-size: 2.5vw;
   left: 43vw;
   position: relative;
@@ -84,7 +84,7 @@ main {
   /* height: 11vh; */
   aspect-ratio: 1845 / 95;
   background: linear-gradient(to right,#FFA500 0%,#800080 100%);
-  z-index: 10;
+  z-index: 1000;
 }
 
 #titial{
@@ -337,12 +337,27 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   margin-bottom: 20vh;
 }
 
-.instruction img{
-  left: 55vw;
-  top: 75vh;
+/* .instruction img{
+  margin-left: 0vw;
+  margin-top: 0vh;
   position: relative;
   width: 40vw;
   height: auto;
+} */
+.con-caner{
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+#donationImage{
+  width: 40vw;
+  aspect-ratio: 4122 / 2028;
+  background-color: #FFFACD;
+  position: relative;
+}
+.con-caner img {
+  align-self: start; /* prevent flex stretching */
 }
 
 .instruction h1{
@@ -352,7 +367,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
 }
 .instruction{
   position:relative;
-  margin-top: -30vh;
+  margin-top: 13.75vh;
   
 }
 .ist{
@@ -360,9 +375,10 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   line-height: 1.5;
   font-family: anotherFont, sans-serif;
   position:relative;
-  top: 6vh;
-  left: 2vw;
+  /* margin-top: 6vh; */
+  margin-left: 2vw;
   width: 45vw;
+  height: auto;
   overflow: auto;
   color: #800080;
   text-shadow: .5px .5px #FFA500;
@@ -391,9 +407,12 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   font-family: customFont, sans-serif;
 }
 .tiers-container{
-  left: 2.30vw;
   top: 0;
-  width: 94.3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0vw;
+  width: 99vw;
   height:auto ;
   position: relative;
   margin-top:10vh;
