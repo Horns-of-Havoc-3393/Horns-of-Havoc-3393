@@ -204,7 +204,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
     position: relative;
     width: 99vw;
     height: auto;
-    margin-top: 76vh;
+    margin-top: 35vh;
     display: flex;
   }
   #mi h1{
@@ -375,7 +375,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   line-height: 1.5;
   font-family: anotherFont, sans-serif;
   position:relative;
-  /* margin-top: 6vh; */
+  margin-top: -3vh;
   margin-left: 2vw;
   width: 45vw;
   height: auto;
@@ -415,7 +415,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   width: 99vw;
   height:auto ;
   position: relative;
-  margin-top:10vh;
+  margin-top:0vh;
   padding-bottom: 10rem;
 }
 #history{
