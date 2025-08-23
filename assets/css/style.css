@@ -124,7 +124,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   flex-direction: row;
   gap: 1.2vw;   
   position: relative;
-  margin-left: 15.5vw;
+  margin-left: 9vw;
   z-index: 11;
 }
 .navbar a{
@@ -437,7 +437,7 @@ transition: clip-path 4s ease-out;/* Gold shadow */
   position: relative;
   width: auto;
   height: auto;
-  padding-bottom: 6rem;
+  padding-bottom: 1rem;
 }
 #history p{
   font-size: 1.5rem;
@@ -519,4 +519,31 @@ body.dark-mode .instruction h1{
 body.dark-mode .ist{
   color: #FFA500;
   text-shadow: 1px 1px #800080;
+}
+
+
+.volunteer-section {
+  margin-top: 15vh;
+  width: 90vw;
+  margin-left: 2.5vw;
+  padding: 2rem;
+  background-color: #FFA500;
+  border-radius: 1.5em;
+}
+
+.volunteer-section h2 {
+  font-family: customFont, sans-serif;
+  font-size: 200%;
+}
+.volunteer-section p {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: #800080;
+}
+#volunteer-container{
+  height: auto;
+  width: 99vw;
+  padding-bottom: 5rem;
+  padding-top: 1rem;
 }
