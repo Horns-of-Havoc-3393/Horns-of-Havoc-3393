@@ -6,6 +6,15 @@
     margin: 0;           
     min-height: 100vh;   
   }
+  @font-face {
+    font-family: 'bigFont';
+    src: url("/assets/fonts/LiberStructRegular-ARdoA.ttf") format('truetype');
+  }
+@font-face {
+    font-family: 'smallFont';
+    src: url("/assets/fonts/AirAmericanaLight-xR5vq.ttf") format('truetype');
+  }
+
   .page-container{
     min-height: 300vh;
     background-color: antiquewhite;
@@ -42,6 +51,7 @@
     height: auto;
     width: 60vw;
     top: 0vh;
+    margin-left: .5vw;
   } 
   #init-container{
     display: flex;
@@ -55,16 +65,17 @@
   }
   #introo-message{
     background-color: chocolate;
-    margin-left: 1vw;
+    margin-left: .6vw;
     height: auto;
     width: 35vw;
     border-radius: 25px;
+    max-height: 100vh;
     padding: 1vw;
     aspect-ratio: 1280/710;
+    overflow: auto;
     
   }
   #biuton{
-    background-color: darkorange;
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -73,15 +84,24 @@
     justify-content: center;
     align-items: center;
     height: 15vh;
-    right: -10;
+    margin-left: 4vw;
+
   }
   .nav-item{
     display: inline-grid;
     justify-content: center;
     align-items: center;
-    height: 8vh;
-    width: 8vw;
+    height: 15vh;
+    width: 12vw;
     color: black;
+    clip-path: polygon(
+    0% 0%,      /* top-left */
+    95% 0%,     /* top before arrow tip */
+    100% 50%,   /* right arrow tip */
+    95% 100%,   /* bottom before arrow tip */
+    0% 100%,
+    5% 50% 
+  );
     
   }
   #darkmode{
@@ -99,3 +119,42 @@
   align-items: center;
   color: #00000000;
  }
+
+.secong{
+  display: inline-grid;
+  font-size: 2rem;
+  font-family: smallFont, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    width:12vw;
+    color: black;
+    clip-path: polygon(
+    0% 0%,      /* top-left */
+    98% 0%,     /* top before arrow tip */
+    100% 50%,   /* right arrow tip */
+    98% 100%,   /* bottom before arrow tip */
+    0% 100%,    /* bottom-left */
+    5% 50%     /* left notch inward */
+    );
+  margin-left: -1.2vw;
+}
+
+#homeb{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#homee{
+  font-family: bigFont, sans-serif;
+  font-size: 4vw;
+  
+}
+
+#logo{
+  aspect-ratio: 1/1;
+  height: auto;
+  width: 6vw;
+}
+
+
