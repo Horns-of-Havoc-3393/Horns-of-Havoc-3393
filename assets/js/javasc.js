@@ -32,3 +32,9 @@ const observer = new IntersectionObserver((entries) => {
 
 // start observing all targets
 document.querySelectorAll('.Who, .What').forEach(el => observer.observe(el));
+sessionStorage.getItem('darkMode') === 'true' ? document.body.classList.add('dark-mode') : document.body.classList.remove('dark-mode');
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  sessionStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+  console.log(sessionStorage.getItem('darkMode'));
+}

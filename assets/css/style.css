@@ -19,11 +19,11 @@
   src: url("/assets/fonts/LiberStructRegular-ARdoA.ttf") format('truetype'  );
 }
   .page-container{
-    min-height: 300vh;
+    min-height: 500vh;
     background-color: antiquewhite;
   }
   .content-wrap{
-  min-height: 300vh;
+  min-height: 500vh;
   background-color: aquamarine;
   }
   .nave{
@@ -292,7 +292,7 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  gap: 5vw;
+  gap: 2.5vw;
 }
 #who-img{
   width: 40%;
@@ -303,7 +303,7 @@
   transform: translateX(-110%);
   transition: transform 1s ease;
 }
-.Who #who-img.visible{
+#who-img.visible{
   transform: translateX(0);
   transition: transform 1s ease;
 }
@@ -311,7 +311,8 @@
   position: relative;
   z-index: 0;
   width: 50vw;
-  height: 60vh;
+  height: fit-content;
+  padding-left: 1%;padding-right: 1%;
   background-color: lightgreen;
   margin-left: 0vw;
   margin-top: 5vh;
@@ -322,6 +323,9 @@
   transform: translateX(0);
   transition: transform 1s ease;
 }
+#who-description, #what-description, #volunteer-description, #histpu-description{
+  border-radius: 1.4rem;
+}
 .What{
   width: 100%;
   height: 70vh;
@@ -330,7 +334,7 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  gap: 5vw;
+  gap: 2.5vw;
 }
 #what-img{
   width: 40%;
@@ -349,12 +353,21 @@
   position: relative;
   z-index: 0;
   width: 50vw;
-  height: 60vh;
+  height: fit-content;
   background-color: lightyellow;
   margin-left: 2vw;
   margin-top: 5vh;
+  padding-left: 1%;padding-right: 1%;
   transform: translateX(-110%);
   transition: transform 1s ease;
+}
+#what-description h1, #who-description h1{
+  font-size: 2rem;
+  font-family: gameFont, sans-serif;
+}
+#what-description p, #who-description p{
+  font-size: 1.5rem;
+  font-family: smallFont, sans-serif;
 }
 #what-description.visible{
   transform: translateX(0%);
@@ -376,9 +389,41 @@
 #volunteer-description{
   position: relative;
   z-index: 0;
+  max-width: 80%;
+  font-size: 1.5rem;
   width: fit-content;
   height: auto;
   background-color: lightseagreen;
   margin-left: 0vw;
   margin-top: 0vh;
+  padding: 1%;
+}
+.histpu{
+  width: 100%;
+  height: fit-content;
+  background-color: lightcyan;
+  margin-top: 30vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5vw;
+  padding-top: 3%; padding-bottom: 3%;
+}
+#histpu-description{
+  padding: 1%;
+  position: relative;
+  z-index: 0;
+  max-width: 80%;
+  font-size: 1.5rem;
+  width: fit-content;
+  height: auto;
+  background-color: lightseagreen;
+  margin-left: 0vw;
+  margin-top: 0vh;
+}
+
+body.dark-mode #what-description, body.dark-mode #who-description, body.dark-mode #volunteer-description, body.dark-mode #histpu-description{
+  background-color: darkgray;
 }
