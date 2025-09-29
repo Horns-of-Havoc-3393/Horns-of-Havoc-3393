@@ -12,7 +12,7 @@
   }
 @font-face {
     font-family: 'smallFont';
-    src: url("/assets/fonts/AirAmericanaLight-xR5vq.ttf") format('truetype');
+    src: url("/assets/fonts/AirAmericanaBoldItalic-3ln18.ttf") format('truetype');
   }
 
   .page-container{
@@ -87,8 +87,11 @@
     margin-left: 4vw;
 
   }
+  
   .nav-item{
     display: inline-grid;
+    font-size: 2rem;
+    font-family: smallFont, sans-serif;
     justify-content: center;
     align-items: center;
     height: 15vh;
@@ -135,11 +138,14 @@
     100% 50%,   /* right arrow tip */
     98% 100%,   /* bottom before arrow tip */
     0% 100%,    /* bottom-left */
-    5% 50%     /* left notch inward */
+    2% 50%     /* left notch inward */
     );
   margin-left: -1.2vw;
 }
-
+.secong:hover{
+  background-color: #800800;
+  transition: background-color 0.3s ease;
+}
 #homeb{
   display: flex;
   flex-direction: row;
