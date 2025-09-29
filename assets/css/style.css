@@ -21,10 +21,14 @@
   .page-container{
     min-height: 500vh;
     background-color: antiquewhite;
+    transition: background-color 1s ease;
+  }
+  body.dark-mode .page-container {
+    background-color: #202020;
+    transition: background-color 1s ease;
   }
   .content-wrap{
-  min-height: 500vh;
-  background-color: aquamarine;
+  min-height: 500vh; 
   }
   .nave{
     margin-top: 88vh;
@@ -33,6 +37,10 @@
     z-index: 10;
     position: sticky;
     background-color: #808080;
+    /* background: linear-gradient(to right, #ffee00, #800080); */
+    background-size: 300% 300%;
+    background-position: left center;
+    transition: background-position 1s ease;
     width: 100%;
     height: 12vh;
     display: flex;
@@ -41,11 +49,37 @@
     overflow: hidden;
     align-items: center;
   }
-  footer{
-    
-    background-color: #5a3232;
+  .naveB{
+    margin-top: 0vh;
+    top: 0; 
+    bottom: 0;
+    z-index: 10;
+    position: sticky;
+    background-color: #808080;
+    /* background: linear-gradient(to right, #ffee00, #800080); */
+    background-size: 300% 300%;
+    background-position: left center;
+    transition: background-position 1s ease;
     width: 100%;
-    height: 25vh;
+    height: 12vh;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5vw;
+    overflow: hidden;
+    align-items: center;
+  }
+  /* body.dark-mode .nave{
+    background-position: right center;
+    transition: background-position 1s ease;
+  } */
+  footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ffcc00;
+    width: 100%;
+    height: 35vh;
+    gap: 60vw;
     bottom: 0; 
   }
 
@@ -63,16 +97,24 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-   background-image: linear-gradient(to top right, #202020, #bdadad);
+   background: linear-gradient(to top right, #f095fa, #ffee00);
+   background-size: 400% 200%;
+   background-position: right top;
+    transition: background-position 1s ease;
     
-    background-repeat: no-repeat; /* don't tile */
-  background-size: cover;       /* scale to fill screen */
-  background-position: center;
+/*     
+    background-repeat: no-repeat; 
+    background-size: cover;       
+    background-position: center; */
     /* background-image: url("/assets/images/40b1e677-b6cf-421d-80a9-6ba16823e167 (2).jpg"); */
     margin-top: -100vh;
     height: 88vh;
     width: 100%;
 
+  }
+  body.dark-mode #init-container{
+    background-position: left center;
+    transition: background-position 1s ease;
   }
   #introo-message{
   
@@ -153,6 +195,8 @@
     align-items: center;
     height: 8vh;
     width: auto;
+    transform: rotate(0deg);
+    transition: transform 1s ease;
     aspect-ratio: 1/1;
   }
  #dmode-qrap{
@@ -287,7 +331,6 @@
 .Who{
   width: 100%;
   height: 70vh;
-  background-color: peru;
   margin-top:70vh;
   display: flex;
   flex-direction: row;
@@ -303,6 +346,12 @@
   transform: translateX(-110%);
   transition: transform 1s ease;
 }
+#who-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.4rem;
+}
 #who-img.visible{
   transform: translateX(0);
   transition: transform 1s ease;
@@ -313,11 +362,12 @@
   width: 50vw;
   height: fit-content;
   padding-left: 1%;padding-right: 1%;
-  background-color: lightgreen;
+  background-color: gold;
   margin-left: 0vw;
   margin-top: 5vh;
+    will-change: transform;
   transform: translateX(110%);
-  transition: transform 1s ease;
+  transition: background-color 1s ease,transform 2s ease;
 }
 #who-description.visible{
   transform: translateX(0);
@@ -329,7 +379,6 @@
 .What{
   width: 100%;
   height: 70vh;
-  background-color: lightgray;
   margin-top: 40vh;
   display: flex;
   flex-direction: row;
@@ -345,6 +394,12 @@
   transform: translateX(110%);
   transition: transform 1s ease;
 }
+#what-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.4rem;
+}
 #what-img.visible{
   transform: translateX(0%);
   transition: transform 1s ease;
@@ -355,6 +410,7 @@
   width: 50vw;
   height: fit-content;
   background-color: lightyellow;
+  transition: background-color 1s ease;
   margin-left: 2vw;
   margin-top: 5vh;
   padding-left: 1%;padding-right: 1%;
@@ -376,7 +432,6 @@
 .volunteer{
   width: 100%;
   height: fit-content;
-  background-color: lightpink;
   margin-top: 30vh;
   display: flex;
   flex-direction: row;
@@ -393,15 +448,23 @@
   font-size: 1.5rem;
   width: fit-content;
   height: auto;
-  background-color: lightseagreen;
+  background-color: gold;
+  transition: background-color 1s ease;
   margin-left: 0vw;
   margin-top: 0vh;
+  transform: translateY(110%);
+  transition: transform 1s ease;
   padding: 1%;
+}
+#volunteer-description.visible{
+  transform: translateY(0%);
+  transition: transform 1s ease;
+ 
 }
 .histpu{
   width: 100%;
   height: fit-content;
-  background-color: lightcyan;
+  transition: background-color 1s ease;
   margin-top: 30vh;
   display: flex;
   flex-direction: row;
@@ -419,11 +482,70 @@
   font-size: 1.5rem;
   width: fit-content;
   height: auto;
-  background-color: lightseagreen;
+  transform: translateX(-120%);
+  transition: transform 1s ease;
+  background-color: gold;
   margin-left: 0vw;
   margin-top: 0vh;
+  transition: background-color 1s ease;
+}
+#histpu-description.visible{
+  transform: translateX(0%);
+  transition: transform 1s ease;
+ 
 }
 
 body.dark-mode #what-description, body.dark-mode #who-description, body.dark-mode #volunteer-description, body.dark-mode #histpu-description{
   background-color: darkgray;
+}
+body #what-description, body #who-description, body #volunteer-description, body #histpu-description{
+  transition: background-color 1s ease;
+}
+#footer-logo{
+  aspect-ratio: 1/1;
+  height: auto;
+  width: 12vw;
+  
+}
+.socials{
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  justify-content: center;
+  height: fit-content;
+}
+.footer-content{
+  
+  display: flex;
+  margin-left: 1vw;
+  width: 25vw;
+  flex-direction: column;
+  justify-content: center;
+}
+#fConta{
+  display: flex;
+  flex-direction: column;
+  height: 23vh;
+  align-items: center;
+  justify-content: center;
+}
+.footer-item{
+  font-family: smallFont, sans-serif;
+  color: black;
+  font-size: 1.2rem;
+  margin-top: -3vh;
+}
+#thingy{
+  font-family: smallFont, sans-serif;
+  color: black;
+  font-size: 1.5rem;
+}
+.social-icon{
+  aspect-ratio: 1/1;
+  height: auto;
+  width: 3vw;
+}
+body.dark-mode #darkmode{
+  transform: rotate(180deg);
+  transition: transform 1s ease;
 }

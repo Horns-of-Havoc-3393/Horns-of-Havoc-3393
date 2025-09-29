@@ -27,11 +27,27 @@ const observer = new IntersectionObserver((entries) => {
         description.classList.remove("visible");
       }
     }
+    if(entry.target.classList.contains('volunteer')) {
+        const description = document.querySelector('#volunteer-description');
+        if (entry.isIntersecting) {
+            description.classList.add("visible");
+        } else {
+            description.classList.remove("visible");
+        }
+    }
+    if(entry.target.classList.contains('histpu')) {
+        const description = document.querySelector('#histpu-description');
+        if (entry.isIntersecting) {
+            description.classList.add("visible");
+        } else {
+            description.classList.remove("visible");
+        }
+    }
   });
-}, { threshold: 0.75 });
+}, { threshold: 0.4 });
 
 // start observing all targets
-document.querySelectorAll('.Who, .What').forEach(el => observer.observe(el));
+document.querySelectorAll('.Who, .What , .volunteer, .histpu').forEach(el => observer.observe(el));
 sessionStorage.getItem('darkMode') === 'true' ? document.body.classList.add('dark-mode') : document.body.classList.remove('dark-mode');
 function toggleDarkMode() {
   document.body.classList.toggle('dark-mode');
