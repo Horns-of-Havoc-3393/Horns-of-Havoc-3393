@@ -690,6 +690,7 @@ body.dark-mode #darkmode{
   gap: 1.25vw;
   align-items: center;
   width: 100%;
+  padding-bottom: 10vh;
 }
 #donateTitle{
   text-shadow: 1px 1px 2px #ffcc00;
@@ -741,4 +742,12 @@ body.dark-mode #dontate-instruction{
 body.dark-mode #cal, body.dark-mode #myIframe {
   filter: invert(1) hue-rotate(180deg);
   transition: filter 1s ease;
+}
+.tiers{
+  background-color: wheat;
+  width: 80vw;
+  padding: 2%;
+  font-size: 1.5rem;
+  border-radius: 30px;
+  margin: 0 auto;
 }
