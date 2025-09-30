@@ -67,3 +67,41 @@ function setupDate() {
 document.addEventListener("DOMContentLoaded", () => {
     setupDate();
 });
+window.addEventListener('load', () => {
+  const overlay = document.getElementById('Overlay');
+  if (overlay) overlay.classList.add('hidden');
+});
+
+const insta = document.getElementById('isnt');
+insta.addEventListener('click', () => {
+  window.open('https://www.instagram.com/phshornsofhavoc3393', '_blank');
+});
+
+const twitter = document.getElementById('xic');
+twitter.addEventListener('click', () => {
+  window.open('https://x.com/hornsofhavoc', '_blank');
+});
+
+const face = document.getElementById('fac');
+face.addEventListener('click', () => {
+  window.open('https://www.facebook.com/PuyallupHSRobotics3393', '_blank');
+});
+const hom = document.getElementById('homeb');
+hom.addEventListener('click', () => {
+  window.location.href='index.html';
+});
+const homee = document.getElementById('homebB');
+homee.addEventListener('click', () => {
+  window.location.href='index.html';
+});
+function isDesktop() {
+  const ua = navigator.userAgent;
+  const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
+  const isWideScreen = window.innerWidth >= 1024;
+  return !isMobileUA && isWideScreen;
+}
+
+if (!isDesktop()) {
+  const currentPage = window.location.pathname.split("/").pop(); 
+  window.location.href = `/mobile/${currentPage}`;
+}
