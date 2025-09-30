@@ -712,18 +712,33 @@ body.dark-mode #dontate-instruction{
   transition: color 1s ease;
 }
 
-#cal{
+#cal {
   width: 90%;
-  height: 80vh;
+  height: 100vh;
+}
+#myIframe{
+  width: 90%;
+  height: 200vh;
+  border: none;
+  overflow: hidden;
 }
 #frameContainer{
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 200vh;
   margin-top: 5vh;
   margin-bottom: 5vh;
 }
-body.dark-mode #cal{
+#cframeContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+body.dark-mode #cal, body.dark-mode #myIframe {
   filter: invert(1) hue-rotate(180deg);
   transition: filter 1s ease;
 }
