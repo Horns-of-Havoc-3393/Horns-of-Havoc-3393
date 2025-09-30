@@ -772,7 +772,7 @@ body.dark-mode #cal, body.dark-mode #myIframe {
   position: relative;
   width: 60vw;
   height: auto;
-  background-color: #00b521;
+  background-color: #8a8d8a;
   border-radius: 15px;
 }
 #top-bolts, #bottom-bolts{
@@ -781,6 +781,9 @@ body.dark-mode #cal, body.dark-mode #myIframe {
   gap: 50vw;
   align-items: center;
   justify-content: center;
+}
+#top-bolts img, #bottom-bolts img{
+  animation: spin 1.5s linear infinite;
 }
 #mes{
   text-align: center;
@@ -809,4 +812,8 @@ body.dark-mode #cal, body.dark-mode #myIframe {
   height: 30vh;
   margin-top: 0vh;
   transform: scaleY(2.25);
+}
+@keyframes spin{
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
 }
