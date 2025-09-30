@@ -54,3 +54,16 @@ function toggleDarkMode() {
   sessionStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
   console.log(sessionStorage.getItem('darkMode'));
 }
+
+function setupDate() {
+  const today = new Date();
+  let yyyy = today.getFullYear();
+  let mm = today.getMonth() + 1;
+  if (mm > 4 && mm < 12) yyyy += 1;
+  const datEl = document.getElementById("dat");
+  if (datEl) datEl.textContent = `January - 31 - ${yyyy}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupDate();
+});
