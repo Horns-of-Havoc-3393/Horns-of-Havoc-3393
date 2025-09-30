@@ -711,3 +711,19 @@ body.dark-mode #dontate-instruction{
   color: #ffcc00;
   transition: color 1s ease;
 }
+
+#cal{
+  width: 90%;
+  height: 80vh;
+}
+#frameContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+body.dark-mode #cal{
+  filter: invert(1) hue-rotate(180deg);
+  transition: filter 1s ease;
+}
