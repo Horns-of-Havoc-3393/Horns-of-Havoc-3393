@@ -16,17 +16,16 @@ footer{
   }
     .page-container{
     height: fit-content;
-    background-color: #800080 ;
     width: 150%;
     margin-left: -3vw;
     margin-top: -1vh;
     transition: background-color 1s ease;
   }
     .content-wrap{
-  min-height: 110vh; 
+  min-height: 250vh; 
   /* overflow: hidden; */
   margin-left: 1vw;
-  background-color: aqua;
+  align-items: center;
   padding-bottom: 20vh;
   width: 99%;
   }
@@ -127,6 +126,7 @@ footer{
     font-family: bigFont, sans-serif;
     width: 100%;
     background-color: gray;
+    z-index: 100;
 }
 #logo{
     aspect-ratio: 1/1;
@@ -203,4 +203,65 @@ footer{
     width: 120vw;
     border: solid 2.5px #ffcc00;
     border-radius: 15px;
+}
+
+.Who, .What,  .volunteer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20%;
+    overflow: hidden;
+}
+.histpu{
+    
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+#who-img
+{
+    justify-content: center;
+    width: 110vw;
+    transform: translateX(-140vw);
+    transition: transform 1s ease;
+    height: auto;
+    border-radius: 15px;
+    background-color: #e4e41f;
+}
+#what-img{
+    justify-content: center;
+    width: 110vw;
+    transform: translateX(-130vw);
+    transition: transform 1s ease;
+    height: auto;
+    border-radius: 15px;
+    background-color: #e4e41f;
+    
+}
+#who-description, #what-description, #histpu-description, #volunteer-description{
+    width: 120vw;
+    font-size: 1.5rem;
+    transform: translateY(180vh);
+    transition: transform 1s ease;
+    background-color: gold;
+    margin-top: 10vh;
+    border-radius: 15px;
+}
+
+#who-img.visible{
+    transform: translateX(0vw);
+}
+
+#what-img.visible{
+    transform: translateX(0vw);
+}
+#what-description, #who-description{
+    transform: translateY(0vh);
+}
+#histpu-description.visible, #volunteer-description.visible{
+    transform: translateY(0vh);
+}
+#histpu-description{
+    width: 135vw;
 }
