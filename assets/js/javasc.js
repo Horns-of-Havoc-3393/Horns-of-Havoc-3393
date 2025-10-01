@@ -101,7 +101,54 @@ function isDesktop() {
   return !isMobileUA && isWideScreen;
 }
 
-if (!isDesktop()) {
+if (!isDesktop() && !window.location.pathname.startsWith("/mobile/")) {
   const currentPage = window.location.pathname.split("/").pop(); 
   window.location.href = `/mobile/${currentPage}`;
 }
+if(isDesktop() && window.location.pathname.startsWith("/mobile/")){
+  const currentPage = window.location.pathname.split("/").pop(); 
+  window.location.href = `/${currentPage}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.getElementById('navit');
+  const menu = document.getElementById('menu');
+  const menut = document.getElementById('menut');
+  const button = document.getElementById('button');
+
+  if (!nav || !menu || !menut || !button) {
+    console.warn("Missing elements for menu toggle");
+    return;
+  }
+
+  let navPosition = "top";
+
+  function updateNavPosition() {
+    const rect = nav.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    const newPosition = (rect.top + rect.height / 2 < viewportHeight / 2) ? "top" : "bottom";
+
+    if (newPosition !== navPosition) {
+      // Close the previous menu if nav moves to the other half
+      if (navPosition === "top") menu.classList.remove('vis');
+      else menut.classList.remove('vis');
+
+      navPosition = newPosition;
+    }
+  }
+
+  window.addEventListener("scroll", updateNavPosition);
+  window.addEventListener("resize", updateNavPosition);
+  updateNavPosition(); // initial check
+
+  button.addEventListener('click', () => {
+    if (navPosition === "top") {
+      menu.classList.toggle('vis');
+      menut.classList.remove('vis');
+    } else {
+      menut.classList.toggle('vis');
+      menu.classList.remove('vis');
+    }
+  });
+});
