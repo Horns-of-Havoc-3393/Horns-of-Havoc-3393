@@ -81,6 +81,13 @@ function setupDate() {
   if (mm > 4 && mm < 12) yyyy += 1;
   const datEl = document.getElementById("dat");
   if (datEl) datEl.textContent = `January - 31 - ${yyyy}`;
+
+  const mtoday = new Date();
+  let myyyy = mtoday.getFullYear();
+  let mmm = mtoday.getMonth() + 1;
+  if (mmm > 4 && mmm < 12) myyyy += 1;
+  const mdatEl = document.getElementById("datw");
+  if (mdatEl) mdatEl.textContent = `January - 31 - ${myyyy}`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -156,3 +163,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// const namm = document.getElementById("nam");
+// namm.addEventListener("click", () => {
+//   window.location.href='index.html';
+// });
+document.querySelectorAll("#nam,#logo").forEach(el => el.addEventListener("click", () => {
+  window.location.href='index.html';
+}));
