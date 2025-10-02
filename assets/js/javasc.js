@@ -1,3 +1,22 @@
+function isDesktop() {
+  const ua = navigator.userAgent;
+  const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
+  const isWideScreen = window.innerWidth >= 1024;
+  return !isMobileUA && isWideScreen;
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  if (!isDesktop() && !window.location.pathname.startsWith("/mobile/")) {
+  console.log('mobile');
+  const currentPage = window.location.pathname.split("/").pop(); 
+  window.location.href = `/mobile/${currentPage}`;
+}
+if(isDesktop() && window.location.pathname.startsWith("/mobile/")){
+  console.log('desktop');
+  const currentPage = window.location.pathname.split("/").pop(); 
+  window.location.href = `/${currentPage}`;
+}
+});
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     // set true/false on element
@@ -94,21 +113,6 @@ const homee = document.getElementById('homebB');
 homee.addEventListener('click', () => {
   window.location.href='index.html';
 });
-function isDesktop() {
-  const ua = navigator.userAgent;
-  const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
-  const isWideScreen = window.innerWidth >= 1024;
-  return !isMobileUA && isWideScreen;
-}
-
-if (!isDesktop() && !window.location.pathname.startsWith("/mobile/")) {
-  const currentPage = window.location.pathname.split("/").pop(); 
-  window.location.href = `/mobile/${currentPage}`;
-}
-if(isDesktop() && window.location.pathname.startsWith("/mobile/")){
-  const currentPage = window.location.pathname.split("/").pop(); 
-  window.location.href = `/${currentPage}`;
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById('navit');

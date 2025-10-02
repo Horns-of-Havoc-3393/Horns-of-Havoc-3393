@@ -143,7 +143,7 @@ footer{
     width: 90vw;
     height: 132.5vh;
     transform: translateX(-90vw);
-    background-color: #000000da;
+    background-color: #000000ea;
     transition: transform 1s ease;
 }
 #menut{
@@ -152,7 +152,7 @@ footer{
     width: 90vw;
     height: 121vh;
     transform: translateX(-90vw);
-    background-color: #000000da;
+    background-color: #000000ea;
     transition: transform 1s ease;
 }
 #menu.vis, #menut.vis{
@@ -171,7 +171,6 @@ footer{
     flex-direction: column;
   width: 120vw;
   font-size: 1.25rem;
-  background-color: #e4e41f;
   padding: 4%;
   margin-top: 2vh;
   border-radius: 15px;
@@ -195,8 +194,17 @@ footer{
     align-items: center;
     width: 141.75vw;
     height: fit-content;
-    background-color: bisque;
+    /* background-color: bisque; */
+    background: linear-gradient(to top right, #f095fa, #ffee00);
     padding-bottom: 14vh;
+   background-size: 400% 200%;
+   background-position: right top;
+    transition: background-position 1s ease;
+}
+body.dark-mode #introo-message{
+    background-position: left center;
+    transition: background-position 1s ease;
+    
 }
 #inMg{
     margin-top: 4vh;
@@ -227,7 +235,6 @@ footer{
     transition: transform 1s ease;
     height: auto;
     border-radius: 15px;
-    background-color: #e4e41f;
 }
 #what-img{
     justify-content: center;
@@ -236,7 +243,6 @@ footer{
     transition: transform 1s ease;
     height: auto;
     border-radius: 15px;
-    background-color: #e4e41f;
     
 }
 #who-description, #what-description, #histpu-description, #volunteer-description{
@@ -248,7 +254,9 @@ footer{
     margin-top: 10vh;
     border-radius: 15px;
 }
-
+#what-description{
+  background-color: lightyellow;
+}
 #who-img.visible{
     transform: translateX(0vw);
 }
@@ -265,3 +273,67 @@ footer{
 #histpu-description{
     width: 135vw;
 }
+.menNav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+    margin-top: 10vh;
+}
+.menNav div{
+    text-align: center;
+    background-color:none;
+    color: cornsilk;
+    width: 40vw;
+    height: 4vh;
+    padding: 5%;
+    font-size: 150%;
+    text-decoration: underline; 
+}
+#buto{
+    width: 15vw;
+    height: 1vh;
+    border-radius: 100px;
+    background-color: #FFA500;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+
+}
+#slidr{
+    width: 8vw;
+    border-radius: 100%;
+    transform: translateX(-3.75vw);
+    transition: transform 1s ease;
+    height: auto;
+    aspect-ratio: 1/1;
+    background-color: #800080;
+}
+#buto-cont{
+    background: none;
+    margin-top: 10vh;
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:5vw;
+    
+}
+#buto-cont img{
+    width: 12vw;
+    height: auto;
+}
+body.dark-mode #slidr{
+    transform: translateX(9vw);
+    transition: transform 1s ease;
+}
+body.dark-mode #what-description, body.dark-mode #who-description, body.dark-mode #volunteer-description, body.dark-mode #histpu-description{
+  background-color: darkgray;
+}
+  body.dark-mode .page-container {
+    background-color: #202020;
+    transition: background-color 1s ease;
+  }
