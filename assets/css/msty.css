@@ -244,15 +244,17 @@ body.dark-mode .upperr, body.dark-mode .lower{
     flex-direction: column;
   width: 120vw;
   font-size: 1.25rem;
-  padding: 4%;
-  margin-top: 2vh;
+  padding: 1%;
+  margin-top: 0vh;
   border-radius: 15px;
   align-items: center;
 }
 #mse span{
     background-color: gold;
-    width: fit-content;
-    padding: 5%;
+    width: 110vw;
+    padding: 1%;
+    height: 8vh;
+    margin-top: 3.5vh;
     font-size: 200%;
     text-align: center;
     border: solid 3px #800080;
@@ -269,7 +271,7 @@ body.dark-mode .upperr, body.dark-mode .lower{
     height: fit-content;
     /* background-color: bisque; */
     background: linear-gradient(to top right, #f095fa, #ffee00);
-    padding-bottom: 14vh;
+    padding-bottom: 5vh;
    background-size: 400% 200%;
    background-position: right top;
     transition: background-position 1s ease;
@@ -280,7 +282,7 @@ body.dark-mode #introo-message{
     
 }
 #inMg{
-    margin-top: 4vh;
+    margin-top: 2vh;
     width: 120vw;
     border: solid 2.5px #ffcc00;
     border-radius: 15px;
@@ -526,4 +528,84 @@ body.dark-mode .contact{
   /* color: #e2e2e2; */
   filter: invert(1) hue-rotate(180deg);
   transition: filter 1s ease;
+}
+.news-bit-conta{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#news-bit{
+  background: linear-gradient(to top right, #ffee00, #800080);
+  background-size: 200% 200%;
+  background-position: bottom left;
+  transition: background 1s ease, text-shadow 5s ease;
+  text-shadow: 1px 1px #ffee00;
+  color: #800080;
+  font-family: bigFont, sans-serif;
+  font-size: 110%;
+  text-align: center;
+  border-radius: 25px;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  width: 100vw;
+}
+body.dark-mode #news-bit, body.dark-mode #than{
+  background-position: top right;
+  text-shadow: 1px 1px #800080;
+  color: #ffee00;
+}
+#news-bit form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#news-bit button{
+  font-family: bigFont, sans-serif;
+  background-color: gold;
+  margin-top: 5vh;
+  width: fit-content;
+}
+
+#news-bit label{
+  font-family: gameFont, sans-serif;
+ 
+}
+#namee{
+  margin-left: .4vw;
+}
+#ema{
+  margin-top: 2vh;
+}
+
+#news-bit input{
+  border: none;
+  font-size: large;
+}
+#than{
+  position: absolute;
+  background: linear-gradient(to top right, #ffee00, #800080);
+  background-size: 200% 200%;
+  background-position: bottom left;
+  transition: background 1s ease, text-shadow 5s ease;
+  width: 90vw;
+  padding: 3%;
+  height: 50vh;
+  display: none;
+  font-size: x-large;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15vh;
+  border-radius: 20px;
+}
+#cl{
+  font-size: large;
+  border-radius: 15px;
+  height: 8vh;
 }

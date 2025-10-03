@@ -55,28 +55,44 @@
                 </div>
             </div>
 
-             <div id="donateTitle">How to Donate</div>
-            <div id="donate-container">
-                <div><img id="donate-image" src="/assets/images/Untitled design.png" alt=""></div>
-                <div id="dontate-instruction">
-                    <p>Step 1: Go to the <a href="https://app.aplos.com/aws/give/WAFIRSTBoosters/TeamDonationForm" target="_blank">Official FIRST Washington Donation website.</a></p>
-
-                    <p>Step 2: Select "FRC 3393" from the "Purpose" dropdown menu as shown in the image</p>
-
-                    <p>Step 3: Enter the amount you wish to donate.</p>
-
-                    <p>Step 4: Fill in your personal information and payment details.</p>
-
-                    <p>Step 5: Click "Donate" to complete your donation.</p>
-
-                    <p>Thank you for your support!  (↓ Check out our Tiers ↓)</p>
+            <div class="news-bit-conta">
+                <div id="news-bit">
+                <h1>Join Our Newsletter</h1>
+                <p>A member will send you a snippet of upcoming events, robot news, and club updates every week.</p>
+                <form id="myForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfzYjWXzu0xb95Zmi5nGeV_ulMfdjtIJkRo4CWWRepXvl1g4A/formResponse" method="GET" target="none">
+                
+                <div id="namee"><label>Name:</label>
+                <input type="text" name="entry.517359536" required>
                 </div>
-                <div class="tiers">
-					<p>For donations made prior to <span id="datw"></span></p>
-					<p>A Minimum Donation of $1 will put you in the Berserker Level and prominently on our team T-Shirt and Team photo</p>
-					<p>A Minimum Donation of $1000 will earn you a place in the Valkyrie Level which in addition to placement on the Team T-Shirt and Photo, will include your name, yes YOUR name, on a prominent spot on the robot during competition season</p>
-					<p>A Minimum Donation of $5000, you will be placed in the exclusive Chieftain Level, this includes every thing from the previous levels and in addition to that, at the end of the competition, you will receive a signed part of the robot itself	</p>
-				</div>
+                <div id="ema">
+                <label>Email:</label>
+                <input type="email" name="entry.709848150" required>
+                </div>
+                <button  type="submit">Join</button>
+                </form>
+                <script>
+                    
+                    
+                    document.getElementById("myForm").addEventListener("submit", function(e) {
+                    e.preventDefault(); 
+
+                    const formData = new FormData(this);
+
+                    fetch("https://docs.google.com/forms/d/e/1FAIpQLSfzYjWXzu0xb95Zmi5nGeV_ulMfdjtIJkRo4CWWRepXvl1g4A/formResponse", {
+                        method: "POST",
+                        mode: "no-cors", 
+                        body: formData
+                    });
+
+                    this.reset(); 
+                        document.getElementById('than').style.display = "flex";   
+                    });
+                    </script>
+                    <div id="than">
+                        Thank You for Subscribing, the Newest Newsletter will be sent out next Monday!
+                        <button onclick="document.getElementById('than').style.display = 'none';" id="cl">Close</button>
+                    </div>
+            </div>  
             </div>
 
             
