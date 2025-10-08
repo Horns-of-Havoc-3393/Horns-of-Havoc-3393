@@ -297,7 +297,7 @@ body.dark-mode #introo-message{
 }
 .histpu{
     
-        display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
@@ -306,16 +306,18 @@ body.dark-mode #introo-message{
 {
     justify-content: center;
     width: 110vw;
-    transform: translateX(-140vw);
-    transition: transform 1s ease;
+    transform: translateX(-20vw);
+    opacity: 0%;
+    transition: transform 1s ease, opacity 1s ease;
     height: auto;
     border-radius: 15px;
 }
 #what-img{
     justify-content: center;
     width: 110vw;
-    transform: translateX(-130vw);
-    transition: transform 1s ease;
+    transform: translateX(-20vw);
+    opacity: 0%;
+    transition: transform 1s ease, opacity 1s ease;
     height: auto;
     border-radius: 15px;
     
@@ -323,30 +325,35 @@ body.dark-mode #introo-message{
 #who-description, #what-description, #histpu-description, #volunteer-description{
     width: 120vw;
     font-size: 1.5rem;
-    transform: translateY(180vh);
-    transition: transform 1s ease;
+    transform: translateY(20vh);
+    transition: transform 1s ease, opacity 1s ease;
+    opacity: 0%;
+    padding: 5%;
     background-color: gold;
     margin-top: 10vh;
     border-radius: 15px;
 }
-#what-description{
-  background-color: lightyellow;
-}
 #who-img.visible{
+  opacity: 100%;
     transform: translateX(0vw);
 }
 
 #what-img.visible{
+  opacity: 100%;
     transform: translateX(0vw);
 }
-#what-description, #who-description{
+#what-description.visible, #who-description.visible{
+    
     transform: translateY(0vh);
+    opacity: 100%;
 }
 #histpu-description.visible, #volunteer-description.visible{
     transform: translateY(0vh);
+    opacity: 100%;
 }
 #histpu-description{
-    width: 135vw;
+    width: 120vw;
+    padding: 7%;
 }
 .menNav{
     display: flex;

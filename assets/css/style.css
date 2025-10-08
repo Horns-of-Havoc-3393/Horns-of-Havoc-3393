@@ -106,7 +106,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-   background: linear-gradient(to top right, #f095fa, #ffee00);
+   background: linear-gradient(to top right, #f095fa, gold);
    background-size: 400% 200%;
    background-position: right top;
     transition: background-position 1s ease;
@@ -484,8 +484,9 @@
   height: 60vh;
   margin-left: 2vw;
   margin-top: 5vh;
-  transform: translateX(-110%);
-  transition: transform 1s ease;
+  transform: translateX(-10%);
+  opacity: 0%;
+  transition: transform 1s ease, opacity 1s ease;
 }
 #who-img img{
   width: 100%;
@@ -494,8 +495,8 @@
   border-radius: 1.4rem;
 }
 #who-img.visible{
+  opacity: 100%;
   transform: translateX(0);
-  transition: transform 1s ease;
 }
 #who-description{
   position: relative;
@@ -506,13 +507,16 @@
   background-color: gold;
   margin-left: 0vw;
   margin-top: 5vh;
-    will-change: transform;
-  transform: translateX(110%);
-  transition: background-color 1s ease,transform 2s ease;
+  will-change: transform;
+  opacity: 0%;
+  transform: translateX(10%);
+  transition:background-color 1s ease,transform 2s ease, opacity 1s ease;
+  
 }
 #who-description.visible{
   transform: translateX(0);
-  transition: transform 1s ease;
+  opacity: 100%;
+  /* transition: transform 1s ease; */
 }
 #who-description, #what-description, #volunteer-description, #histpu-description{
   border-radius: 1.4rem;
@@ -531,8 +535,9 @@
   height: 60vh;
   margin-left: 0vw;
   margin-top: 5vh;
-  transform: translateX(110%);
-  transition: transform 1s ease;
+  opacity: 0%;
+  transform: translateX(10%);
+  transition: transform 1s ease, opacity 1s ease;
 }
 #what-img img{
   width: 100%;
@@ -541,21 +546,21 @@
   border-radius: 1.4rem;
 }
 #what-img.visible{
+  opacity: 100%;
   transform: translateX(0%);
-  transition: transform 1s ease;
 }
 #what-description{
   position: relative;
   z-index: 0;
   width: 50vw;
   height: fit-content;
-  background-color: lightyellow;
-  transition: background-color 1s ease;
+  background-color: gold;
   margin-left: 2vw;
   margin-top: 5vh;
+  opacity: 0%;
   padding-left: 1%;padding-right: 1%;
-  transform: translateX(-110%);
-  transition: transform 1s ease;
+  transform: translateX(-10%);
+  transition: background-color 1s ease, transform 1s ease, opacity 1s ease;
 }
 #what-description h1, #who-description h1{
   font-size: 2rem;
@@ -567,7 +572,7 @@
 }
 #what-description.visible{
   transform: translateX(0%);
-  transition: transform 1s ease;
+  opacity: 100%;
 }
 .volunteer{
   width: 100%;
@@ -610,7 +615,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
   gap: 5vw;
   padding-top: 3%; padding-bottom: 3%;
 }
@@ -622,25 +626,25 @@
   font-size: 1.5rem;
   width: fit-content;
   height: auto;
-  transform: translateX(-120%);
-  transition: transform 1s ease;
+  transform: translateX(-10%);
   background-color: gold;
   margin-left: 0vw;
+  opacity: 0%;
   margin-top: 0vh;
-  transition: background-color 1s ease;
+  transition: background-color 1s ease,transform 1s ease, opacity 1s ease;
 }
 #histpu-description.visible{
   transform: translateX(0%);
-  transition: transform 1s ease;
+  opacity: 100%;
  
 }
 
 body.dark-mode #what-description, body.dark-mode #who-description, body.dark-mode #volunteer-description, body.dark-mode #histpu-description{
   background-color: darkgray;
 }
-body #what-description, body #who-description, body #volunteer-description, body #histpu-description{
+/* body #what-description, body #who-description, body #volunteer-description, body #histpu-description{
   transition: background-color 1s ease;
-}
+} */
 #footer-logo{
   aspect-ratio: 1/1;
   height: auto;
